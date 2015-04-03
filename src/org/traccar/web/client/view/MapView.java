@@ -173,9 +173,11 @@ public class MapView {
 
     private final MapPositionRenderer archivePositionRenderer;
 
+
     public void showLatestPositions(List<Position> positions) {
         latestPositionRenderer.showPositions(positions);
     }
+
 
     public void showArchivePositions(List<Position> positions) {
         archivePositionRenderer.showTrack(positions);

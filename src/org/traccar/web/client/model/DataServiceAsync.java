@@ -18,10 +18,7 @@ package org.traccar.web.client.model;
 import java.util.Date;
 import java.util.List;
 
-import org.traccar.web.shared.model.ApplicationSettings;
-import org.traccar.web.shared.model.Device;
-import org.traccar.web.shared.model.Position;
-import org.traccar.web.shared.model.User;
+import org.traccar.web.shared.model.*;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -57,4 +54,5 @@ public interface DataServiceAsync {
 
     void updateApplicationSettings(ApplicationSettings applicationSettings, AsyncCallback<ApplicationSettings> callback);
 
+    void getGameInfo(AsyncCallback<GameInfo> async);
 }

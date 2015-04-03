@@ -15,28 +15,20 @@
  */
 package org.traccar.web.server.model;
 
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.traccar.web.client.model.DataService;
+import org.traccar.web.server.controller.Game;
+import org.traccar.web.shared.model.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
-
-import org.traccar.web.client.model.DataService;
-import org.traccar.web.shared.model.ApplicationSettings;
-import org.traccar.web.shared.model.Device;
-import org.traccar.web.shared.model.Position;
-import org.traccar.web.shared.model.User;
-
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class DataServiceImpl extends RemoteServiceServlet implements DataService {
 
@@ -48,22 +40,14 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
     private static final String ATTRIBUTE_USER = "traccar.user";
     private static final String ATTRIBUTE_ENTITYMANAGER = "traccar.entitymanager";
 
-    private EntityManagerFactory entityManagerFactory;
+    public static EntityManagerFactory entityManagerFactory;
+    public static Game GAME;
 
     @Override
     public void init() throws ServletException {
         super.init();
 
-        String persistenceUnit;
-        try {
-            Context context = new InitialContext();
-            context.lookup(PERSISTENCE_DATASTORE);
-            persistenceUnit = PERSISTENCE_UNIT_RELEASE;
-        } catch (NamingException e) {
-            persistenceUnit = PERSISTENCE_UNIT_DEBUG;
-        }
-
-        entityManagerFactory = Persistence.createEntityManagerFactory(persistenceUnit);
+        initEMF();
 
         // Create Administrator account
         EntityManager entityManager = getServletEntityManager();
@@ -76,6 +60,22 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
             user.setAdmin(true);
             createUser(entityManager, user);
         }
+    }
+
+    public static EntityManagerFactory initEMF() {
+        String persistenceUnit;
+        try {
+            Context context = new InitialContext();
+            context.lookup(PERSISTENCE_DATASTORE);
+            persistenceUnit = PERSISTENCE_UNIT_RELEASE;
+        } catch (NamingException e) {
+            persistenceUnit = PERSISTENCE_UNIT_DEBUG;
+        }
+
+        if (entityManagerFactory == null)
+            entityManagerFactory = Persistence.createEntityManagerFactory(persistenceUnit);
+
+        return entityManagerFactory;
     }
 
     private EntityManager servletEntityManager;
@@ -155,15 +155,13 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
                 query.setParameter("login", login);
                 List<User> results = query.getResultList();
                 if (results.isEmpty()) {
-                        User user = new User();
-                        user.setLogin(login);
-                        user.setPassword(password);
-                        createUser(getSessionEntityManager(), user);
-                        setSessionUser(user);
-                        return user;                
-                }
-                else
-                {
+                    User user = new User();
+                    user.setLogin(login);
+                    user.setPassword(password);
+                    createUser(getSessionEntityManager(), user);
+                    setSessionUser(user);
+                    return user;
+                } else {
                     throw new IllegalStateException();
                 }
             }
@@ -191,18 +189,18 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
         if (currentUser.getAdmin()) {
             EntityManager entityManager = getSessionEntityManager();
             synchronized (entityManager) {
-                
+
                 String login = user.getLogin();
                 TypedQuery<User> query = entityManager.createQuery("SELECT x FROM User x WHERE x.login = :login", User.class);
                 query.setParameter("login", login);
                 List<User> results = query.getResultList();
-                
+
                 if (results.isEmpty()) {
                     entityManager.getTransaction().begin();
                     try {
                         entityManager.persist(user);
                         entityManager.getTransaction().commit();
-                        return user;                        
+                        return user;
                     } catch (RuntimeException e) {
                         entityManager.getTransaction().rollback();
                         throw e;
@@ -299,11 +297,11 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
     @Override
     public Device addDevice(Device device) {
         EntityManager entityManager = getSessionEntityManager();
-        synchronized (entityManager) {         
+        synchronized (entityManager) {
             TypedQuery<Device> query = entityManager.createQuery("SELECT x FROM Device x WHERE x.uniqueId = :id", Device.class);
             query.setParameter("id", device.getUniqueId());
             List<Device> results = query.getResultList();
-            
+
             User user = getSessionUser();
 
             if (results.isEmpty()) {
@@ -312,14 +310,12 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
                     entityManager.persist(device);
                     user.getDevices().add(device);
                     entityManager.getTransaction().commit();
-                    return device;                
+                    return device;
                 } catch (RuntimeException e) {
                     entityManager.getTransaction().rollback();
                     throw e;
                 }
-            }
-            else
-            {
+            } else {
                 throw new IllegalStateException();
             }
         }
@@ -334,8 +330,8 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
             TypedQuery<Device> query = entityManager.createQuery("SELECT x FROM Device x WHERE x.uniqueId = :id AND x.id <> :primary_id", Device.class);
             query.setParameter("primary_id", device.getId());
             query.setParameter("id", device.getUniqueId());
-            List<Device> results = query.getResultList();            
-            
+            List<Device> results = query.getResultList();
+
             if (results.isEmpty()) {
                 entityManager.getTransaction().begin();
                 try {
@@ -348,9 +344,7 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
                     entityManager.getTransaction().rollback();
                     throw e;
                 }
-            }
-            else
-            {
+            } else {
                 throw new IllegalStateException();
             }
         }
@@ -451,7 +445,7 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
                     try {
                         entityManager.merge(applicationSettings);
                         entityManager.getTransaction().commit();
-                        this.applicationSettings =  applicationSettings;
+                        this.applicationSettings = applicationSettings;
                         return applicationSettings;
                     } catch (RuntimeException e) {
                         entityManager.getTransaction().rollback();
@@ -462,6 +456,14 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
                 }
             }
         }
+    }
+
+    @Override
+    public GameInfo getGameInfo() {
+        if (GAME != null)
+            return GAME.getGameInfo();
+        else
+            return null;
     }
 
 }

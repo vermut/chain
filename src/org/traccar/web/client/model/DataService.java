@@ -18,10 +18,7 @@ package org.traccar.web.client.model;
 import java.util.Date;
 import java.util.List;
 
-import org.traccar.web.shared.model.ApplicationSettings;
-import org.traccar.web.shared.model.Device;
-import org.traccar.web.shared.model.Position;
-import org.traccar.web.shared.model.User;
+import org.traccar.web.shared.model.*;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -58,5 +55,7 @@ public interface DataService extends RemoteService {
     List<Position> getLatestPositions();
 
     ApplicationSettings updateApplicationSettings(ApplicationSettings applicationSettings);
+
+    GameInfo getGameInfo();
 
 }

@@ -15,28 +15,26 @@
  */
 package org.traccar.web.client.controller;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import org.traccar.web.client.Application;
-import org.traccar.web.client.view.MapView;
-import org.traccar.web.shared.model.Device;
-import org.traccar.web.shared.model.Position;
-
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.sencha.gxt.widget.core.client.ContentPanel;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.Marker;
+import org.traccar.web.client.Application;
+import org.traccar.web.client.view.MapView;
+import org.traccar.web.shared.model.Device;
+import org.traccar.web.shared.model.GameInfo;
+import org.traccar.web.shared.model.Position;
+
+import java.util.*;
 
 public class MapController implements ContentController, MapView.MapHandler {
 
-    private static final int UPDATE_INTERVAL = 15000;
+    private static final int UPDATE_INTERVAL = 5000;
 
     public interface MapHandler {
         public void onDeviceSelected(Device device);
+
         public void onArchivePositionSelected(Position position);
     }
 
@@ -83,9 +81,23 @@ public class MapController implements ContentController, MapView.MapHandler {
                 }
                 updateTimer.schedule(UPDATE_INTERVAL);
             }
+
             @Override
             public void onFailure(Throwable caught) {
                 updateTimer.schedule(UPDATE_INTERVAL);
+            }
+        });
+        Application.getDataService().getGameInfo(new AsyncCallback<GameInfo>() {
+            @Override
+            public void onFailure(Throwable caught) {
+            }
+
+            @Override
+            public void onSuccess(GameInfo result) {
+                if (result != null) {
+                    mapView.getMarkerLayer().addMarker(new Marker(new LonLat(result.getBottomLeft().x, result.getBottomLeft().y)));
+                    mapView.getMarkerLayer().addMarker(new Marker(new LonLat(result.getTopRight().x, result.getTopRight().y)));
+                }
             }
         });
     }
