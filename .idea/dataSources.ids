@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="H2 - database" uuid="377ede2d-c5ec-4500-a027-d9ab92585f8b">
+    <database-info product="H2" version="1.3.175 (2014-01-18)" jdbc-version="4.0" driver-name="H2 JDBC Driver" driver-version="1.3.175 (2014-01-18)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact"/>
+    <schema name="PUBLIC" catalog="DATABASE"/>
+    <table name="APPLICATION_SETTINGS" schema="PUBLIC" catalog="DATABASE" type="TABLE">
+      <column name="ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFBVQkxJQy5TWVNURU1fU0VRVUVOQ0VfRDhBMDREQ0FfQTE0Nl80RkI4X0E0NTVfRjQ1QzBEOTAyMUJDKQ==" autoIncrement="true"/>
+      <column name="REGISTRATIONENABLED" sqlType="BOOLEAN" precision="1" scale="0" nullable="false" jdbcType="16"/>
+      <primary-key name="CONSTRAINT_4" columns="ID"/>
+    </table>
+    <table name="DEVICES" schema="PUBLIC" catalog="DATABASE" type="TABLE">
+      <column name="ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFBVQkxJQy5TWVNURU1fU0VRVUVOQ0VfRDlDNUFDQTNfMzRCNV80NzVDX0FENzZfQUQ2MTZGQkFBRkRBKQ==" autoIncrement="true"/>
+      <column name="NAME" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="UNIQUEID" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="LATESTPOSITION_ID" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="CONSTRAINT_8" columns="ID"/>
+      <foreign-key name="FK5CF8ACDD7C6208C3" columns="LATESTPOSITION_ID" ref-table="POSITIONS" ref-schema="PUBLIC" ref-catalog="DATABASE" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <exported-key name="FK65C08C6ADB0C3B8A" table="POSITIONS" schema="PUBLIC" catalog="DATABASE" columns="DEVICE_ID"/>
+      <exported-key name="FK81E459A68294BA3" table="USERS_DEVICES" schema="PUBLIC" catalog="DATABASE" columns="DEVICES_ID"/>
+      <index name="FK5CF8ACDD7C6208C3_INDEX_8" unique="false" columns="LATESTPOSITION_ID"/>
+    </table>
+    <table name="POSITIONS" schema="PUBLIC" catalog="DATABASE" type="TABLE">
+      <column name="ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFBVQkxJQy5TWVNURU1fU0VRVUVOQ0VfRTM0NzU4RDhfQUIwRF80MDZBXzk2M0FfODRGRkZEMTVGOEJBKQ==" autoIncrement="true"/>
+      <column name="ADDRESS" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ALTITUDE" sqlType="DOUBLE" precision="17" scale="0" nullable="true" jdbcType="8"/>
+      <column name="COURSE" sqlType="DOUBLE" precision="17" scale="0" nullable="true" jdbcType="8"/>
+      <column name="LATITUDE" sqlType="DOUBLE" precision="17" scale="0" nullable="true" jdbcType="8"/>
+      <column name="LONGITUDE" sqlType="DOUBLE" precision="17" scale="0" nullable="true" jdbcType="8"/>
+      <column name="OTHER" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="POWER" sqlType="DOUBLE" precision="17" scale="0" nullable="true" jdbcType="8"/>
+      <column name="SPEED" sqlType="DOUBLE" precision="17" scale="0" nullable="true" jdbcType="8"/>
+      <column name="TIME" sqlType="TIMESTAMP" precision="23" scale="10" nullable="true" jdbcType="93"/>
+      <column name="VALID" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="DEVICE_ID" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="CONSTRAINT_B" columns="ID"/>
+      <foreign-key name="FK65C08C6ADB0C3B8A" columns="DEVICE_ID" ref-table="DEVICES" ref-schema="PUBLIC" ref-catalog="DATABASE" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <exported-key name="FK5CF8ACDD7C6208C3" table="DEVICES" schema="PUBLIC" catalog="DATABASE" columns="LATESTPOSITION_ID"/>
+      <index name="FK65C08C6ADB0C3B8A_INDEX_B" unique="false" columns="DEVICE_ID"/>
+      <index name="POSITIONSINDEX" unique="false" columns="DEVICE_ID,TIME"/>
+    </table>
+    <table name="USERS" schema="PUBLIC" catalog="DATABASE" type="TABLE">
+      <column name="ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFBVQkxJQy5TWVNURU1fU0VRVUVOQ0VfQzI1QTVGM0FfNEIxMF80NTVFX0I0NjVfRkIxRjI5MUYyNjJEKQ==" autoIncrement="true"/>
+      <column name="ADMIN" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="LOGIN" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PASSWORD" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="USERSETTINGS_ID" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="CONSTRAINT_4D" columns="ID"/>
+      <foreign-key name="FK6A68E0862018CAA" columns="USERSETTINGS_ID" ref-table="USER_SETTINGS" ref-schema="PUBLIC" ref-catalog="DATABASE" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <exported-key name="FK81E459A6712480D" table="USERS_DEVICES" schema="PUBLIC" catalog="DATABASE" columns="USERS_ID"/>
+      <index name="FK6A68E0862018CAA_INDEX_4" unique="false" columns="USERSETTINGS_ID"/>
+    </table>
+    <table name="USERS_DEVICES" schema="PUBLIC" catalog="DATABASE" type="TABLE">
+      <column name="USERS_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="DEVICES_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <foreign-key name="FK81E459A68294BA3" columns="DEVICES_ID" ref-table="DEVICES" ref-schema="PUBLIC" ref-catalog="DATABASE" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <foreign-key name="FK81E459A6712480D" columns="USERS_ID" ref-table="USERS" ref-schema="PUBLIC" ref-catalog="DATABASE" ref-columns="ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <index name="FK81E459A6712480D_INDEX_3" unique="false" columns="USERS_ID"/>
+      <index name="FK81E459A68294BA3_INDEX_3" unique="false" columns="DEVICES_ID"/>
+    </table>
+    <table name="USER_SETTINGS" schema="PUBLIC" catalog="DATABASE" type="TABLE">
+      <column name="ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFBVQkxJQy5TWVNURU1fU0VRVUVOQ0VfNjgwOEVGMzRfQjMyRV80NUMyX0E4MDhfMkU3Qjk3RTU4Mjg1KQ==" autoIncrement="true"/>
+      <column name="SPEEDUNIT" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="CONSTRAINT_9" columns="ID"/>
+      <exported-key name="FK6A68E0862018CAA" table="USERS" schema="PUBLIC" catalog="DATABASE" columns="USERSETTINGS_ID"/>
+    </table>
+  </data-source>
+</component>
