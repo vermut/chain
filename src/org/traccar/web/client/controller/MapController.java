@@ -22,6 +22,7 @@ import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Marker;
 import org.traccar.web.client.Application;
 import org.traccar.web.client.view.MapView;
+import org.traccar.web.client.view.MarkerIconFactory;
 import org.traccar.web.shared.model.Device;
 import org.traccar.web.shared.model.GameInfo;
 import org.traccar.web.shared.model.Position;
@@ -95,8 +96,11 @@ public class MapController implements ContentController, MapView.MapHandler {
             @Override
             public void onSuccess(GameInfo result) {
                 if (result != null) {
-                    mapView.getMarkerLayer().addMarker(new Marker(new LonLat(result.getBottomLeft().x, result.getBottomLeft().y)));
-                    mapView.getMarkerLayer().addMarker(new Marker(new LonLat(result.getTopRight().x, result.getTopRight().y)));
+                    mapView.drawField(mapView.createLonLat(result.getTopLeft().y, result.getTopLeft().x),
+                            mapView.createLonLat(result.getTopRight().y, result.getTopRight().x),
+                            mapView.createLonLat(result.getBottomRight().y, result.getBottomRight().x),
+                            mapView.createLonLat(result.getBottomLeft().y, result.getBottomLeft().x)
+                            );
                 }
             }
         });

@@ -36,16 +36,15 @@ class Game implements Runnable {
         field = new GameField(new Coordinate(56.961385, 24.1306516666667), 0, 100)
         em = DataServiceImpl.initEMF().createEntityManager()
 
-        DataServiceImpl.GAME = this
-
         //Set up gameInfo
         gameInfo = new GameInfo(
-                topLeft: new SimplePoint(field.teamOneStart.geom.coordinate),
-                bottomLeft: new SimplePoint(field.teamTwoStart.geom.coordinate),
-                bottomRight: new SimplePoint(field.teamOneFinish.geom.coordinate),
-                topRight: new SimplePoint(field.teamTwoFinish.geom.coordinate)
+                topLeft: new SimplePoint(field.teamOneStart.geom.coordinate.x, field.teamOneStart.geom.coordinate.y),
+                bottomLeft: new SimplePoint(field.teamTwoStart.geom.coordinate.x, field.teamTwoStart.geom.coordinate.y),
+                bottomRight: new SimplePoint(field.teamOneFinish.geom.coordinate.x, field.teamOneFinish.geom.coordinate.y),
+                topRight: new SimplePoint(field.teamTwoFinish.geom.coordinate.x, field.teamTwoFinish.geom.coordinate.y)
         )
 
+        DataServiceImpl.GAME = this
     }
 
     @Override

@@ -44,8 +44,8 @@ class GameField {
         def af = new AffineTransformation().rotate(Math.toRadians(yAxisOffsetDegrees), topLeft.x, topLeft.y)
         Coordinate[] cs = [
                 new Coordinate(topLeft.x, topLeft.y),
-                new Coordinate(topLeft.x + latSizeDeg, topLeft.y),
-                new Coordinate(topLeft.x + latSizeDeg, topLeft.y + lonSizeDeg),
+                new Coordinate(topLeft.x - latSizeDeg, topLeft.y),
+                new Coordinate(topLeft.x - latSizeDeg, topLeft.y + lonSizeDeg),
                 new Coordinate(topLeft.x, topLeft.y + lonSizeDeg),
                 new Coordinate(topLeft.x, topLeft.y)
         ]

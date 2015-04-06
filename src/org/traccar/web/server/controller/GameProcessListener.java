@@ -31,7 +31,7 @@ public class GameProcessListener implements ServletContextListener
         game.startGame();
 
         scheduler = Executors.newSingleThreadScheduledExecutor();
-      //  scheduler.scheduleAtFixedRate(game, 0, 5, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(game, 0, 5, TimeUnit.SECONDS);
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

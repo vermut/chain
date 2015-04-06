@@ -17,12 +17,7 @@ package org.traccar.web.client.view;
 
 import java.util.List;
 
-import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.MapOptions;
-import org.gwtopenmaps.openlayers.client.MapWidget;
-import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.Style;
+import org.gwtopenmaps.openlayers.client.*;
 import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
 import org.gwtopenmaps.openlayers.client.control.ScaleLine;
 import org.gwtopenmaps.openlayers.client.geometry.Point;
@@ -178,6 +173,12 @@ public class MapView {
         latestPositionRenderer.showPositions(positions);
     }
 
+    public void drawField(LonLat topLeft, LonLat topRight, LonLat bottomLeft, LonLat bottomRight) {
+        getMarkerLayer().addMarker(new Marker(topLeft, MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, true)));
+        getMarkerLayer().addMarker(new Marker(topRight, MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, true)));
+        getMarkerLayer().addMarker(new Marker(bottomRight, MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, false)));
+        getMarkerLayer().addMarker(new Marker(bottomLeft, MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, false)));
+    }
 
     public void showArchivePositions(List<Position> positions) {
         archivePositionRenderer.showTrack(positions);
