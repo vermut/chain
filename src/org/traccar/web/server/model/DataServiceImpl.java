@@ -466,4 +466,36 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
             return null;
     }
 
+    @Override
+    public Boolean moveDevice(Device device, double offsetX, double offsetY) {
+        System.out.println("DataServiceImpl.moveDevice");
+
+        if (device == null)
+            return false;
+
+        EntityManager entityManager = getSessionEntityManager();
+        synchronized (entityManager) {
+            entityManager.getTransaction().begin();
+            try {
+                Query query = entityManager.createQuery("UPDATE Position p SET p.latitude = p.latitude + :offsetX, p.longitude = p.longitude + :offsetY WHERE p = :position");
+                query.setParameter("offsetX", offsetX);
+                query.setParameter("offsetY", offsetY);
+                query.setParameter("position", device.getLatestPosition());
+                int res = query.executeUpdate();
+                entityManager.getTransaction().commit();
+
+                query = entityManager.createQuery("SELECT p FROM Position p WHERE p = :position");
+                query.setParameter("position", device.getLatestPosition());
+                Object pos = query.getSingleResult();
+
+                if (res > 0)
+                    return true;
+            } catch (RuntimeException e) {
+                entityManager.getTransaction().rollback();
+                throw e;
+            }
+        }
+
+        return false;
+    }
 }

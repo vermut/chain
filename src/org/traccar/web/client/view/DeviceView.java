@@ -55,6 +55,7 @@ public class DeviceView implements SelectionChangedEvent.SelectionChangedHandler
         public void onAdd();
         public void onEdit(Device device);
         public void onRemove(Device device);
+        public void onMove(Device device, double offsetX, double offsetY);
     }
 
     private DeviceHandler deviceHandler;
@@ -89,6 +90,11 @@ public class DeviceView implements SelectionChangedEvent.SelectionChangedHandler
 
     @UiField
     MenuItem settingsGlobal;
+
+    @UiField TextButton leftButton;
+    @UiField TextButton rightButton;
+    @UiField TextButton upButton;
+    @UiField TextButton downButton;
 
     public DeviceView(DeviceHandler deviceHandler, SettingsHandler settingsHandler, ListStore<Device> deviceStore) {
         this.deviceHandler = deviceHandler;
@@ -149,6 +155,20 @@ public class DeviceView implements SelectionChangedEvent.SelectionChangedHandler
             }
         });
     }
+
+    @UiHandler("upButton")  public void onUpClicked(SelectEvent event) {
+        deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), 0D, 0.01D);
+    }
+    @UiHandler("downButton")  public void onDownClicked(SelectEvent event) {
+        deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), 0D, -0.01D);
+    }
+    @UiHandler("leftButton")  public void onLeftClicked(SelectEvent event) {
+        deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), -0.01D, 0D);
+    }
+    @UiHandler("rightButton")  public void onRightClicked(SelectEvent event) {
+        deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), 0.01D, 0D);
+    }
+
 
     public void selectDevice(Device device) {
         grid.getSelectionModel().select(deviceStore.findModel(device), false);

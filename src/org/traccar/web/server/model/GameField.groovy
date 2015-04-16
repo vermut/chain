@@ -23,8 +23,6 @@ import org.traccar.web.shared.model.Position
         @Grab(group = 'com.vividsolutions', module = 'jts', version = '1.12'),
 ])*/
 class GameField {
-    private static final long serialVersionUID = 1;
-
     final private JtsSpatialContext geo = JtsSpatialContext.GEO
 
     private Polygon areaPolygon
@@ -33,11 +31,11 @@ class GameField {
     JtsGeometry teamOneFinish
     JtsGeometry teamTwoFinish
 
-    private static PLAYER_RADIUS_DEG = metersToDeg(50)
+    private static double PLAYER_RADIUS_DEG = metersToDeg(50)
 
     public GameField(Coordinate topLeft, double yAxisOffsetDegrees, double sideSizeMeters) {
-        def latSizeDeg = metersToDeg(sideSizeMeters)
-        def lonSizeDeg = DistanceUtils.calcLonDegreesAtLat(topLeft.x, latSizeDeg)
+        double latSizeDeg = metersToDeg(sideSizeMeters)
+        double lonSizeDeg = DistanceUtils.calcLonDegreesAtLat(topLeft.x, latSizeDeg)
 
         // Build and rotate gamefield rect area
         def gf = geo.geometryFactory
@@ -91,12 +89,12 @@ class GameField {
                 }
             }
         }
-        graph.vertexSet().each { println it.hashCode() + ",,$it.center.x,$it.center.y" }
+        // graph.vertexSet().each { println it.hashCode() + ",,$it.center.x,$it.center.y" }
 
         new DijkstraShortestPath(graph, start.center, finish.center).path
     }
 
-    static double metersToDeg(double m) { m / 1000 * DistanceUtils.KM_TO_DEG }
+    static double metersToDeg(double m) { m / 1000D * DistanceUtils.KM_TO_DEG }
 
     @Override
     public String toString() {

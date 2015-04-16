@@ -15,36 +15,28 @@
  */
 package org.traccar.web.client.view;
 
-import java.util.List;
-
-import org.gwtopenmaps.openlayers.client.*;
-import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
-import org.gwtopenmaps.openlayers.client.control.ScaleLine;
-import org.gwtopenmaps.openlayers.client.geometry.Point;
-import org.gwtopenmaps.openlayers.client.layer.Bing;
-import org.gwtopenmaps.openlayers.client.layer.BingOptions;
-import org.gwtopenmaps.openlayers.client.layer.BingType;
-import org.gwtopenmaps.openlayers.client.layer.GoogleV3;
-import org.gwtopenmaps.openlayers.client.layer.GoogleV3MapType;
-import org.gwtopenmaps.openlayers.client.layer.GoogleV3Options;
-import org.gwtopenmaps.openlayers.client.layer.Markers;
-import org.gwtopenmaps.openlayers.client.layer.MarkersOptions;
-import org.gwtopenmaps.openlayers.client.layer.OSM;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
-import org.traccar.web.shared.model.Device;
-import org.traccar.web.shared.model.Position;
-
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Command;
 import com.sencha.gxt.widget.core.client.ContentPanel;
+import org.gwtopenmaps.openlayers.client.*;
+import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
+import org.gwtopenmaps.openlayers.client.control.ScaleLine;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.geometry.LineString;
+import org.gwtopenmaps.openlayers.client.geometry.Point;
+import org.gwtopenmaps.openlayers.client.layer.*;
+import org.traccar.web.shared.model.Device;
+import org.traccar.web.shared.model.Position;
+
+import java.util.List;
 
 public class MapView {
 
     public interface MapHandler {
         public void onPositionSelected(Position position);
+
         public void onArchivePositionSelected(Position position);
     }
 
@@ -143,7 +135,7 @@ public class MapView {
 
         map.addControl(new LayerSwitcher());
         map.addControl(new ScaleLine());
-        map.setCenter(createLonLat(12.5, 41.9), 1);
+        map.setCenter(createLonLat(24.1306516666667, 56.961385), 16);
 
         contentPanel.add(mapWidget);
 
@@ -173,11 +165,31 @@ public class MapView {
         latestPositionRenderer.showPositions(positions);
     }
 
-    public void drawField(LonLat topLeft, LonLat topRight, LonLat bottomLeft, LonLat bottomRight) {
-        getMarkerLayer().addMarker(new Marker(topLeft, MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, true)));
-        getMarkerLayer().addMarker(new Marker(topRight, MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, true)));
-        getMarkerLayer().addMarker(new Marker(bottomRight, MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, false)));
-        getMarkerLayer().addMarker(new Marker(bottomLeft, MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, false)));
+    private Point fromLonLat(LonLat l) {
+        return createPoint(l.lon(), l.lat());
+    }
+    private LonLat fromPoint(Point p) {
+        return new LonLat(p.getY(), p.getX());
+    }
+
+    public void drawField(Point topLeft, Point topRight, Point bottomRight, Point bottomLeft) {
+        Point[] linePoints = new Point[]{
+                topLeft,
+                topRight,
+                bottomRight,
+                bottomLeft,
+                topLeft
+        };
+
+        LineString lineString = new LineString(linePoints);
+        getVectorLayer().addFeature(new VectorFeature(lineString));
+    }
+
+    public void drawField2(LonLat topLeft, LonLat topRight, LonLat bottomLeft, LonLat bottomRight) {
+        getMarkerLayer().addMarker(new Marker((topLeft), MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, true)));
+        getMarkerLayer().addMarker(new Marker((topRight), MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, true)));
+        getMarkerLayer().addMarker(new Marker((bottomRight), MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, false)));
+        getMarkerLayer().addMarker(new Marker((bottomLeft), MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, false)));
     }
 
     public void showArchivePositions(List<Position> positions) {

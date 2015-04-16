@@ -55,4 +55,6 @@ public interface DataServiceAsync {
     void updateApplicationSettings(ApplicationSettings applicationSettings, AsyncCallback<ApplicationSettings> callback);
 
     void getGameInfo(AsyncCallback<GameInfo> async);
+
+    void moveDevice(Device device, double offsetX, double offsetY, AsyncCallback<Boolean> async);
 }

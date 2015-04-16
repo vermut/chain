@@ -132,6 +132,12 @@ public class DeviceController implements ContentController, DeviceView.DeviceHan
         dialog.show();
     }
 
+    @Override
+    public void onMove(Device device, double offsetX, double offsetY) {
+        Application.getDataService().moveDevice(device, offsetX, offsetY, new BaseAsyncCallback<Boolean>());
+
+    }
+
     public void selectDevice(Device device) {
         deviceView.selectDevice(device);
     }

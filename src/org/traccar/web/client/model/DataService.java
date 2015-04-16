@@ -58,4 +58,6 @@ public interface DataService extends RemoteService {
 
     GameInfo getGameInfo();
 
+    Boolean moveDevice(Device device, double offsetX, double offsetY);
+
 }
