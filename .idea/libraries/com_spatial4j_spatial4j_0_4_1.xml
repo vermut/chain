@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="com.spatial4j:spatial4j:0.4.1" type="repository">
+    <properties maven-id="com.spatial4j:spatial4j:0.4.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/spatial4j-0.4.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/spatial4j-0.4.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/spatial4j-0.4.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

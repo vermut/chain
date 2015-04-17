@@ -53,7 +53,7 @@ public class Position implements Serializable, Cloneable {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     public long getId() {
         return id;
@@ -128,4 +128,19 @@ public class Position implements Serializable, Cloneable {
         return other;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
 }

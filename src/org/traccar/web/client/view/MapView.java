@@ -160,16 +160,8 @@ public class MapView {
 
     private final MapPositionRenderer archivePositionRenderer;
 
-
     public void showLatestPositions(List<Position> positions) {
         latestPositionRenderer.showPositions(positions);
-    }
-
-    private Point fromLonLat(LonLat l) {
-        return createPoint(l.lon(), l.lat());
-    }
-    private LonLat fromPoint(Point p) {
-        return new LonLat(p.getY(), p.getX());
     }
 
     public void drawField(Point topLeft, Point topRight, Point bottomRight, Point bottomLeft) {

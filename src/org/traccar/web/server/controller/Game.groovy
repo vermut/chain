@@ -1,6 +1,7 @@
 package org.traccar.web.server.controller
 
 import com.vividsolutions.jts.geom.Coordinate
+import groovy.transform.CompileStatic
 import org.traccar.web.server.model.DataServiceImpl
 import org.traccar.web.server.model.GameField
 import org.traccar.web.shared.model.GameInfo
@@ -12,6 +13,7 @@ import javax.persistence.EntityManager
 /**
  * Created by admin on 03/04/15.
  */
+@CompileStatic
 class Game implements Runnable {
     GameField field
     GameInfo gameInfo
@@ -63,8 +65,10 @@ class Game implements Runnable {
     }
 
     void checkForConnection() {
-        field.teamOneHasLink(players[TEAM1])
-        field.teamOneHasLink(players[TEAM2])
+        def t1 = field.teamOneHasLink(players[TEAM1]) != null
+        def t2 = false // field.teamTwoHasLink(players[TEAM2])
+
+        println "T1 link $t1 T2 link $t2"
     }
 
     void processAttacks() {

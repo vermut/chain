@@ -27,8 +27,12 @@ public class GameProcessListener implements ServletContextListener
     // ServletContextListener implementation
     // -------------------------------------------------------
     public void contextInitialized(ServletContextEvent sce) {
-        game = new Game();
-        game.startGame();
+        try {
+            game = new Game();
+            game.startGame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(game, 0, 5, TimeUnit.SECONDS);

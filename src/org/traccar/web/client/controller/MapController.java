@@ -20,6 +20,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.traccar.web.client.Application;
+import org.traccar.web.client.model.BaseAsyncCallback;
 import org.traccar.web.client.view.MapView;
 import org.traccar.web.shared.model.Device;
 import org.traccar.web.shared.model.GameInfo;
@@ -66,6 +67,11 @@ public class MapController implements ContentController, MapView.MapHandler {
 
     private Map<Long, Position> latestPositionMap = new HashMap<Long, Position>();
 
+    public static native void console(String text)
+/*-{
+    console.log(text);
+}-*/;
+
     public void update() {
         updateTimer.cancel();
         Application.getDataService().getLatestPositions(new AsyncCallback<List<Position>>() {
@@ -87,11 +93,7 @@ public class MapController implements ContentController, MapView.MapHandler {
             }
         });
 
-        Application.getDataService().getGameInfo(new AsyncCallback<GameInfo>() {
-            @Override
-            public void onFailure(Throwable caught) {
-            }
-
+        Application.getDataService().getGameInfo(new BaseAsyncCallback<GameInfo>() {
             @Override
             public void onSuccess(GameInfo result) {
                 if (result != null) {
@@ -101,11 +103,11 @@ public class MapController implements ContentController, MapView.MapHandler {
                             mapView.createPoint(result.getBottomRight().y, result.getBottomRight().x),
                             mapView.createPoint(result.getBottomLeft().y, result.getBottomLeft().x)
                     );
-                    mapView.drawField2(mapView.createLonLat(result.getTopLeft().y, result.getTopLeft().x),
-                            mapView.createLonLat(result.getTopRight().y, result.getTopRight().x),
-                            mapView.createLonLat(result.getBottomRight().y, result.getBottomRight().x),
-                            mapView.createLonLat(result.getBottomLeft().y, result.getBottomLeft().x)
-                    );
+//                    mapView.drawField2(mapView.createLonLat(result.getTopLeft().y, result.getTopLeft().x),
+//                            mapView.createLonLat(result.getTopRight().y, result.getTopRight().x),
+//                            mapView.createLonLat(result.getBottomRight().y, result.getBottomRight().x),
+//                            mapView.createLonLat(result.getBottomLeft().y, result.getBottomLeft().x)
+//                    );
                 }
             }
         });

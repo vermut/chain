@@ -16,6 +16,7 @@
 package org.traccar.web.server.model;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import javafx.geometry.Pos;
 import org.traccar.web.client.model.DataService;
 import org.traccar.web.server.controller.Game;
 import org.traccar.web.shared.model.*;
@@ -468,7 +469,7 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
 
     @Override
     public Boolean moveDevice(Device device, double offsetX, double offsetY) {
-        System.out.println("DataServiceImpl.moveDevice");
+        System.out.print("DataServiceImpl.moveDevice");
 
         if (device == null)
             return false;
@@ -477,18 +478,38 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
         synchronized (entityManager) {
             entityManager.getTransaction().begin();
             try {
-                Query query = entityManager.createQuery("UPDATE Position p SET p.latitude = p.latitude + :offsetX, p.longitude = p.longitude + :offsetY WHERE p = :position");
+                TypedQuery<Position> query = entityManager.createQuery(
+                        "SELECT x FROM Position x WHERE x.id IN (" +
+                                "SELECT y.latestPosition FROM Device y WHERE y = :device)", Position.class);
+                query.setParameter("device", device);
+
+                Position position = new Position(query.getSingleResult());
+                position.setId(null);
+                position.setLatitude(position.getLatitude() + offsetX);
+                position.setLongitude(position.getLongitude() + offsetY);
+                position.setTime(new Date());
+                entityManager.persist(position);
+
+                device.setLatestPosition(position);
+                entityManager.merge(device);
+
+                entityManager.getTransaction().commit();
+                System.out.println(" - done");
+
+
+    /*            Query query = entityManager.createQuery("UPDATE Position p SET p.latitude = p.latitude + :offsetX, p.longitude = p.longitude + :offsetY WHERE p = :position");
                 query.setParameter("offsetX", offsetX);
                 query.setParameter("offsetY", offsetY);
                 query.setParameter("position", device.getLatestPosition());
                 int res = query.executeUpdate();
+                entityManager.flush();
                 entityManager.getTransaction().commit();
 
                 query = entityManager.createQuery("SELECT p FROM Position p WHERE p = :position");
                 query.setParameter("position", device.getLatestPosition());
                 Object pos = query.getSingleResult();
 
-                if (res > 0)
+                if (res > 0)*/
                     return true;
             } catch (RuntimeException e) {
                 entityManager.getTransaction().rollback();
@@ -496,6 +517,6 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
             }
         }
 
-        return false;
+        // return false;
     }
 }

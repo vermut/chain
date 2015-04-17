@@ -151,7 +151,9 @@
           <root url="jar://$USER_HOME$/.groovy/grapes/com.vividsolutions/jts/jars/jts-1.12.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.ideaLibSources/jts-1.12-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
@@ -163,5 +165,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="org.jgrapht:jgrapht-core:0.9.0" level="project" />
+    <orderEntry type="library" name="com.spatial4j:spatial4j:0.4.1" level="project" />
+    <orderEntry type="library" name="com.vividsolutions:jts:1.12" level="project" />
   </component>
 </module>

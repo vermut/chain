@@ -8,6 +8,7 @@ import com.spatial4j.core.shape.jts.*
 import com.vividsolutions.jts.geom.Coordinate
 import com.vividsolutions.jts.geom.Polygon
 import com.vividsolutions.jts.geom.util.AffineTransformation
+import com.vividsolutions.jts.operation.distance.DistanceOp
 import org.jgrapht.GraphPath
 import org.jgrapht.alg.DijkstraShortestPath
 import org.jgrapht.graph.DefaultEdge
@@ -31,11 +32,14 @@ class GameField {
     JtsGeometry teamOneFinish
     JtsGeometry teamTwoFinish
 
+    double latSizeDeg
+    double lonSizeDeg
+
     private static double PLAYER_RADIUS_DEG = metersToDeg(50)
 
     public GameField(Coordinate topLeft, double yAxisOffsetDegrees, double sideSizeMeters) {
-        double latSizeDeg = metersToDeg(sideSizeMeters)
-        double lonSizeDeg = DistanceUtils.calcLonDegreesAtLat(topLeft.x, latSizeDeg)
+        latSizeDeg = metersToDeg(sideSizeMeters)
+        lonSizeDeg = DistanceUtils.calcLonDegreesAtLat(topLeft.x, latSizeDeg)
 
         // Build and rotate gamefield rect area
         def gf = geo.geometryFactory
@@ -79,18 +83,26 @@ class GameField {
                 def player = geo.makeCircle(players[i], PLAYER_RADIUS_DEG)
 
                 // Check edges
-                if (start.relate(player).intersects()) addEdge(start.center, player.center)
-                if (finish.relate(player).intersects()) addEdge(finish.center, player.center)
+                if (start.boundingBox.relate(player).intersects()) {
+                    print "hasStart "
+                    addEdge(start.center, player.center)
+                }
+
+
+                if (finish.boundingBox.relate(player).intersects()) {
+                    print "hasFinish "
+                    addEdge(finish.center, player.center)
+                }
 
                 for (int j = i + 1; j < players.length; j++) {
                     def anotherPlayer = geo.makeCircle(players[j], PLAYER_RADIUS_DEG)
-                    if (anotherPlayer.relate(player).intersects())
+                    if (anotherPlayer.relate(player).intersects()) {
+                        print "hasPlayer "
                         addEdge(player.center, anotherPlayer.center)
+                    }
                 }
             }
         }
-        // graph.vertexSet().each { println it.hashCode() + ",,$it.center.x,$it.center.y" }
-
         new DijkstraShortestPath(graph, start.center, finish.center).path
     }
 

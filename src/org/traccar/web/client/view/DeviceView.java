@@ -45,6 +45,7 @@ import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent;
 
 public class DeviceView implements SelectionChangedEvent.SelectionChangedHandler<Device> {
 
+    public static final double MANUAL_MOVE_STEP = 0.0002;
     private static DeviceViewUiBinder uiBinder = GWT.create(DeviceViewUiBinder.class);
 
     interface DeviceViewUiBinder extends UiBinder<Widget, DeviceView> {
@@ -157,16 +158,16 @@ public class DeviceView implements SelectionChangedEvent.SelectionChangedHandler
     }
 
     @UiHandler("upButton")  public void onUpClicked(SelectEvent event) {
-        deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), 0D, 0.01D);
+        deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), MANUAL_MOVE_STEP, 0.0);
     }
     @UiHandler("downButton")  public void onDownClicked(SelectEvent event) {
-        deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), 0D, -0.01D);
+        deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), -MANUAL_MOVE_STEP, 0.0);
     }
     @UiHandler("leftButton")  public void onLeftClicked(SelectEvent event) {
-        deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), -0.01D, 0D);
+        deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), 0.0, -MANUAL_MOVE_STEP);
     }
     @UiHandler("rightButton")  public void onRightClicked(SelectEvent event) {
-        deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), 0.01D, 0D);
+        deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), 0.0, MANUAL_MOVE_STEP);
     }
 
 
