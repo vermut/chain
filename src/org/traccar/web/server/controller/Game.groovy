@@ -66,7 +66,9 @@ class Game implements Runnable {
 
     void checkForConnection() {
         def t1 = field.teamOneHasLink(players[TEAM1]) != null
-        def t2 = false // field.teamTwoHasLink(players[TEAM2])
+        println ""
+        def t2 = field.teamTwoHasLink(players[TEAM2]) != null
+        println ""
 
         println "T1 link $t1 T2 link $t2"
     }

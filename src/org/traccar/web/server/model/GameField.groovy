@@ -36,8 +36,7 @@ class GameField {
     double latSizeDeg
     double lonSizeDeg
 
-    private static double PLAYER_RADIUS_DEG = metersToDeg(50)
-    private static double TOUCH_DISTANCE_METERS = 100
+    private static double TOUCH_DISTANCE_KM = 0.070
 
     public GameField(Coordinate topLeft, double yAxisOffsetDegrees, double sideSizeMeters) {
         latSizeDeg = metersToDeg(sideSizeMeters)
@@ -90,19 +89,19 @@ class GameField {
                 def player = players[i]
 
                 // Check edges
-                if (calcDistance(start, player) < TOUCH_DISTANCE_METERS) {
+                if (calcDistance(start, player) < TOUCH_DISTANCE_KM) {
                     print "hasStart "
                     addEdge(start.center, player)
                 }
 
-                if (calcDistance(finish, player) < TOUCH_DISTANCE_METERS) {
+                if (calcDistance(finish, player) < TOUCH_DISTANCE_KM) {
                     print "hasFinish "
-                    addEdge(finish.center, player.center)
+                    addEdge(finish.center, player)
                 }
 
                 for (int j = i + 1; j < players.length; j++) {
                     def anotherPlayer = players[j]
-                    if (calcDistance(anotherPlayer, player) < TOUCH_DISTANCE_METERS) {
+                    if (calcDistance(anotherPlayer, player) < TOUCH_DISTANCE_KM) {
                         print "hasPlayer "
                         addEdge(player, anotherPlayer)
                     }

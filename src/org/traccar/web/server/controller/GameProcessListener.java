@@ -2,9 +2,6 @@ package org.traccar.web.server.controller; /**
  * Created by admin on 03/04/15.
  */
 
-import org.opengis.referencing.FactoryException;
-import org.opengis.referencing.crs.CoordinateReferenceSystem;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -30,12 +27,6 @@ public class GameProcessListener implements ServletContextListener
     // ServletContextListener implementation
     // -------------------------------------------------------
     public void contextInitialized(ServletContextEvent sce) {
-        try {
-            CoordinateReferenceSystem CRS = org.geotools.referencing.CRS.decode("EPSG:4326");
-        } catch (FactoryException e) {
-            e.printStackTrace();
-        }
-
         game = new Game();
         game.startGame();
 
