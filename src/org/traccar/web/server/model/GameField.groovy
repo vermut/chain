@@ -2,9 +2,9 @@ package org.traccar.web.server.model
 
 import com.spatial4j.core.context.jts.JtsSpatialContext
 import com.spatial4j.core.distance.DistanceUtils
-import com.spatial4j.core.shape.*
+import com.spatial4j.core.shape.Point
 import com.spatial4j.core.shape.Shape
-import com.spatial4j.core.shape.jts.*
+import com.spatial4j.core.shape.jts.JtsGeometry
 import com.vividsolutions.jts.geom.Coordinate
 import com.vividsolutions.jts.geom.Polygon
 import com.vividsolutions.jts.geom.util.AffineTransformation
@@ -23,6 +23,7 @@ import org.traccar.web.shared.model.Position
         @Grab(group = 'com.spatial4j', module = 'spatial4j', version = '0.4.1'),
         @Grab(group = 'com.vividsolutions', module = 'jts', version = '1.12'),
 ])*/
+
 class GameField {
     final private JtsSpatialContext geo = JtsSpatialContext.GEO
 
@@ -36,6 +37,7 @@ class GameField {
     double lonSizeDeg
 
     private static double PLAYER_RADIUS_DEG = metersToDeg(50)
+    private static double TOUCH_DISTANCE_METERS = 100
 
     public GameField(Coordinate topLeft, double yAxisOffsetDegrees, double sideSizeMeters) {
         latSizeDeg = metersToDeg(sideSizeMeters)
@@ -66,10 +68,15 @@ class GameField {
 
 
     GraphPath teamOneHasLink(List<Position> players) {
-        hasLink(teamOneStart, teamOneFinish, players.collect ({geo.makePoint(it.latitude, it.longitude)}).toArray() as Point[])
+        hasLink(teamOneStart, teamOneFinish, players.collect({
+            geo.makePoint(it.latitude, it.longitude)
+        }).toArray() as Point[])
     }
+
     GraphPath teamTwoHasLink(List<Position> players) {
-        hasLink(teamTwoStart, teamTwoFinish, players.collect ({geo.makePoint(it.latitude, it.longitude)}).toArray() as Point[])
+        hasLink(teamTwoStart, teamTwoFinish, players.collect({
+            geo.makePoint(it.latitude, it.longitude)
+        }).toArray() as Point[])
     }
 
     private GraphPath hasLink(Shape start, Shape finish, Point[] players) {
@@ -80,25 +87,24 @@ class GameField {
             players.each { addVertex(it) }
 
             for (int i = 0; i < players.length; i++) {
-                def player = geo.makeCircle(players[i], PLAYER_RADIUS_DEG)
+                def player = players[i]
 
                 // Check edges
-                if (start.boundingBox.relate(player).intersects()) {
+                if (calcDistance(start, player) < TOUCH_DISTANCE_METERS) {
                     print "hasStart "
-                    addEdge(start.center, player.center)
+                    addEdge(start.center, player)
                 }
 
-
-                if (finish.boundingBox.relate(player).intersects()) {
+                if (calcDistance(finish, player) < TOUCH_DISTANCE_METERS) {
                     print "hasFinish "
                     addEdge(finish.center, player.center)
                 }
 
                 for (int j = i + 1; j < players.length; j++) {
-                    def anotherPlayer = geo.makeCircle(players[j], PLAYER_RADIUS_DEG)
-                    if (anotherPlayer.relate(player).intersects()) {
+                    def anotherPlayer = players[j]
+                    if (calcDistance(anotherPlayer, player) < TOUCH_DISTANCE_METERS) {
                         print "hasPlayer "
-                        addEdge(player.center, anotherPlayer.center)
+                        addEdge(player, anotherPlayer)
                     }
                 }
             }
@@ -115,5 +121,23 @@ teamTwoStart,,$teamTwoStart.geom.coordinate.x,$teamTwoStart.geom.coordinate.y
 teamOneFinish,,$teamOneFinish.geom.coordinate.x,$teamOneFinish.geom.coordinate.y
 teamTwoFinish,,$teamTwoFinish.geom.coordinate.x,$teamTwoFinish.geom.coordinate.y
 """;
+    }
+
+    private double calcDistance(Shape a, Shape b) {
+        DistanceOp dc = new DistanceOp(geo.getGeometryFrom(a), geo.getGeometryFrom(b))
+        haversine(dc.nearestPoints()[0].x, dc.nearestPoints()[0].y, dc.nearestPoints()[1].x, dc.nearestPoints()[1].y)
+    }
+
+    static double haversine(lat1, lon1, lat2, lon2) {
+        def R = 6372.8
+        // In kilometers
+        def dLat = Math.toRadians(lat2 - lat1)
+        def dLon = Math.toRadians(lon2 - lon1)
+        lat1 = Math.toRadians(lat1)
+        lat2 = Math.toRadians(lat2)
+
+        def a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2)
+        def c = 2 * Math.asin(Math.sqrt(a))
+        R * c
     }
 }

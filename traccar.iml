@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="JAVA_MODULE" version="4">
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="EclipseModuleManager">
     <libelement value="jar://$MODULE_DIR$/lib/gxt.jar!/" />
     <libelement value="jar://$MODULE_DIR$/lib/gwt-openlayers-client-1.0.jar!/" />
@@ -41,14 +41,14 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/war/WEB-INF/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="com.google.gwt.eclipse.core.GWT_CONTAINER" level="application" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="module-library">
       <library name="gxt.jar">
@@ -89,84 +89,19 @@
     <orderEntry type="library" name="gwt-user" level="project" />
     <orderEntry type="library" name="groovy-2.4.3" level="application" />
     <orderEntry type="module-library">
-      <library name="Grab:jgrapht-core-0.9.0.jar">
+      <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.groovy/grapes/org.jgrapht/jgrapht-core/jars/jgrapht-core-0.9.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Grab:spatial4j-0.4.1.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.groovy/grapes/com.spatial4j/spatial4j/jars/spatial4j-0.4.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="jgrapht-core-0.9.0">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/war/WEB-INF/lib/jgrapht-core-0.9.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/war/WEB-INF/lib/spatial4j-0.4.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Grab:quartz-2.2.1.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.groovy/grapes/org.quartz-scheduler/quartz/jars/quartz-2.2.1.jar!/" />
+          <root url="file://$MODULE_DIR$/war/WEB-INF/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$USER_HOME$/.ideaLibSources/quartz-2.2.1-sources.jar!/" />
+          <root url="file://$MODULE_DIR$/war/WEB-INF/lib" />
         </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/war/WEB-INF/lib" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/war/WEB-INF/lib" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Grab:c3p0-0.9.1.1.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.groovy/grapes/c3p0/c3p0/jars/c3p0-0.9.1.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Grab:slf4j-api-1.6.6.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.groovy/grapes/org.slf4j/slf4j-api/jars/slf4j-api-1.6.6.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Grab:jts-1.12.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.groovy/grapes/com.vividsolutions/jts/jars/jts-1.12.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.ideaLibSources/jts-1.12-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Grab:xercesImpl-2.4.0.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.groovy/grapes/xerces/xercesImpl/jars/xercesImpl-2.4.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="org.jgrapht:jgrapht-core:0.9.0" level="project" />
-    <orderEntry type="library" name="com.spatial4j:spatial4j:0.4.1" level="project" />
-    <orderEntry type="library" name="com.vividsolutions:jts:1.12" level="project" />
+    <orderEntry type="library" name="Maven: org.jgrapht:jgrapht-core:0.9.0" level="project" />
+    <orderEntry type="library" name="Maven: com.spatial4j:spatial4j:0.4.1" level="project" />
   </component>
 </module>

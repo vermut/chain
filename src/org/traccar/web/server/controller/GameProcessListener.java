@@ -2,18 +2,21 @@ package org.traccar.web.server.controller; /**
  * Created by admin on 03/04/15.
  */
 
+import org.opengis.referencing.FactoryException;
+import org.opengis.referencing.crs.CoordinateReferenceSystem;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionEvent;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 @WebListener
 public class GameProcessListener implements ServletContextListener
-        /*, HttpSessionListener, HttpSessionAttributeListener */{
+        /*, HttpSessionListener, HttpSessionAttributeListener */ {
 
     private ScheduledExecutorService scheduler;
     private Game game;
@@ -28,11 +31,13 @@ public class GameProcessListener implements ServletContextListener
     // -------------------------------------------------------
     public void contextInitialized(ServletContextEvent sce) {
         try {
-            game = new Game();
-            game.startGame();
-        } catch (Exception e) {
+            CoordinateReferenceSystem CRS = org.geotools.referencing.CRS.decode("EPSG:4326");
+        } catch (FactoryException e) {
             e.printStackTrace();
         }
+
+        game = new Game();
+        game.startGame();
 
         scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(game, 0, 5, TimeUnit.SECONDS);
