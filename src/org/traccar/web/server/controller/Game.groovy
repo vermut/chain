@@ -144,7 +144,7 @@ class Game implements Runnable {
         def team = getTeamId(device)
 
         report.teamName = teamNameById(team)
-        report.score = gameInfo.score
+        report.score = gameInfo.score.toString()
 
         if (team == null)
             return report;
@@ -157,7 +157,7 @@ class Game implements Runnable {
 
 
         report.otherTeamLinkStatus = isOtherTeamHasLink(team) ? DeviceReport.HAVE_LINK : DeviceReport.NO_LINK
-        if (isOtherTeamHasLink(team) && field.isFeelingLink(device.latestPosition, teamlink[otherTeam(team)]))
+        if (isOtherTeamHasLink(team) && field.isFeelingLink(device.latestPosition, teamlink[otherTeam(team)] as SimplePoint[]))
             report.otherTeamLinkStatus = DeviceReport.HAVE_LINK_AROUND_YOU
 
 

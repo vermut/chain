@@ -16,6 +16,7 @@
 package org.traccar.web.server.model;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.hibernate.ejb.QueryHints;
 import org.traccar.web.client.model.DataService;
 import org.traccar.web.server.controller.Game;
 import org.traccar.web.shared.model.*;
@@ -555,7 +556,17 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
 
     @Override
     public DeviceReport getDeviceReport() {
-        Device device = getSessionDevice();
-        return GAME.deviceReport(device);
+        EntityManager entityManager = getSessionEntityManager();
+        synchronized (entityManager) {
+/*
+            TypedQuery<Device> query = entityManager.createQuery(
+                    "SELECT x FROM Device x WHERE x = :device", Device.class);
+            query.setParameter("device", getSessionDevice());
+*/
+
+            Device device = getSessionDevice();
+            entityManager.refresh(device);
+            return GAME.deviceReport(device);
+        }
     }
 }

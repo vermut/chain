@@ -165,7 +165,7 @@ class GameField {
 
     boolean isFeelingLink(Position position, SimplePoint[] linkRoute) {
         def player = geom(geo.makePoint(position.latitude, position.longitude))
-        def link = geo.geometryFactory.createLinearRing(linkRoute.collect {
+        def link = geo.geometryFactory.createLineString(linkRoute.collect {
             new Coordinate(it.x, it.y)
         } as Coordinate[])
         calcDistance(player, link) < FEEL_DISTANCE_KM
