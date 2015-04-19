@@ -28,6 +28,8 @@ public interface DataServiceAsync {
 
     void login(String login, String password, AsyncCallback<User> callback);
 
+    void deviceLogin(String login, String password, AsyncCallback<Device> callback);
+
     void logout(AsyncCallback<Boolean> callback);
 
     void register(String login, String password, AsyncCallback<User> callback);
@@ -54,9 +56,11 @@ public interface DataServiceAsync {
 
     void updateApplicationSettings(ApplicationSettings applicationSettings, AsyncCallback<ApplicationSettings> callback);
 
-    void getGameInfo(AsyncCallback<GameInfo> async);
+    void getGameInfo(AsyncCallback<GameInfo> callback);
 
-    void moveDevice(Device device, double offsetX, double offsetY, AsyncCallback<Boolean> async);
+    void moveDevice(Device device, double offsetX, double offsetY, AsyncCallback<Boolean> callback);
 
-    void getLink(AsyncCallback<TeamReport> async);
+    void getTeamReport(AsyncCallback<TeamReport> callback);
+
+    void getDeviceReport(AsyncCallback<DeviceReport> async);
 }

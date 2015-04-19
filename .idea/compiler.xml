@@ -25,8 +25,8 @@
         <module name="traccar" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="traccar" target="1.5" />
-    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="DEPRECATION" value="false" />
   </component>
 </project>

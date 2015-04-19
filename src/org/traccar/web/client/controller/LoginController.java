@@ -19,6 +19,7 @@ import org.traccar.web.client.Application;
 import org.traccar.web.client.ApplicationContext;
 import org.traccar.web.client.model.BaseAsyncCallback;
 import org.traccar.web.client.view.LoginDialog;
+import org.traccar.web.shared.model.Device;
 import org.traccar.web.shared.model.User;
 
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
@@ -29,6 +30,7 @@ public class LoginController implements LoginDialog.LoginHandler {
 
     public interface LoginHandler {
         public void onLogin();
+        public void onDeviceLogin();
     }
 
     private LoginHandler loginHandler;
@@ -70,6 +72,27 @@ public class LoginController implements LoginDialog.LoginHandler {
                         loginHandler.onLogin();
                     }
                 }
+                @Override
+                public void onFailure(Throwable caught) {
+                    new AlertMessageBox("Error", "User name or password is invalid").show();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onDeviceLogin(String login, String password) {
+        if (validate(login, password)) {
+            Application.getDataService().deviceLogin(login, password, new BaseAsyncCallback<Device>() {
+                @Override
+                public void onSuccess(Device result) {
+                    // ApplicationContext.getInstance().setUser(result);
+                    if (loginHandler != null) {
+                        dialog.hide();
+                        loginHandler.onDeviceLogin();
+                    }
+                }
+
                 @Override
                 public void onFailure(Throwable caught) {
                     new AlertMessageBox("Error", "User name or password is invalid").show();

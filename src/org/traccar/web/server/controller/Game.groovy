@@ -55,8 +55,13 @@ class Game implements Runnable {
 
         fetchDbData()
         processAttacks()
+        processRevivals()
         checkForConnection()
         updateScore()
+    }
+
+    def processRevivals() {
+
     }
 
     void updateScore() {

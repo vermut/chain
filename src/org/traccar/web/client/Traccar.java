@@ -15,11 +15,10 @@
  */
 package org.traccar.web.client;
 
+import com.google.gwt.core.client.EntryPoint;
 import org.traccar.web.client.controller.LoginController;
 import org.traccar.web.client.model.BaseAsyncCallback;
 import org.traccar.web.shared.model.ApplicationSettings;
-
-import com.google.gwt.core.client.EntryPoint;
 
 public class Traccar implements EntryPoint, LoginController.LoginHandler {
 
@@ -37,6 +36,11 @@ public class Traccar implements EntryPoint, LoginController.LoginHandler {
     @Override
     public void onLogin() {
         new Application().run();
+    }
+
+    @Override
+    public void onDeviceLogin() {
+        new SingleDeviceApplication().run();
     }
 
 }

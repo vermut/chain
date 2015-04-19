@@ -37,6 +37,7 @@ public class LoginDialog {
 
     public interface LoginHandler {
         public void onLogin(String login, String password);
+        public void onDeviceLogin(String login, String password);
         public void onRegister(String login, String password);
     }
 
@@ -74,6 +75,11 @@ public class LoginDialog {
     @UiHandler("loginButton")
     public void onLoginClicked(SelectEvent event) {
         loginHandler.onLogin(login.getText(), password.getText());
+    }
+
+    @UiHandler("deviceLoginButton")
+    public void onDeviceLoginClicked(SelectEvent event) {
+        loginHandler.onDeviceLogin(login.getText(), password.getText());
     }
 
     @UiHandler("registerButton")

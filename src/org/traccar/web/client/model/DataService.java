@@ -30,6 +30,8 @@ public interface DataService extends RemoteService {
 
     User login(String login, String password);
 
+    Device deviceLogin(String login, String password);
+
     boolean logout();
 
     User register(String login, String password);
@@ -57,8 +59,10 @@ public interface DataService extends RemoteService {
     ApplicationSettings updateApplicationSettings(ApplicationSettings applicationSettings);
 
     GameInfo getGameInfo();
-    TeamReport getLink();
+    TeamReport getTeamReport();
 
     Boolean moveDevice(Device device, double offsetX, double offsetY);
+
+    DeviceReport getDeviceReport();
 
 }

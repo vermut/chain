@@ -38,6 +38,7 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
     private static final String PERSISTENCE_UNIT_DEBUG = "debug";
     private static final String PERSISTENCE_UNIT_RELEASE = "release";
     private static final String ATTRIBUTE_USER = "traccar.user";
+    private static final String ATTRIBUTE_DEVICE = "traccar.device";
     private static final String ATTRIBUTE_ENTITYMANAGER = "traccar.entitymanager";
 
     public static EntityManagerFactory entityManagerFactory;
@@ -115,6 +116,25 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
         return user;
     }
 
+    private void setSessionDevice(Device device) {
+        HttpSession session = getThreadLocalRequest().getSession();
+        if (device != null) {
+            session.setAttribute(ATTRIBUTE_DEVICE, device);
+        } else {
+            session.removeAttribute(ATTRIBUTE_DEVICE);
+        }
+    }
+
+    private Device getSessionDevice() {
+        HttpSession session = getThreadLocalRequest().getSession();
+        Device device = (Device) session.getAttribute(ATTRIBUTE_DEVICE);
+        if (device == null) {
+            throw new IllegalStateException();
+        }
+        return device;
+    }
+
+
     @Override
     public User authenticated() throws IllegalStateException {
         return getSessionUser();
@@ -133,6 +153,24 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
                 User user = results.get(0);
                 setSessionUser(user);
                 return user;
+            }
+            throw new IllegalStateException();
+        }
+    }
+
+    @Override
+    public Device deviceLogin(String login, String password) {
+        EntityManager entityManager = getSessionEntityManager();
+        synchronized (entityManager) {
+            TypedQuery<Device> query = entityManager.createQuery(
+                    "SELECT x FROM Device x WHERE x.name = :name", Device.class);
+            query.setParameter("name", login);
+            List<Device> results = query.getResultList();
+
+            if (!results.isEmpty()) { // TODO check pass?  && password.equals(results.get(0).getPassword()))
+                Device device = results.get(0);
+                setSessionDevice(device);
+                return device;
             }
             throw new IllegalStateException();
         }
@@ -467,15 +505,14 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
     }
 
     @Override
-    public TeamReport getLink() {
+    public TeamReport getTeamReport() {
         User user = getSessionUser();
         TeamReport report = new TeamReport();
 
         if (user.getLogin().equals(Game.TEAM1_STR)) {
             report.setOwnLink(GAME.getTeam1link());
             report.setOtherTeamHasLink(GAME.getTeam2link() != null);
-        }
-        else if (user.getLogin().equals(Game.TEAM2_STR)) {
+        } else if (user.getLogin().equals(Game.TEAM2_STR)) {
             report.setOwnLink(GAME.getTeam2link());
             report.setOtherTeamHasLink(GAME.getTeam1link() != null);
         }
@@ -515,5 +552,12 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
                 throw e;
             }
         }
+    }
+
+    @Override
+    public DeviceReport getDeviceReport() {
+        DeviceReport report = new DeviceReport();
+        report.teamName = "sdfsdfsdf";
+        return report;
     }
 }

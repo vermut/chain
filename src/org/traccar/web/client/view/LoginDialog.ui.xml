@@ -33,6 +33,9 @@
       <button:TextButton ui:field="loginButton" text="Login" />
     </gxt:button>
     <gxt:button>
+      <button:TextButton ui:field="deviceLoginButton" text="Device Login" />
+    </gxt:button>
+    <gxt:button>
       <button:TextButton ui:field="registerButton" text="Register" enabled="false" />
     </gxt:button>
   </gxt:Window>

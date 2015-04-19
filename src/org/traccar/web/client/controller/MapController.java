@@ -21,10 +21,7 @@ import com.sencha.gxt.widget.core.client.ContentPanel;
 import org.traccar.web.client.Application;
 import org.traccar.web.client.model.BaseAsyncCallback;
 import org.traccar.web.client.view.MapView;
-import org.traccar.web.shared.model.Device;
-import org.traccar.web.shared.model.GameInfo;
-import org.traccar.web.shared.model.Position;
-import org.traccar.web.shared.model.SimplePoint;
+import org.traccar.web.shared.model.*;
 
 import java.util.*;
 
@@ -92,11 +89,11 @@ public class MapController implements ContentController, MapView.MapHandler {
                 updateTimer.schedule(UPDATE_INTERVAL);
             }
         });
-        Application.getDataService().getLink(new BaseAsyncCallback<SimplePoint[]>() {
+        Application.getDataService().getTeamReport(new BaseAsyncCallback<TeamReport>() {
             @Override
-            public void onSuccess(SimplePoint[] result) {
-                if (result != null)
-                    mapView.drawLink(result);
+            public void onSuccess(TeamReport result) {
+                if (result != null && result.getOwnLink() != null)
+                    mapView.drawLink(result.getOwnLink());
             }
         });
 

@@ -17,15 +17,13 @@ package org.traccar.web.client;
 
 import java.util.logging.Logger;
 
-import org.traccar.web.client.controller.ArchiveController;
-import org.traccar.web.client.controller.DeviceController;
-import org.traccar.web.client.controller.MapController;
-import org.traccar.web.client.controller.SettingsController;
-import org.traccar.web.client.controller.StateController;
+import com.google.gwt.user.client.ui.Label;
+import org.traccar.web.client.controller.*;
 import org.traccar.web.client.model.BaseStoreHandlers;
 import org.traccar.web.client.model.DataService;
 import org.traccar.web.client.model.DataServiceAsync;
 import org.traccar.web.client.view.ApplicationView;
+import org.traccar.web.client.view.SingleDeviceApplicationView;
 import org.traccar.web.shared.model.Device;
 import org.traccar.web.shared.model.Position;
 
@@ -55,7 +53,10 @@ public class Application {
     private final MapController mapController;
     private final ArchiveController archiveController;
 
+    private final SingleDeviceController singleDeviceController;
+
     private ApplicationView view;
+    private SingleDeviceApplicationView singleDeviceApplicationView;
 
     public Application() {
         settingsController = new SettingsController();
@@ -68,6 +69,9 @@ public class Application {
 
         view = new ApplicationView(
                 deviceController.getView(), stateController.getView(), mapController.getView(), archiveController.getView());
+
+        singleDeviceApplicationView = new SingleDeviceApplicationView();
+        singleDeviceController = new SingleDeviceController(singleDeviceApplicationView);
     }
 
     public void run() {
@@ -78,6 +82,13 @@ public class Application {
         mapController.run();
         archiveController.run();
     }
+
+    public void runDevice() {
+        RootPanel.get().add(new Label("sdfgdsgdsgr!!!!"));
+        RootPanel.get().add(singleDeviceApplicationView);
+        singleDeviceController.run();
+    }
+
 
     private DeviceController.DeviceHandler deviceHandler = new DeviceController.DeviceHandler() {
 
