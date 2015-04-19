@@ -57,4 +57,6 @@ public interface DataServiceAsync {
     void getGameInfo(AsyncCallback<GameInfo> async);
 
     void moveDevice(Device device, double offsetX, double offsetY, AsyncCallback<Boolean> async);
+
+    void getLink(AsyncCallback<TeamReport> async);
 }

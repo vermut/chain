@@ -57,6 +57,7 @@ public interface DataService extends RemoteService {
     ApplicationSettings updateApplicationSettings(ApplicationSettings applicationSettings);
 
     GameInfo getGameInfo();
+    TeamReport getLink();
 
     Boolean moveDevice(Device device, double offsetX, double offsetY);
 

@@ -27,6 +27,7 @@
         <setting name="provider-name" value="" />
         <datasource-mapping>
           <factory-entry name="debug" />
+          <factory-entry name="debug_h2" />
           <factory-entry name="release" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/META-INF/persistence.xml" />

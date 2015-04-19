@@ -9,7 +9,6 @@ import com.vividsolutions.jts.geom.Coordinate
 import com.vividsolutions.jts.geom.Polygon
 import com.vividsolutions.jts.geom.util.AffineTransformation
 import com.vividsolutions.jts.operation.distance.DistanceOp
-import org.jgrapht.GraphPath
 import org.jgrapht.alg.DijkstraShortestPath
 import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.SimpleGraph
@@ -66,19 +65,15 @@ class GameField {
     }
 
 
-    GraphPath teamOneHasLink(List<Position> players) {
-        hasLink(teamOneStart, teamOneFinish, players.collect({
-            geo.makePoint(it.latitude, it.longitude)
-        }).toArray() as Point[])
+    def teamOneHasLink(List<Position> players) {
+        hasLink teamOneStart, teamOneFinish, activePlayers(players)
     }
 
-    GraphPath teamTwoHasLink(List<Position> players) {
-        hasLink(teamTwoStart, teamTwoFinish, players.collect({
-            geo.makePoint(it.latitude, it.longitude)
-        }).toArray() as Point[])
+    def teamTwoHasLink(List<Position> players) {
+        hasLink teamTwoStart, teamTwoFinish, activePlayers(players)
     }
 
-    private GraphPath hasLink(Shape start, Shape finish, Point[] players) {
+    private hasLink(Shape start, Shape finish, Point[] players) {
         def graph = new SimpleGraph<Point, DefaultEdge>(DefaultEdge.class)
         graph.with {
             addVertex(start.center)
@@ -96,7 +91,7 @@ class GameField {
 
                 if (calcDistance(finish, player) < TOUCH_DISTANCE_KM) {
                     print "hasFinish "
-                    addEdge(finish.center, player)
+                    addEdge(player, finish.center)
                 }
 
                 for (int j = i + 1; j < players.length; j++) {
@@ -108,10 +103,24 @@ class GameField {
                 }
             }
         }
-        new DijkstraShortestPath(graph, start.center, finish.center).path
+
+        def path = new DijkstraShortestPath<Point, DefaultEdge>(graph, start.center, finish.center).path
+        if (!path)
+            return null
+
+        def link = new Link()
+        link.points = path.edgeList.collect { graph.getEdgeSource(it) as Point }
+        link.start = start.center
+        link.finish = finish.center
+        link
     }
 
     static double metersToDeg(double m) { m / 1000D * DistanceUtils.KM_TO_DEG }
+
+    private Point[] activePlayers(List<Position> players) {
+        players.collect { geo.makePoint(it.latitude, it.longitude) }.
+                findAll { areaPolygon.contains(geom(it)) }
+    }
 
     @Override
     public String toString() {
@@ -121,6 +130,8 @@ teamOneFinish,,$teamOneFinish.geom.coordinate.x,$teamOneFinish.geom.coordinate.y
 teamTwoFinish,,$teamTwoFinish.geom.coordinate.x,$teamTwoFinish.geom.coordinate.y
 """;
     }
+
+    def geom(Shape s) { geo.getGeometryFrom s }
 
     private double calcDistance(Shape a, Shape b) {
         DistanceOp dc = new DistanceOp(geo.getGeometryFrom(a), geo.getGeometryFrom(b))
@@ -138,5 +149,11 @@ teamTwoFinish,,$teamTwoFinish.geom.coordinate.x,$teamTwoFinish.geom.coordinate.y
         def a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2)
         def c = 2 * Math.asin(Math.sqrt(a))
         R * c
+    }
+
+    public class Link {
+        Point start
+        Point finish
+        List<Point> points
     }
 }

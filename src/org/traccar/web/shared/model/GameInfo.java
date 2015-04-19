@@ -38,9 +38,18 @@ public class GameInfo implements Serializable, Cloneable {
         this.topRight = topRight;
     }
 
+    public int[] getScore() {
+        return score;
+    }
+
+    public void setScore(int[] score) {
+        this.score = score;
+    }
+
     private static final long serialVersionUID = 1;
     private SimplePoint topLeft;
     private SimplePoint bottomLeft;
     private SimplePoint bottomRight;
     private SimplePoint topRight;
+    int[] score;
 }

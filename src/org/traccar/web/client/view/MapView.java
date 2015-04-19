@@ -29,6 +29,7 @@ import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.layer.*;
 import org.traccar.web.shared.model.Device;
 import org.traccar.web.shared.model.Position;
+import org.traccar.web.shared.model.SimplePoint;
 
 import java.util.List;
 
@@ -172,6 +173,18 @@ public class MapView {
                 bottomLeft,
                 topLeft
         };
+
+        LineString lineString = new LineString(linePoints);
+        getVectorLayer().addFeature(new VectorFeature(lineString));
+    }
+
+    public void drawLink(SimplePoint[] points) {
+        Point[] linePoints = new Point[points.length];
+
+        for (int i = 0; i < points.length; i++) {
+            //noinspection SuspiciousNameCombination
+            linePoints[i] = createPoint(points[i].y, points[i].x);
+        }
 
         LineString lineString = new LineString(linePoints);
         getVectorLayer().addFeature(new VectorFeature(lineString));
