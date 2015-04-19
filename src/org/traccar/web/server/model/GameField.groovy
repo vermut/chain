@@ -6,6 +6,7 @@ import com.spatial4j.core.shape.Point
 import com.spatial4j.core.shape.Shape
 import com.spatial4j.core.shape.jts.JtsGeometry
 import com.vividsolutions.jts.geom.Coordinate
+import com.vividsolutions.jts.geom.Geometry
 import com.vividsolutions.jts.geom.Polygon
 import com.vividsolutions.jts.geom.util.AffineTransformation
 import com.vividsolutions.jts.operation.distance.DistanceOp
@@ -13,6 +14,7 @@ import org.jgrapht.alg.DijkstraShortestPath
 import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.SimpleGraph
 import org.traccar.web.shared.model.Position
+import org.traccar.web.shared.model.SimplePoint
 
 /**
  * Created by admin on 03/04/15.
@@ -36,6 +38,7 @@ class GameField {
     double lonSizeDeg
 
     private static double TOUCH_DISTANCE_KM = 0.070
+    private static double FEEL_DISTANCE_KM = TOUCH_DISTANCE_KM / 2
 
     public GameField(Coordinate topLeft, double yAxisOffsetDegrees, double sideSizeMeters) {
         latSizeDeg = metersToDeg(sideSizeMeters)
@@ -66,11 +69,11 @@ class GameField {
 
 
     def teamOneHasLink(List<Position> players) {
-        hasLink teamOneStart, teamOneFinish, activePlayers(players)
+        hasLink teamOneStart, teamOneFinish, activePoints(players)
     }
 
     def teamTwoHasLink(List<Position> players) {
-        hasLink teamTwoStart, teamTwoFinish, activePlayers(players)
+        hasLink teamTwoStart, teamTwoFinish, activePoints(players)
     }
 
     private hasLink(Shape start, Shape finish, Point[] players) {
@@ -117,25 +120,28 @@ class GameField {
 
     static double metersToDeg(double m) { m / 1000D * DistanceUtils.KM_TO_DEG }
 
-    private Point[] activePlayers(List<Position> players) {
+    private Point[] activePoints(List<Position> players) {
         players.collect { geo.makePoint(it.latitude, it.longitude) }.
                 findAll { areaPolygon.contains(geom(it)) }
     }
 
-    @Override
-    public String toString() {
-        return """teamOneStart,,$teamOneStart.geom.coordinate.x,$teamOneStart.geom.coordinate.y
-teamTwoStart,,$teamTwoStart.geom.coordinate.x,$teamTwoStart.geom.coordinate.y
-teamOneFinish,,$teamOneFinish.geom.coordinate.x,$teamOneFinish.geom.coordinate.y
-teamTwoFinish,,$teamTwoFinish.geom.coordinate.x,$teamTwoFinish.geom.coordinate.y
-""";
+    private Position[] activePositions(List<Position> players) {
+        players.findAll { areaPolygon.contains(geom(geo.makePoint(it.latitude, it.longitude))) }
     }
 
     def geom(Shape s) { geo.getGeometryFrom s }
 
     private double calcDistance(Shape a, Shape b) {
-        DistanceOp dc = new DistanceOp(geo.getGeometryFrom(a), geo.getGeometryFrom(b))
+        calcDistance(geo.getGeometryFrom(a), geo.getGeometryFrom(b))
+    }
+
+    private static double calcDistance(Geometry a, Geometry b) {
+        DistanceOp dc = new DistanceOp(a, b)
         haversine(dc.nearestPoints()[0].x, dc.nearestPoints()[0].y, dc.nearestPoints()[1].x, dc.nearestPoints()[1].y)
+    }
+
+    private double calcDistance(Position a, Shape b) {
+        calcDistance(geo.makePoint(a.latitude, a.longitude), b)
     }
 
     static double haversine(lat1, lon1, lat2, lon2) {
@@ -149,6 +155,20 @@ teamTwoFinish,,$teamTwoFinish.geom.coordinate.x,$teamTwoFinish.geom.coordinate.y
         def a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2)
         def c = 2 * Math.asin(Math.sqrt(a))
         R * c
+    }
+
+    def getNeighbors(Position position, List<Position> positions) {
+        def player = geo.makePoint(position.latitude, position.longitude)
+        activePositions(positions).findAll { calcDistance(it, player) < TOUCH_DISTANCE_KM }.
+                collect { it.device.name }
+    }
+
+    boolean isFeelingLink(Position position, SimplePoint[] linkRoute) {
+        def player = geom(geo.makePoint(position.latitude, position.longitude))
+        def link = geo.geometryFactory.createLinearRing(linkRoute.collect {
+            new Coordinate(it.x, it.y)
+        } as Coordinate[])
+        calcDistance(player, link) < FEEL_DISTANCE_KM
     }
 
     public class Link {

@@ -20,6 +20,14 @@ public class SingleDeviceApplicationView extends Composite {
     public Label teamLabel;
     @UiField
     public Label neighborsLabel;
+    @UiField
+    public Label otherLink;
+    @UiField
+    public Label yourLink;
+    @UiField
+    public Label updateId;
+    @UiField
+    public Label score;
 
     public SingleDeviceApplicationView() {
         VerticalPanel rootElement = ourUiBinder.createAndBindUi(this);

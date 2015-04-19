@@ -509,13 +509,12 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
         User user = getSessionUser();
         TeamReport report = new TeamReport();
 
-        if (user.getLogin().equals(Game.TEAM1_STR)) {
-            report.setOwnLink(GAME.getTeam1link());
-            report.setOtherTeamHasLink(GAME.getTeam2link() != null);
-        } else if (user.getLogin().equals(Game.TEAM2_STR)) {
-            report.setOwnLink(GAME.getTeam2link());
-            report.setOtherTeamHasLink(GAME.getTeam1link() != null);
-        }
+        Integer team = Game.teamIdByName(user.getLogin());
+        if (team == null)
+            return report;
+
+        report.setOwnLink(GAME.getTeamlink(team));
+        report.setOtherTeamHasLink(GAME.isOtherTeamHasLink(team));
 
         return report;
     }
@@ -556,8 +555,7 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
 
     @Override
     public DeviceReport getDeviceReport() {
-        DeviceReport report = new DeviceReport();
-        report.teamName = "sdfsdfsdf";
-        return report;
+        Device device = getSessionDevice();
+        return GAME.deviceReport(device);
     }
 }

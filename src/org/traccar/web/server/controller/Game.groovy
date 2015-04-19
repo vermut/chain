@@ -3,9 +3,7 @@ package org.traccar.web.server.controller
 import com.vividsolutions.jts.geom.Coordinate
 import org.traccar.web.server.model.DataServiceImpl
 import org.traccar.web.server.model.GameField
-import org.traccar.web.shared.model.GameInfo
-import org.traccar.web.shared.model.Position
-import org.traccar.web.shared.model.SimplePoint
+import org.traccar.web.shared.model.*
 
 import javax.persistence.EntityManager
 
@@ -19,16 +17,14 @@ class Game implements Runnable {
 
     boolean started = false
 
-    static Integer TEAM1 = 0
-    static Integer TEAM2 = 1
+    public static Integer TEAM1 = 0
+    public static Integer TEAM2 = 1
 
     public static TEAM1_STR = 'team1'
     public static TEAM2_STR = 'team2'
 
-    SimplePoint[] team1link
-    SimplePoint[] team2link
-
-    HashMap<Integer, List<Position>> players = new HashMap<>()
+    HashMap<Integer, SimplePoint[]> teamlink = [:]
+    HashMap<Integer, List<Position>> players = [:]
 
     EntityManager em
 
@@ -43,7 +39,7 @@ class Game implements Runnable {
                 bottomLeft: new SimplePoint(field.teamTwoStart.geom.coordinate.x, field.teamTwoStart.geom.coordinate.y),
                 bottomRight: new SimplePoint(field.teamOneFinish.geom.coordinate.x, field.teamOneFinish.geom.coordinate.y),
                 topRight: new SimplePoint(field.teamTwoFinish.geom.coordinate.x, field.teamTwoFinish.geom.coordinate.y),
-                score: [0,0]
+                score: [0, 0]
         )
 
         DataServiceImpl.GAME = this
@@ -65,10 +61,10 @@ class Game implements Runnable {
     }
 
     void updateScore() {
-        if (team1link)
+        if (teamlink[TEAM1])
             gameInfo.score[TEAM1]++
 
-        if (team2link)
+        if (teamlink[TEAM2])
             gameInfo.score[TEAM2]++
     }
 
@@ -82,22 +78,22 @@ class Game implements Runnable {
 
         if (t1) {
             t1.with { GameField.Link team ->
-                team1link = team.points.collect {
+                teamlink[TEAM1] = team.points.collect {
                     new SimplePoint(it.x, it.y)
                 } + new SimplePoint(team.finish.x, team.finish.y)
 
             }
         } else
-            team1link = null
+            teamlink[TEAM1] = null
 
         if (t2)
             t2.with { team ->
-                team2link = team.points.collect {
+                teamlink[TEAM2] = team.points.collect {
                     new SimplePoint(it.x, it.y)
                 } + new SimplePoint(team.finish.x, team.finish.y)
             }
         else
-            team2link = null
+            teamlink[TEAM2] = null
     }
 
 
@@ -112,4 +108,59 @@ class Game implements Runnable {
                 em.createQuery("SELECT x FROM User u join u.devices d join d.latestPosition x WHERE u.login = '$TEAM2_STR'", Position.class).resultList
     }
 
+    def getTeamId(Device device) {
+        if (players[TEAM1].find { it.device.id == device.id })
+            return TEAM1;
+        if (players[TEAM2].find { it.device.id == device.id })
+            return TEAM2;
+
+        return null;
+    }
+
+    static def teamNameById(team) {
+        switch (team) {
+            case TEAM1: TEAM1_STR; break
+            case TEAM2: TEAM2_STR; break
+            default: "UNREGISTERED"
+        }
+    }
+
+    static def Integer teamIdByName(team) {
+        switch (team) {
+            case TEAM1_STR: TEAM1; break
+            case TEAM2_STR: TEAM2; break
+            default: null
+        }
+    }
+
+    SimplePoint[] getTeamlink(Integer team) { teamlink[team] }
+
+    boolean isOtherTeamHasLink(Integer team) { teamlink[otherTeam(team)] }
+
+    static int otherTeam(int team) { team == TEAM1 ? TEAM2 : TEAM1 }
+
+    DeviceReport deviceReport(Device device) {
+        def report = new DeviceReport()
+        def team = getTeamId(device)
+
+        report.teamName = teamNameById(team)
+        report.score = gameInfo.score
+
+        if (team == null)
+            return report;
+
+        report.neighbors = field.getNeighbors(device.latestPosition, players[team])
+
+        report.ownLinkStatus = getTeamlink(team) ? DeviceReport.HAVE_LINK : DeviceReport.NO_LINK
+        if (getTeamlink(team).find {it.x == device.latestPosition.latitude && it.y == device.latestPosition.longitude})
+            report.ownLinkStatus = DeviceReport.HAVE_LINK_WITH_YOU
+
+
+        report.otherTeamLinkStatus = isOtherTeamHasLink(team) ? DeviceReport.HAVE_LINK : DeviceReport.NO_LINK
+        if (isOtherTeamHasLink(team) && field.isFeelingLink(device.latestPosition, teamlink[otherTeam(team)]))
+            report.otherTeamLinkStatus = DeviceReport.HAVE_LINK_AROUND_YOU
+
+
+        report
+    }
 }
