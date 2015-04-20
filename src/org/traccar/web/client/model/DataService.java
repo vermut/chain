@@ -65,4 +65,6 @@ public interface DataService extends RemoteService {
 
     DeviceReport getDeviceReport();
 
+    Boolean attack(double lat, double lon);
+
 }

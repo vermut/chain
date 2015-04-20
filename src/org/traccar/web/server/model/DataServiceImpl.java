@@ -558,15 +558,14 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
     public DeviceReport getDeviceReport() {
         EntityManager entityManager = getSessionEntityManager();
         synchronized (entityManager) {
-/*
-            TypedQuery<Device> query = entityManager.createQuery(
-                    "SELECT x FROM Device x WHERE x = :device", Device.class);
-            query.setParameter("device", getSessionDevice());
-*/
-
             Device device = getSessionDevice();
             entityManager.refresh(device);
             return GAME.deviceReport(device);
         }
+    }
+
+    @Override
+    public Boolean attack(double lat, double lon) {
+        return GAME.attack(lat, lon, Game.teamIdByName(getSessionUser().getLogin()));
     }
 }

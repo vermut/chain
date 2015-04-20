@@ -39,6 +39,7 @@ class GameField {
 
     private static double TOUCH_DISTANCE_KM = 0.070
     private static double FEEL_DISTANCE_KM = TOUCH_DISTANCE_KM / 2
+    private static double ATTACK_DISTANCE_KM = TOUCH_DISTANCE_KM / 4
 
     public GameField(Coordinate topLeft, double yAxisOffsetDegrees, double sideSizeMeters) {
         latSizeDeg = metersToDeg(sideSizeMeters)
@@ -161,6 +162,11 @@ class GameField {
         def player = geo.makePoint(position.latitude, position.longitude)
         activePositions(positions).findAll { calcDistance(it, player) < TOUCH_DISTANCE_KM }.
                 collect { it.device.name }
+    }
+
+    def getVictims(double latitude, double longitude, List<Position> positions) {
+        def player = geo.makePoint(latitude, longitude)
+        positions.findAll { calcDistance(it, player) < ATTACK_DISTANCE_KM }
     }
 
     boolean isFeelingLink(Position position, SimplePoint[] linkRoute) {

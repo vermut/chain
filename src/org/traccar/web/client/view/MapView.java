@@ -19,10 +19,12 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.Window;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import org.gwtopenmaps.openlayers.client.*;
 import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
 import org.gwtopenmaps.openlayers.client.control.ScaleLine;
+import org.gwtopenmaps.openlayers.client.event.MapClickListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.LineString;
 import org.gwtopenmaps.openlayers.client.geometry.Point;
@@ -34,11 +36,14 @@ import org.traccar.web.shared.model.SimplePoint;
 import java.util.List;
 
 public class MapView {
+    private static final Projection DEFAULT_PROJECTION = new Projection("EPSG:4326");
 
     public interface MapHandler {
         public void onPositionSelected(Position position);
 
         public void onArchivePositionSelected(Position position);
+
+        public void onAttackTargetClicked(double lat, double lon);
     }
 
     private MapHandler mapHandler;
@@ -68,13 +73,13 @@ public class MapView {
 
     public LonLat createLonLat(double longitude, double latitude) {
         LonLat lonLat = new LonLat(longitude, latitude);
-        lonLat.transform(new Projection("EPSG:4326").getProjectionCode(), map.getProjection());
+        lonLat.transform(DEFAULT_PROJECTION.getProjectionCode(), map.getProjection());
         return lonLat;
     }
 
     public Point createPoint(double x, double y) {
         Point point = new Point(x, y);
-        point.transform(new Projection("EPSG:4326"), new Projection(map.getProjection()));
+        point.transform(DEFAULT_PROJECTION, new Projection(map.getProjection()));
         return point;
     }
 
@@ -107,7 +112,7 @@ public class MapView {
         map.addLayer(new Bing(new BingOptions("Bing Aerial", bingKey, BingType.AERIAL)));
     }
 
-    public MapView(MapHandler mapHandler) {
+    public MapView(final MapHandler mapHandler) {
         this.mapHandler = mapHandler;
         contentPanel = new ContentPanel();
         contentPanel.setHeadingText("Map");
@@ -137,6 +142,16 @@ public class MapView {
         map.addControl(new LayerSwitcher());
         map.addControl(new ScaleLine());
         map.setCenter(createLonLat(24.1306516666667, 56.961385), 16);
+
+
+        map.addMapClickListener(new MapClickListener() {
+            @Override
+            public void onClick(MapClickEvent mapClickEvent) {
+                LonLat lonLat = mapClickEvent.getLonLat();
+                lonLat.transform(map.getProjection(), DEFAULT_PROJECTION.getProjectionCode()); //transform lonlat to more readable format
+                mapHandler.onAttackTargetClicked(lonLat.lat(), lonLat.lon());
+            }
+        });
 
         contentPanel.add(mapWidget);
 

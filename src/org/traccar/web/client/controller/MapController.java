@@ -28,6 +28,7 @@ import java.util.*;
 public class MapController implements ContentController, MapView.MapHandler {
 
     private static final int UPDATE_INTERVAL = 5000;
+    public static final double ATTACK_CROSS = 0.0002;
 
     public interface MapHandler {
         public void onDeviceSelected(Device device);
@@ -50,16 +51,23 @@ public class MapController implements ContentController, MapView.MapHandler {
     }
 
     private Timer updateTimer;
+    private GameInfo gameInfo;
 
     @Override
     public void run() {
+        Application.getDataService().getGameInfo(new BaseAsyncCallback<GameInfo>() {
+            @Override
+            public void onSuccess(GameInfo result) {
+                gameInfo = result;
+                update();
+            }
+        });
         updateTimer = new Timer() {
             @Override
             public void run() {
                 update();
             }
         };
-        update();
     }
 
     private Map<Long, Position> latestPositionMap = new HashMap<Long, Position>();
@@ -92,12 +100,20 @@ public class MapController implements ContentController, MapView.MapHandler {
         Application.getDataService().getTeamReport(new BaseAsyncCallback<TeamReport>() {
             @Override
             public void onSuccess(TeamReport result) {
+                mapView.getVectorLayer().removeAllFeatures();
+                //noinspection SuspiciousNameCombination
+                mapView.drawField(mapView.createPoint(gameInfo.getTopLeft().y, gameInfo.getTopLeft().x),
+                        mapView.createPoint(gameInfo.getTopRight().y, gameInfo.getTopRight().x),
+                        mapView.createPoint(gameInfo.getBottomRight().y, gameInfo.getBottomRight().x),
+                        mapView.createPoint(gameInfo.getBottomLeft().y, gameInfo.getBottomLeft().x)
+                );
+
                 if (result != null && result.getOwnLink() != null)
                     mapView.drawLink(result.getOwnLink());
             }
         });
 
-        Application.getDataService().getGameInfo(new BaseAsyncCallback<GameInfo>() {
+        if (false) Application.getDataService().getGameInfo(new BaseAsyncCallback<GameInfo>() {
             @Override
             public void onSuccess(GameInfo result) {
                 if (result != null) {
@@ -162,6 +178,23 @@ public class MapController implements ContentController, MapView.MapHandler {
     @Override
     public void onArchivePositionSelected(Position position) {
         mapHandler.onArchivePositionSelected(position);
+    }
+
+    @Override
+    public void onAttackTargetClicked(final double lat, final double lon) {
+        Application.getDataService().attack(lat, lon, new BaseAsyncCallback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean result) {
+                if (result) {
+                    mapView.drawLink(new SimplePoint[]{
+                            new SimplePoint(lat - ATTACK_CROSS, lon), new SimplePoint(lat + ATTACK_CROSS, lon)
+                    });
+                    mapView.drawLink(new SimplePoint[]{
+                            new SimplePoint(lat, lon - ATTACK_CROSS), new SimplePoint(lat, lon + ATTACK_CROSS)
+                    });
+                }
+            }
+        });
     }
 
 }

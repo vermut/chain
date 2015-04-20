@@ -20,11 +20,14 @@ class Game implements Runnable {
     public static Integer TEAM1 = 0
     public static Integer TEAM2 = 1
 
+    public static long ATTACK_INTERVAL = 10 * 1000l
+
     public static TEAM1_STR = 'team1'
     public static TEAM2_STR = 'team2'
 
     HashMap<Integer, SimplePoint[]> teamlink = [:]
     HashMap<Integer, List<Position>> players = [:]
+    HashMap<Integer, Long> attackTimer = [:]
 
     EntityManager em
 
@@ -32,6 +35,8 @@ class Game implements Runnable {
         started = true
         field = new GameField(new Coordinate(56.961385, 24.1306516666667), 0, 100)
         em = DataServiceImpl.initEMF().createEntityManager()
+        attackTimer[TEAM1] = System.currentTimeMillis()
+        attackTimer[TEAM2] = System.currentTimeMillis()
 
         //Set up gameInfo
         gameInfo = new GameInfo(
@@ -162,5 +167,18 @@ class Game implements Runnable {
 
 
         report
+    }
+
+    Boolean attack(double lat, double lon, Integer team) {
+        if (team == null)
+            return false;
+
+        if (System.currentTimeMillis() - ATTACK_INTERVAL < attackTimer[team] )
+            return false;
+
+        field.getVictims(lat, lon, players[TEAM1] + players[TEAM2]);
+
+        attackTimer[team] = System.currentTimeMillis()
+        true
     }
 }

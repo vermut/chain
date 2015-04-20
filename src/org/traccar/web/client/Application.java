@@ -83,13 +83,6 @@ public class Application {
         archiveController.run();
     }
 
-    public void runDevice() {
-        RootPanel.get().add(new Label("sdfgdsgdsgr!!!!"));
-        RootPanel.get().add(singleDeviceApplicationView);
-        singleDeviceController.run();
-    }
-
-
     private DeviceController.DeviceHandler deviceHandler = new DeviceController.DeviceHandler() {
 
         private Device selected;

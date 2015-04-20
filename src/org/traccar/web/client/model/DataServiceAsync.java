@@ -62,5 +62,7 @@ public interface DataServiceAsync {
 
     void getTeamReport(AsyncCallback<TeamReport> callback);
 
-    void getDeviceReport(AsyncCallback<DeviceReport> async);
+    void getDeviceReport(AsyncCallback<DeviceReport> callback);
+
+    void attack(double lat, double lon, AsyncCallback<Boolean> callback);
 }
