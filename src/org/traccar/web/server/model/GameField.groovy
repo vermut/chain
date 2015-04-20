@@ -34,26 +34,25 @@ class GameField {
     JtsGeometry teamOneFinish
     JtsGeometry teamTwoFinish
 
-    double latSizeDeg
-    double lonSizeDeg
-
     private static double TOUCH_DISTANCE_KM = 0.070
     private static double FEEL_DISTANCE_KM = TOUCH_DISTANCE_KM / 2
     private static double ATTACK_DISTANCE_KM = TOUCH_DISTANCE_KM / 4
 
     public GameField(Coordinate topLeft, double yAxisOffsetDegrees, double sideSizeMeters) {
-        latSizeDeg = metersToDeg(sideSizeMeters)
-        lonSizeDeg = DistanceUtils.calcLonDegreesAtLat(topLeft.x, latSizeDeg)
+        def latSizeDeg = metersToDeg(sideSizeMeters)
+        def lonSizeDeg = latSizeDeg // DistanceUtils.calcLonDegreesAtLat(topLeft.x, latSizeDeg)
 
         // Build and rotate gamefield rect area
         def gf = geo.geometryFactory
-        def af = new AffineTransformation().rotate(Math.toRadians(yAxisOffsetDegrees), topLeft.x, topLeft.y)
+        def af = new AffineTransformation().rotate(Math.toRadians(yAxisOffsetDegrees))
+                .scale(1d, DistanceUtils.calcLonDegreesAtLat(topLeft.x, 1))
+                .translate(topLeft.x, topLeft.y)
         Coordinate[] cs = [
-                new Coordinate(topLeft.x, topLeft.y),
-                new Coordinate(topLeft.x - latSizeDeg, topLeft.y),
-                new Coordinate(topLeft.x - latSizeDeg, topLeft.y + lonSizeDeg),
-                new Coordinate(topLeft.x, topLeft.y + lonSizeDeg),
-                new Coordinate(topLeft.x, topLeft.y)
+                new Coordinate(0, 0),
+                new Coordinate(0 - latSizeDeg, 0),
+                new Coordinate(0 - latSizeDeg, 0 + lonSizeDeg),
+                new Coordinate(0, 0 + lonSizeDeg),
+                new Coordinate(0, 0)
         ]
 
         cs.each { Coordinate it -> af.transform(it, it) }
@@ -122,12 +121,17 @@ class GameField {
     static double metersToDeg(double m) { m / 1000D * DistanceUtils.KM_TO_DEG }
 
     private Point[] activePoints(List<Position> players) {
-        players.collect { geo.makePoint(it.latitude, it.longitude) }.
+        players.findAll { it.device.active }.
+                collect { geo.makePoint(it.latitude, it.longitude) }.
                 findAll { areaPolygon.contains(geom(it)) }
     }
 
+    def outsiders(List<Position> players) {
+        players.findAll { !areaPolygon.contains(geom(geo.makePoint(it.latitude, it.longitude))) }
+    }
+
     private Position[] activePositions(List<Position> players) {
-        players.findAll { areaPolygon.contains(geom(geo.makePoint(it.latitude, it.longitude))) }
+        players.findAll { it.device.active && areaPolygon.contains(geom(geo.makePoint(it.latitude, it.longitude))) }
     }
 
     def geom(Shape s) { geo.getGeometryFrom s }
@@ -145,7 +149,7 @@ class GameField {
         calcDistance(geo.makePoint(a.latitude, a.longitude), b)
     }
 
-    static double haversine(lat1, lon1, lat2, lon2) {
+    static double haversine(double lat1, double lon1, double lat2, double lon2) {
         def R = 6372.8
         // In kilometers
         def dLat = Math.toRadians(lat2 - lat1)

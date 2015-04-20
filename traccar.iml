@@ -99,6 +99,7 @@
         <JAVADOC />
         <SOURCES>
           <root url="file://$MODULE_DIR$/war/WEB-INF/lib" />
+          <root url="jar://$USER_HOME$/.ideaLibSources/jts-1.12-sources.jar!/" />
         </SOURCES>
         <jarDirectory url="file://$MODULE_DIR$/war/WEB-INF/lib" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/war/WEB-INF/lib" recursive="false" type="SOURCES" />

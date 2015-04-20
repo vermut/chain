@@ -33,7 +33,7 @@ class Game implements Runnable {
 
     void startGame() {
         started = true
-        field = new GameField(new Coordinate(56.961385, 24.1306516666667), 0, 100)
+        field = new GameField(new Coordinate(56.961385, 24.1306516666667), 30, 100)
         em = DataServiceImpl.initEMF().createEntityManager()
         attackTimer[TEAM1] = System.currentTimeMillis()
         attackTimer[TEAM2] = System.currentTimeMillis()
@@ -55,14 +55,19 @@ class Game implements Runnable {
         if (!started) return
 
         fetchDbData()
-        processAttacks()
         processRevivals()
         checkForConnection()
         updateScore()
     }
 
     def processRevivals() {
-
+        field.outsiders(players[TEAM1] + players[TEAM2]).each {
+            em.transaction.begin()
+            em.refresh(it.device)
+            it.device.active = true
+            em.persist(it.device)
+            em.transaction.commit()
+        }
     }
 
     void updateScore() {
@@ -99,11 +104,6 @@ class Game implements Runnable {
             }
         else
             teamlink[TEAM2] = null
-    }
-
-
-    void processAttacks() {
-
     }
 
     void fetchDbData() {
@@ -176,7 +176,13 @@ class Game implements Runnable {
         if (System.currentTimeMillis() - ATTACK_INTERVAL < attackTimer[team] )
             return false;
 
-        field.getVictims(lat, lon, players[TEAM1] + players[TEAM2]);
+        field.getVictims(lat, lon, players[TEAM1] + players[TEAM2]).each {
+            em.transaction.begin()
+            em.refresh(it.device)
+            it.device.active = false
+            em.persist(it.device)
+            em.transaction.commit()
+        }
 
         attackTimer[team] = System.currentTimeMillis()
         true
