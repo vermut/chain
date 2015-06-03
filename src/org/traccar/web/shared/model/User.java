@@ -77,7 +77,6 @@ public class User implements Serializable, Cloneable {
         return password;
     }
 
-    // TODO temporary nullable to migrate from old database
     private Boolean admin;
 
     public void setAdmin(boolean admin) {
@@ -85,7 +84,6 @@ public class User implements Serializable, Cloneable {
     }
 
     public boolean getAdmin() {
-        // TODO temporary nullable to migrate from old database
         return (admin == null) ? false : admin;
     }
 

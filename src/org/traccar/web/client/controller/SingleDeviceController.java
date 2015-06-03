@@ -41,6 +41,16 @@ public class SingleDeviceController {
                 deviceView.teamLabel.setText(result.teamName);
                 deviceView.score.setText(result.score);
 
+                if (result.active)
+                {
+                    deviceView.death.setText("");
+                    deviceView.panel.setStylePrimaryName("active");
+                } else {
+                    deviceView.panel.setStylePrimaryName("dead");
+                    deviceView.death.setText("You are DEAD! Proceed of the limits to respawn.");
+                }
+
+
                 if (result.neighbors != null)
                     deviceView.neighborsLabel.setText(result.neighbors.toString());
 

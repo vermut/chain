@@ -28,6 +28,10 @@ public class SingleDeviceApplicationView extends Composite {
     public Label updateId;
     @UiField
     public Label score;
+    @UiField
+    public VerticalPanel panel;
+    @UiField
+    public Label death;
 
     public SingleDeviceApplicationView() {
         VerticalPanel rootElement = ourUiBinder.createAndBindUi(this);

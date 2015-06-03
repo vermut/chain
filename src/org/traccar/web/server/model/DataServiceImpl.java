@@ -522,6 +522,7 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
 
     @Override
     public Boolean moveDevice(Device device, double offsetX, double offsetY) {
+        // TODO: disable on play
         if (device == null)
             return false;
 
@@ -529,6 +530,7 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
         synchronized (entityManager) {
             entityManager.getTransaction().begin();
             try {
+                device.setActive(true);
                 TypedQuery<Position> query = entityManager.createQuery(
                         "SELECT x FROM Position x WHERE x.id IN (" +
                                 "SELECT y.latestPosition FROM Device y WHERE y = :device)", Position.class);

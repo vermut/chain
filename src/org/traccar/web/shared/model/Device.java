@@ -38,6 +38,7 @@ public class Device implements Serializable {
         id = device.id;
         uniqueId = device.uniqueId;
         name = device.name;
+        active = device.active;
     }
 
     @Id

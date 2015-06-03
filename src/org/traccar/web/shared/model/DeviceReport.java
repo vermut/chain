@@ -18,4 +18,5 @@ public class DeviceReport implements Serializable {
     public int otherTeamLinkStatus = NO_LINK;
     public int ownLinkStatus = NO_LINK;
     public String score;
+    public boolean active;
 }

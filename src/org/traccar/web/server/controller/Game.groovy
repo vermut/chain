@@ -9,6 +9,8 @@ import javax.persistence.EntityManager
 
 /**
  * Created by admin on 03/04/15.
+ *
+ *  TODO: select map in park
  */
 // @CompileStatic
 class Game implements Runnable {
@@ -165,6 +167,8 @@ class Game implements Runnable {
         if (isOtherTeamHasLink(team) && field.isFeelingLink(device.latestPosition, teamlink[otherTeam(team)] as SimplePoint[]))
             report.otherTeamLinkStatus = DeviceReport.HAVE_LINK_AROUND_YOU
 
+
+        report.active = device.active
 
         report
     }
