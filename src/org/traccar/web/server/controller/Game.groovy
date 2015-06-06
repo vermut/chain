@@ -35,7 +35,8 @@ class Game implements Runnable {
 
     void startGame() {
         started = true
-        field = new GameField(new Coordinate(56.961385, 24.1306516666667), 30, 100)
+        // field = new GameField(new Coordinate(56.955492, 24.102950), 240, 300)
+        field = new GameField(new Coordinate(56.954818, 24.103382), 243, 300)
         em = DataServiceImpl.initEMF().createEntityManager()
         attackTimer[TEAM1] = System.currentTimeMillis()
         attackTimer[TEAM2] = System.currentTimeMillis()
@@ -159,7 +160,9 @@ class Game implements Runnable {
         report.neighbors = field.getNeighbors(device.latestPosition, players[team])
 
         report.ownLinkStatus = getTeamlink(team) ? DeviceReport.HAVE_LINK : DeviceReport.NO_LINK
-        if (getTeamlink(team).find {it.x == device.latestPosition.latitude && it.y == device.latestPosition.longitude})
+        if (getTeamlink(team).find {
+            it.x == device.latestPosition.latitude && it.y == device.latestPosition.longitude
+        })
             report.ownLinkStatus = DeviceReport.HAVE_LINK_WITH_YOU
 
 
@@ -177,7 +180,7 @@ class Game implements Runnable {
         if (team == null)
             return false;
 
-        if (System.currentTimeMillis() - ATTACK_INTERVAL < attackTimer[team] )
+        if (System.currentTimeMillis() - ATTACK_INTERVAL < attackTimer[team])
             return false;
 
         field.getVictims(lat, lon, players[TEAM1] + players[TEAM2]).each {
