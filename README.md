@@ -1,8 +1,10 @@
 # [Traccar Web Interface](https://www.traccar.org)
 
-## Status
+## Capabilities
+ * [geo](http://html5demos.com/geo)
+ * [voice](http://voicechatapi.com/)
 
-**The project is in frozen state.** I am working on a completely new web interface based on pure JavaScript.
+
 
 ## Contacts
 
