@@ -3,6 +3,7 @@
 ## Capabilities
  * [geo](http://html5demos.com/geo)
  * [geowatch](https://thedotproduct.org/experiments/geo/)
+ * [geowatch 2](https://htmlpreview.github.io/?https://raw.githubusercontent.com/vermut/geo/mdn_plotting_yourself_on_the_map/index.html#showOpenStreetMap)
  * [voice](http://voicechatapi.com/)
 
 
