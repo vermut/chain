@@ -2,6 +2,7 @@
 
 ## Capabilities
  * [geo](http://html5demos.com/geo)
+ * [geowatch](https://thedotproduct.org/experiments/geo/)
  * [voice](http://voicechatapi.com/)
 
 
