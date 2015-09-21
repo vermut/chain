@@ -1,7 +1,6 @@
 package org.traccar.web.client.view;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -36,5 +35,38 @@ public class SingleDeviceApplicationView extends Composite {
     public SingleDeviceApplicationView() {
         VerticalPanel rootElement = ourUiBinder.createAndBindUi(this);
         initWidget(rootElement);
+        initJavascript();
     }
+
+    private native void initJavascript() /*-{
+        console.log("[MapUtil] loaded.");
+
+        // Get Position
+        var registerPosition = function (enableHighAccuracyInput, timeout, maximumAge) {
+            console.log("[MapUtil] enableHighAccuracyInput: ", enableHighAccuracyInput);
+            console.log("[MapUtil] timeout: ", timeout);
+            console.log("[MapUtil] maximumAge: ", maximumAge);
+
+            options = {
+                enableHighAccuracy: enableHighAccuracyInput || DefaultConfig.defaultEnableHighAccuracy,
+                timeout: parseInt(timeout, 10) || DefaultConfig.defaultTimeout,
+                maximumAge: parseInt(maximumAge, 10) || DefaultConfig.defaultMaximumAge
+            };
+            console.log("[MapUtil] options: ", options);
+
+            navigator.geolocation.watchPosition(
+                function (position) {
+                    // On Success
+                    console.log(position.coords.latitude + ":" + position.coords.longitude);
+                },
+                function (error) {
+                    var msg = error.message;
+                    console.log(msg);
+                },
+                options
+            );
+        }
+        registerPosition(true, 60, 60)
+    }-*/;
+
 }
