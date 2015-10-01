@@ -1,21 +1,20 @@
 package org.traccar.web.client;
 
 import org.traccar.web.shared.model.ApplicationSettings;
+import org.traccar.web.shared.model.Device;
 import org.traccar.web.shared.model.User;
 import org.traccar.web.shared.model.UserSettings;
 
 public class ApplicationContext {
 
     private static final ApplicationContext context = new ApplicationContext();
+    private FormatterUtil formatterUtil;
+    private ApplicationSettings applicationSettings;
+    private User user;
+    private Device device;
 
     public static ApplicationContext getInstance() {
         return context;
-    }
-
-    private FormatterUtil formatterUtil;
-
-    public void setFormatterUtil(FormatterUtil formatterUtil) {
-        this.formatterUtil = formatterUtil;
     }
 
     public FormatterUtil getFormatterUtil() {
@@ -25,10 +24,8 @@ public class ApplicationContext {
         return formatterUtil;
     }
 
-    private ApplicationSettings applicationSettings;
-
-    public void setApplicationSettings(ApplicationSettings applicationSettings) {
-        this.applicationSettings = applicationSettings;
+    public void setFormatterUtil(FormatterUtil formatterUtil) {
+        this.formatterUtil = formatterUtil;
     }
 
     public ApplicationSettings getApplicationSettings() {
@@ -39,20 +36,16 @@ public class ApplicationContext {
         }
     }
 
-    private User user;
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setApplicationSettings(ApplicationSettings applicationSettings) {
+        this.applicationSettings = applicationSettings;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUserSettings(UserSettings userSettings) {
-        if (user != null) {
-            user.setUserSettings(userSettings);
-        }
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public UserSettings getUserSettings() {
@@ -63,4 +56,17 @@ public class ApplicationContext {
         }
     }
 
+    public void setUserSettings(UserSettings userSettings) {
+        if (user != null) {
+            user.setUserSettings(userSettings);
+        }
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
+    }
 }

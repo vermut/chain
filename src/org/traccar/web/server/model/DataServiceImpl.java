@@ -16,7 +16,6 @@
 package org.traccar.web.server.model;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import org.hibernate.ejb.QueryHints;
 import org.traccar.web.client.model.DataService;
 import org.traccar.web.server.controller.Game;
 import org.traccar.web.shared.model.*;
@@ -44,6 +43,24 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
 
     public static EntityManagerFactory entityManagerFactory;
     public static Game GAME;
+    private EntityManager servletEntityManager;
+    private ApplicationSettings applicationSettings;
+
+    public static EntityManagerFactory initEMF() {
+        String persistenceUnit;
+        try {
+            Context context = new InitialContext();
+            context.lookup(PERSISTENCE_DATASTORE);
+            persistenceUnit = PERSISTENCE_UNIT_RELEASE;
+        } catch (NamingException e) {
+            persistenceUnit = PERSISTENCE_UNIT_DEBUG;
+        }
+
+        if (entityManagerFactory == null)
+            entityManagerFactory = Persistence.createEntityManagerFactory(persistenceUnit);
+
+        return entityManagerFactory;
+    }
 
     @Override
     public void init() throws ServletException {
@@ -64,24 +81,6 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
         }
     }
 
-    public static EntityManagerFactory initEMF() {
-        String persistenceUnit;
-        try {
-            Context context = new InitialContext();
-            context.lookup(PERSISTENCE_DATASTORE);
-            persistenceUnit = PERSISTENCE_UNIT_RELEASE;
-        } catch (NamingException e) {
-            persistenceUnit = PERSISTENCE_UNIT_DEBUG;
-        }
-
-        if (entityManagerFactory == null)
-            entityManagerFactory = Persistence.createEntityManagerFactory(persistenceUnit);
-
-        return entityManagerFactory;
-    }
-
-    private EntityManager servletEntityManager;
-
     private EntityManager getServletEntityManager() {
         if (servletEntityManager == null) {
             servletEntityManager = entityManagerFactory.createEntityManager();
@@ -99,15 +98,6 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
         return entityManager;
     }
 
-    private void setSessionUser(User user) {
-        HttpSession session = getThreadLocalRequest().getSession();
-        if (user != null) {
-            session.setAttribute(ATTRIBUTE_USER, user);
-        } else {
-            session.removeAttribute(ATTRIBUTE_USER);
-        }
-    }
-
     private User getSessionUser() {
         HttpSession session = getThreadLocalRequest().getSession();
         User user = (User) session.getAttribute(ATTRIBUTE_USER);
@@ -117,12 +107,12 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
         return user;
     }
 
-    private void setSessionDevice(Device device) {
+    private void setSessionUser(User user) {
         HttpSession session = getThreadLocalRequest().getSession();
-        if (device != null) {
-            session.setAttribute(ATTRIBUTE_DEVICE, device);
+        if (user != null) {
+            session.setAttribute(ATTRIBUTE_USER, user);
         } else {
-            session.removeAttribute(ATTRIBUTE_DEVICE);
+            session.removeAttribute(ATTRIBUTE_USER);
         }
     }
 
@@ -135,6 +125,14 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
         return device;
     }
 
+    private void setSessionDevice(Device device) {
+        HttpSession session = getThreadLocalRequest().getSession();
+        if (device != null) {
+            session.setAttribute(ATTRIBUTE_DEVICE, device);
+        } else {
+            session.removeAttribute(ATTRIBUTE_DEVICE);
+        }
+    }
 
     @Override
     public User authenticated() throws IllegalStateException {
@@ -168,8 +166,11 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
             query.setParameter("name", login);
             List<Device> results = query.getResultList();
 
-            if (!results.isEmpty()) { // TODO check pass?  && password.equals(results.get(0).getPassword()))
+            if (!results.isEmpty()) {
                 Device device = results.get(0);
+                if (!device.getUniqueId().equals(password))
+                    throw new IllegalStateException();
+
                 setSessionDevice(device);
                 return device;
             }
@@ -360,7 +361,6 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
         }
     }
 
-
     @Override
     public Device updateDevice(Device device) {
         EntityManager entityManager = getSessionEntityManager();
@@ -444,8 +444,6 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
             return positions;
         }
     }
-
-    private ApplicationSettings applicationSettings;
 
     private ApplicationSettings getApplicationSettings() {
         if (applicationSettings == null) {

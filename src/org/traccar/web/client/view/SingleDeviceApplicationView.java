@@ -11,6 +11,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import org.traccar.web.client.ApplicationContext;
+
+import java.util.Date;
 
 /**
  * Created by admin on 19/04/15.
@@ -33,14 +36,17 @@ public class SingleDeviceApplicationView extends Composite {
     public VerticalPanel panel;
     @UiField
     public Label death;
+
     Geolocation geolocation = Geolocation.getIfSupported();
+
     public SingleDeviceApplicationView() {
         VerticalPanel rootElement = ourUiBinder.createAndBindUi(this);
         initWidget(rootElement);
-        initGeo();
+        initGeo(ApplicationContext.getInstance().getDevice().getUniqueId());
+
     }
 
-    private void initGeo() {
+    void initGeo(final String login) {
         if (geolocation == null) {
             GWT.log("[MapUtil] unsupported!");
             return;
@@ -55,9 +61,10 @@ public class SingleDeviceApplicationView extends Composite {
             @Override
             public void onSuccess(Position result) {
                 Position.Coordinates c = result.getCoordinates();
-                String url = "http://trac.wwc.lv:5055/?id=123456&lat=" + c.getLatitude() + "&lon=" + c.getLongitude()
-                        + "&timestamp=" + result.getTimestamp()
-                        + "&hdop=" + c.getHeading() + "&altitude=" + c.getAltitude() + "&speed=" + c.getSpeed();
+                String url = "http://trac.wwc.lv:5056/?id=" + login + "&lat=" + c.getLatitude() + "&lon=" + c.getLongitude()
+                        + "&timestamp=" + new Date().getTime() / 1000
+                        + "&hdop=0&altitude=0&speed=0";
+                // + "&hdop=" + c.getHeading() + "&altitude=" + c.getAltitude() + "&speed=" + c.getSpeed();
 
                 RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
                 try {
@@ -77,7 +84,7 @@ public class SingleDeviceApplicationView extends Composite {
                     updateId.setText(updateId.getText() + "-");
                 }
             }
-        }, new Geolocation.PositionOptions().setHighAccuracyEnabled(true).setTimeout(60).setMaximumAge(60));
+        }, new Geolocation.PositionOptions().setHighAccuracyEnabled(true).setTimeout(60).setMaximumAge(10));
     }
 
     interface SingleDeviceApplicationViewUiBinder extends UiBinder<VerticalPanel, SingleDeviceApplicationView> {
