@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="traccar:war exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/traccar_war_exploded</output-path>
+    <root id="archive" name="traccar-web.war">
+      <element id="artifact" artifact-name="traccar:GWT" />
+    </root>
+  </artifact>
+</component>

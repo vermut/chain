@@ -86,7 +86,7 @@ public class SingleDeviceApplicationView extends Composite {
                     updateId.setText(updateId.getText() + "-");
                 }
             }
-        }, new Geolocation.PositionOptions().setHighAccuracyEnabled(true).setTimeout(60).setMaximumAge(10));
+        }, new Geolocation.PositionOptions().setHighAccuracyEnabled(true).setTimeout(60000).setMaximumAge(5000));
     }
 
     interface SingleDeviceApplicationViewUiBinder extends UiBinder<VerticalPanel, SingleDeviceApplicationView> {
