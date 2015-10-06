@@ -10,7 +10,6 @@
           <element id="file-copy" path="$PROJECT_DIR$/lib/gxt.jar" />
           <element id="library" level="project" name="com.vividsolutions:jts:1.12" />
           <element id="library" level="application" name="groovy-2.4.3" />
-          <element id="library" level="project" name="gwt-user" />
           <element id="library" level="module" name="hibernate-core-4.1.10.Final.jar" module-name="traccar" />
           <element id="library" level="module" name="hibernate-jpa-2.0-api-1.0.1.Final.jar" module-name="traccar" />
           <element id="file-copy" path="$PROJECT_DIR$/war/WEB-INF/lib/jts-1.12.jar" />
@@ -32,6 +31,7 @@
           <element id="file-copy" path="$PROJECT_DIR$/war/WEB-INF/lib/jboss-transaction-api_1.1_spec-1.0.0.Final.jar" />
           <element id="library" level="project" name="Maven: com.spatial4j:spatial4j:0.4.1" />
           <element id="library" level="project" name="Maven: org.jgrapht:jgrapht-core:0.9.0" />
+          <element id="file-copy" path="$USER_HOME$/lib/gwt-2.7.0/gwt-servlet.jar" />
         </element>
         <element id="directory" name="classes">
           <element id="module-output" name="traccar" />

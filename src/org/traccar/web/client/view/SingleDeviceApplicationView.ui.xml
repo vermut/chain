@@ -1,6 +1,6 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
-    <g:VerticalPanel ui:field="panel">
+    <g:VerticalPanel ui:field="panel" width="100%">
         <g:Label>Current info</g:Label>
         <g:Label ui:field="death"/>
         <g:Label ui:field="teamLabel"/>
@@ -15,5 +15,6 @@
 
         <g:Label text="updateId"/>
         <g:Label ui:field="updateId"/>
+        <g:Frame ui:field="chat" height="800px"/>
     </g:VerticalPanel>
 </ui:UiBinder>

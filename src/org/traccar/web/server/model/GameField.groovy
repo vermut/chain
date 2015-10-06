@@ -23,6 +23,7 @@ import org.traccar.web.shared.model.SimplePoint
         @Grab(group = "org.jgrapht", module = "jgrapht-core", version = '0.9.0'),
         @Grab(group = 'com.spatial4j', module = 'spatial4j', version = '0.4.1'),
         @Grab(group = 'com.vividsolutions', module = 'jts', version = '1.12'),
+        @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.5.2'),
 ])*/
 
 class GameField {

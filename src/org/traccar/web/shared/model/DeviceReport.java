@@ -13,6 +13,7 @@ public class DeviceReport implements Serializable {
     public static final int HAVE_LINK_AROUND_YOU = 3;
 
     public String teamName;
+    public String teamConferenceUrl;
     public List<String> neighbors;
 
     public int otherTeamLinkStatus = NO_LINK;

@@ -12,13 +12,11 @@ import org.traccar.web.shared.model.DeviceReport;
 public class SingleDeviceController {
     private static final int UPDATE_INTERVAL = 5000;
     private final SingleDeviceApplicationView deviceView;
-
+    private Timer updateTimer;
+    private Long updateId = 0l;
     public SingleDeviceController(SingleDeviceApplicationView deviceView) {
         this.deviceView = deviceView;
     }
-
-    private Timer updateTimer;
-    private Long updateId = 0l;
 
     public void run() {
         updateTimer = new Timer() {
@@ -40,6 +38,9 @@ public class SingleDeviceController {
 
                 deviceView.teamLabel.setText(result.teamName);
                 deviceView.score.setText(result.score);
+
+                if (!deviceView.chat.getUrl().equalsIgnoreCase(result.teamConferenceUrl))
+                    deviceView.chat.setUrl(result.teamConferenceUrl);
 
                 if (result.active)
                 {

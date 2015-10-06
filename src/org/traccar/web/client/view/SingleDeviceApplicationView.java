@@ -9,6 +9,7 @@ import com.google.gwt.http.client.*;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import org.traccar.web.client.ApplicationContext;
@@ -36,6 +37,8 @@ public class SingleDeviceApplicationView extends Composite {
     public VerticalPanel panel;
     @UiField
     public Label death;
+    @UiField
+    public Frame chat;
 
     Geolocation geolocation = Geolocation.getIfSupported();
 
@@ -43,7 +46,6 @@ public class SingleDeviceApplicationView extends Composite {
         VerticalPanel rootElement = ourUiBinder.createAndBindUi(this);
         initWidget(rootElement);
         initGeo(ApplicationContext.getInstance().getDevice().getUniqueId());
-
     }
 
     void initGeo(final String login) {

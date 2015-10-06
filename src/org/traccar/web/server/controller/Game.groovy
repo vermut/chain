@@ -1,6 +1,7 @@
 package org.traccar.web.server.controller
 
 import com.vividsolutions.jts.geom.Coordinate
+import groovyx.net.http.HTTPBuilder
 import org.traccar.web.server.model.DataServiceImpl
 import org.traccar.web.server.model.GameField
 import org.traccar.web.shared.model.*
@@ -30,16 +31,14 @@ class Game implements Runnable {
     HashMap<Integer, SimplePoint[]> teamlink = [:]
     HashMap<Integer, List<Position>> players = [:]
     HashMap<Integer, Long> attackTimer = [:]
+    HashMap<Integer, String> confUrl = [:]
 
     EntityManager em
 
-    void startGame() {
-        started = true
+    void initGame() {
         // field = new GameField(new Coordinate(56.955492, 24.102950), 240, 300)
         field = new GameField(new Coordinate(56.954818, 24.103382), 243, 300)
         em = DataServiceImpl.initEMF().createEntityManager()
-        attackTimer[TEAM1] = System.currentTimeMillis()
-        attackTimer[TEAM2] = System.currentTimeMillis()
 
         //Set up gameInfo
         gameInfo = new GameInfo(
@@ -51,6 +50,17 @@ class Game implements Runnable {
         )
 
         DataServiceImpl.GAME = this
+
+        // Create voice rooms
+        def http = new HTTPBuilder('http://voicechatapi.com/api/v1/conference/')
+        confUrl[TEAM1] = http.post(body: null).conference_url
+        confUrl[TEAM2] = http.post(body: null).conference_url
+    }
+
+    void startGame() {
+        started = true
+        attackTimer[TEAM1] = System.currentTimeMillis()
+        attackTimer[TEAM2] = System.currentTimeMillis()
     }
 
     @Override
@@ -152,6 +162,7 @@ class Game implements Runnable {
         def team = getTeamId(device)
 
         report.teamName = teamNameById(team)
+        report.teamConferenceUrl = confUrl[team]
         report.score = gameInfo.score.toString()
 
         if (team == null)
