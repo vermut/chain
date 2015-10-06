@@ -107,5 +107,6 @@
     </orderEntry>
     <orderEntry type="library" name="Maven: org.jgrapht:jgrapht-core:0.9.0" level="project" />
     <orderEntry type="library" name="Maven: com.spatial4j:spatial4j:0.4.1" level="project" />
+    <orderEntry type="library" name="com.vividsolutions:jts:1.12" level="project" />
   </component>
 </module>
