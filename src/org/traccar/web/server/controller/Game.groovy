@@ -31,7 +31,7 @@ class Game implements Runnable {
     HashMap<Integer, SimplePoint[]> teamlink = [:]
     HashMap<Integer, List<Position>> players = [:]
     HashMap<Integer, Long> attackTimer = [:]
-    HashMap<Integer, String> confUrl = [:]
+    HashMap<Integer, String> chatUrl = [:]
 
     EntityManager em
 
@@ -53,8 +53,8 @@ class Game implements Runnable {
 
         // Create voice rooms
         def http = new HTTPBuilder('http://voicechatapi.com/api/v1/conference/')
-        confUrl[TEAM1] = http.post(body: null).conference_url
-        confUrl[TEAM2] = http.post(body: null).conference_url
+        chatUrl[TEAM1] = http.post(body: null).conference_url
+        chatUrl[TEAM2] = http.post(body: null).conference_url
     }
 
     void startGame() {
@@ -162,7 +162,7 @@ class Game implements Runnable {
         def team = getTeamId(device)
 
         report.teamName = teamNameById(team)
-        report.teamConferenceUrl = confUrl[team]
+        report.teamConferenceUrl = chatUrl[team]
         report.score = gameInfo.score.toString()
 
         if (team == null)
@@ -204,5 +204,9 @@ class Game implements Runnable {
 
         attackTimer[team] = System.currentTimeMillis()
         true
+    }
+
+    String getChatUrl(Integer team) {
+        return chatUrl[team];
     }
 }

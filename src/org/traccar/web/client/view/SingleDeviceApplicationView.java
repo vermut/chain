@@ -45,7 +45,8 @@ public class SingleDeviceApplicationView extends Composite {
     public SingleDeviceApplicationView() {
         VerticalPanel rootElement = ourUiBinder.createAndBindUi(this);
         initWidget(rootElement);
-        initGeo(ApplicationContext.getInstance().getDevice().getUniqueId());
+        if (ApplicationContext.getInstance().getDevice() != null)
+            initGeo(ApplicationContext.getInstance().getDevice().getUniqueId());
     }
 
     void initGeo(final String login) {

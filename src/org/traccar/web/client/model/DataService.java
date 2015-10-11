@@ -15,13 +15,12 @@
  */
 package org.traccar.web.client.model;
 
-import java.util.Date;
-import java.util.List;
-
-import org.traccar.web.shared.model.*;
-
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import org.traccar.web.shared.model.*;
+
+import java.util.Date;
+import java.util.List;
 
 @RemoteServiceRelativePath("dataService")
 public interface DataService extends RemoteService {
@@ -66,5 +65,7 @@ public interface DataService extends RemoteService {
     DeviceReport getDeviceReport();
 
     Boolean attack(double lat, double lon);
+
+    String getChatUrl();
 
 }

@@ -15,12 +15,11 @@
  */
 package org.traccar.web.client.model;
 
-import java.util.Date;
-import java.util.List;
-
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.traccar.web.shared.model.*;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.Date;
+import java.util.List;
 
 public interface DataServiceAsync {
 
@@ -65,4 +64,6 @@ public interface DataServiceAsync {
     void getDeviceReport(AsyncCallback<DeviceReport> callback);
 
     void attack(double lat, double lon, AsyncCallback<Boolean> callback);
+
+    void getChatUrl(AsyncCallback<String> async);
 }

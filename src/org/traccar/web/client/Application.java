@@ -15,10 +15,13 @@
  */
 package org.traccar.web.client;
 
-import java.util.logging.Logger;
-
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.sencha.gxt.data.shared.event.StoreAddEvent;
+import com.sencha.gxt.data.shared.event.StoreHandlers;
+import com.sencha.gxt.data.shared.event.StoreRemoveEvent;
 import org.traccar.web.client.controller.*;
+import org.traccar.web.client.model.BaseAsyncCallback;
 import org.traccar.web.client.model.BaseStoreHandlers;
 import org.traccar.web.client.model.DataService;
 import org.traccar.web.client.model.DataServiceAsync;
@@ -27,62 +30,28 @@ import org.traccar.web.client.view.SingleDeviceApplicationView;
 import org.traccar.web.shared.model.Device;
 import org.traccar.web.shared.model.Position;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.sencha.gxt.data.shared.event.StoreAddEvent;
-import com.sencha.gxt.data.shared.event.StoreHandlers;
-import com.sencha.gxt.data.shared.event.StoreRemoveEvent;
+import java.util.logging.Logger;
 
 public class Application {
 
     private static final DataServiceAsync dataService = GWT.create(DataService.class);
-
-    public static DataServiceAsync getDataService() {
-        return dataService;
-    }
-
     private static Logger logger = Logger.getLogger("");
-
-    public static Logger getLogger() {
-        return logger;
-    }
-
     private final SettingsController settingsController;
     private final DeviceController deviceController;
     private final StateController stateController;
     private final MapController mapController;
     private final ArchiveController archiveController;
-
     private final SingleDeviceController singleDeviceController;
-
     private ApplicationView view;
     private SingleDeviceApplicationView singleDeviceApplicationView;
+    private MapController.PositionUpdateHandler positionUpdateHandler = new MapController.PositionUpdateHandler() {
 
-    public Application() {
-        settingsController = new SettingsController();
-        deviceController = new DeviceController(deviceHandler, settingsController);
-        deviceController.getDeviceStore().addStoreHandlers(deviceStoreHandler);
-        stateController = new StateController();
-        mapController = new MapController(mapHandler);
-        archiveController = new ArchiveController(archiveHanlder, deviceController.getDeviceStore());
-        archiveController.getPositionStore().addStoreHandlers(archiveStoreHandler);
+        @Override
+        public void onUpdate(Position position) {
+            stateController.showState(position);
+        }
 
-        view = new ApplicationView(
-                deviceController.getView(), stateController.getView(), mapController.getView(), archiveController.getView());
-
-        singleDeviceApplicationView = new SingleDeviceApplicationView();
-        singleDeviceController = new SingleDeviceController(singleDeviceApplicationView);
-    }
-
-    public void run() {
-        RootPanel.get().add(view);
-
-        deviceController.run();
-        stateController.run();
-        mapController.run();
-        archiveController.run();
-    }
-
+    };
     private DeviceController.DeviceHandler deviceHandler = new DeviceController.DeviceHandler() {
 
         private Device selected;
@@ -100,16 +69,6 @@ public class Application {
         }
 
     };
-
-    private MapController.PositionUpdateHandler positionUpdateHandler = new MapController.PositionUpdateHandler() {
-
-        @Override
-        public void onUpdate(Position position) {
-            stateController.showState(position);
-        }
-
-    };
-
     private MapController.MapHandler mapHandler = new MapController.MapHandler() {
 
         @Override
@@ -123,7 +82,6 @@ public class Application {
         }
 
     };
-
     private ArchiveController.ArchiveHandler archiveHanlder = new ArchiveController.ArchiveHandler() {
 
         @Override
@@ -132,7 +90,6 @@ public class Application {
         }
 
     };
-
     private StoreHandlers<Device> deviceStoreHandler = new BaseStoreHandlers<Device>() {
 
         @Override
@@ -146,7 +103,6 @@ public class Application {
         }
 
     };
-
     private StoreHandlers<Position> archiveStoreHandler = new BaseStoreHandlers<Position>() {
 
         @Override
@@ -155,5 +111,46 @@ public class Application {
         }
 
     };
+
+    public Application() {
+        settingsController = new SettingsController();
+        deviceController = new DeviceController(deviceHandler, settingsController);
+        deviceController.getDeviceStore().addStoreHandlers(deviceStoreHandler);
+        stateController = new StateController();
+        mapController = new MapController(mapHandler);
+        archiveController = new ArchiveController(archiveHanlder, deviceController.getDeviceStore());
+        archiveController.getPositionStore().addStoreHandlers(archiveStoreHandler);
+
+        view = new ApplicationView(
+                deviceController.getView(), stateController.getView(), mapController.getView(), archiveController.getView());
+
+        singleDeviceApplicationView = new SingleDeviceApplicationView();
+        singleDeviceController = new SingleDeviceController(singleDeviceApplicationView);
+    }
+
+    public static DataServiceAsync getDataService() {
+        return dataService;
+    }
+
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    public void run() {
+        RootPanel.get().add(view);
+
+        deviceController.run();
+        stateController.run();
+        mapController.run();
+        archiveController.run();
+
+
+        Application.getDataService().getChatUrl(new BaseAsyncCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                view.chatFrame.setUrl(result);
+            }
+        });
+    }
 
 }
