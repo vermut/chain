@@ -4,31 +4,40 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Chain Reaction by vermut</title>
-
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
-    <div class="wrapper">
+
       <header>
-        <h1 class="header">Chain Reaction</h1>
-        <p class="header">Игра на скорость, скрытность и командную работу</p>
-
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/vermut/chain/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/vermut/chain/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/vermut/chain">View On GitHub</a></li>
-        </ul>
-
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/vermut">vermut</a></p>
-
-
+        <h1>Chain Reaction</h1>
+        <p>Игра на скорость, скрытность и командную работу</p>
       </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/vermut/chain" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/vermut/chain/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/vermut/chain/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
       <section>
         <h1>
 <a id="Краткое-описание-и-цель-игры" class="anchor" href="#%D0%9A%D1%80%D0%B0%D1%82%D0%BA%D0%BE%D0%B5-%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D1%86%D0%B5%D0%BB%D1%8C-%D0%B8%D0%B3%D1%80%D1%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>Краткое описание и цель игры</h1>
@@ -43,7 +52,25 @@
 <a id="Требования" class="anchor" href="#%D0%A2%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>Требования</h1>
 
 <p>Командору требуется ноутбук или планшет с выходом в интернет.
-Бойцам нужен телефон с выходом в интернет, установленной программой <a href="https://www.traccar.org/client/">Traccar</a> и открытый браузер, в котором будет загружаться страница Пипбоя. Трафик у бойцов минимальный.</p>
+Бойцам нужен телефон с выходом в интернет и открытый браузер, в котором будет загружаться страница Пипбоя. Трафик у бойцов минимальный.</p>
+
+<h2>
+<a id="Инструкции-по-настройке-android" class="anchor" href="#%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8-%D0%BF%D0%BE-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B5-android" aria-hidden="true"><span class="octicon octicon-link"></span></a>Инструкции по настройке Android</h2>
+
+<p>Для того, чтобы всё работало, надо включить определение местоположения (чтоб наверняка, у кого есть, можно включить "Высокая точность" (определение с помощью gps и wi-fi/мобильных сетей), хотя только gps вполне хватит.
+Заранее надо отключить или поставить на возможный максимум таймаут экрана, ибо бывает сложно уследить, что экран погас, а из-за этого может сбиться ваше местоположение.</p>
+
+<p>Включите (лучше на полную громкость) звук в телефоне. Надо будет общаться через аудио чат. Желательно запастись гарнитурой (наушники с микрофоном).</p>
+
+<p>Заходить надо через браузер Chrome сюда:
+<a href="http://trac.wwc.lv:8082/">http://trac.wwc.lv:8082/</a></p>
+
+<p>У игроков будут свои логин и пароль, но пока для теста (чтобы проверить и знать как будет выглядеть) можно зайти логин: T1_1, пароль: 11
+Или логин: T1_2, пароль: 12</p>
+
+<p>Когда заходите, сразу же появляется вопрос о разрешении определения местоположения (надо согласиться) и окно с разрешением для использования микрофона (тоже согласиться). Чтобы аудио чат работал, надо будет кликнуть в окне слева на кнопку "click to join your conference". Если у вас в первый раз не появились эти 2 запроса - у вас что-то не так.</p>
+
+<p>Лучше не использовать wi-fi, ибо он может пропасть.</p>
 
 <h1>
 <a id="Роли" class="anchor" href="#%D0%A0%D0%BE%D0%BB%D0%B8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Роли</h1>
@@ -52,7 +79,7 @@
 <a id="Командор" class="anchor" href="#%D0%9A%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%BE%D1%80" aria-hidden="true"><span class="octicon octicon-link"></span></a>Командор</h2>
 
 <p>Человек, к которому сходятся все нити. Он сидит за терминалом, где видна карта, границы игрового поля, расположение игроков, путь, по которому проходит цепочка.<br>
-Он может нанести <strong>авиаудар</strong> по местности кликом по карте. Авиаудар убивает как чужих, так и своих Бойцов в радиусе 12.5 метров вокруг эпицентра. Авиаудар имеет задержку - каждые 10 секунд.</p>
+Он может нанести <strong>авиаудар</strong> по местности кликом по карте. Авиаудар убивает как чужих, так и своих Бойцов в радиусе 12.5 метров вокруг эпицентра. Авиаудар имеет задержку - каждые 60 секунд.</p>
 
 <h2>
 <a id="Радист" class="anchor" href="#%D0%A0%D0%B0%D0%B4%D0%B8%D1%81%D1%82" aria-hidden="true"><span class="octicon octicon-link"></span></a>Радист</h2>
@@ -162,10 +189,11 @@
 </ul>
       </section>
       <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+        <p>Project maintained by <a href="https://github.com/vermut">vermut</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+    
   </body>
 </html>
