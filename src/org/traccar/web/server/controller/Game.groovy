@@ -10,8 +10,6 @@ import javax.persistence.EntityManager
 
 /**
  * Created by admin on 03/04/15.
- *
- *  TODO: select map in park
  */
 // @CompileStatic
 class Game implements Runnable {
@@ -23,7 +21,7 @@ class Game implements Runnable {
     public static Integer TEAM1 = 0
     public static Integer TEAM2 = 1
 
-    public static long ATTACK_INTERVAL = 10 * 1000l
+    public static long ATTACK_INTERVAL = 60 * 1000l
 
     public static TEAM1_STR = 'team1'
     public static TEAM2_STR = 'team2'
@@ -36,8 +34,9 @@ class Game implements Runnable {
     EntityManager em
 
     void initGame() {
-        // field = new GameField(new Coordinate(56.955492, 24.102950), 240, 300)
-        field = new GameField(new Coordinate(56.954818, 24.103382), 243, 300)
+        // field = new GameField(new Coordinate(56.95538256286238, 24.10307086375411), 243, 250)
+        field = new GameField(new Coordinate(56.95129001973695, 24.108960994751108), 50, 300)
+
         em = DataServiceImpl.initEMF().createEntityManager()
 
         //Set up gameInfo

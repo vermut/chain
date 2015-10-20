@@ -19,7 +19,6 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.Window;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import org.gwtopenmaps.openlayers.client.*;
 import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
@@ -27,6 +26,7 @@ import org.gwtopenmaps.openlayers.client.control.ScaleLine;
 import org.gwtopenmaps.openlayers.client.event.MapClickListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.LineString;
+import org.gwtopenmaps.openlayers.client.geometry.MultiLineString;
 import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.layer.*;
 import org.traccar.web.shared.model.Device;
@@ -37,27 +37,124 @@ import java.util.List;
 
 public class MapView {
     private static final Projection DEFAULT_PROJECTION = new Projection("EPSG:4326");
-
-    public interface MapHandler {
-        public void onPositionSelected(Position position);
-
-        public void onArchivePositionSelected(Position position);
-
-        public void onAttackTargetClicked(double lat, double lon);
-    }
-
+    private final MapPositionRenderer latestPositionRenderer;
+    private final MapPositionRenderer archivePositionRenderer;
     private MapHandler mapHandler;
-
     private ContentPanel contentPanel;
+    private MapWidget mapWidget;
+    private Map map;
+    private Vector vectorLayer;
+    private Vector team1Layer;
+    private Vector team2Layer;
+
+    private Markers markerLayer;
+    private MapPositionRenderer.SelectHandler latestPositionSelectHandler = new MapPositionRenderer.SelectHandler() {
+
+        @Override
+        public void onSelected(Position position) {
+            mapHandler.onPositionSelected(position);
+        }
+
+    };
+    private MapPositionRenderer.SelectHandler archivePositionSelectHandler = new MapPositionRenderer.SelectHandler() {
+
+        @Override
+        public void onSelected(Position position) {
+            mapHandler.onArchivePositionSelected(position);
+        }
+
+    };
+
+    public MapView(final MapHandler mapHandler) {
+        this.mapHandler = mapHandler;
+        contentPanel = new ContentPanel();
+        contentPanel.setHeadingText("Map");
+
+        MapOptions defaultMapOptions = new MapOptions();
+
+        mapWidget = new MapWidget("100%", "100%", defaultMapOptions);
+        map = mapWidget.getMap();
+        {
+            VectorOptions vectorOptions = new VectorOptions();
+            {
+                Style style = new Style();
+                style.setStrokeColor("blue");
+                style.setStrokeWidth(3);
+                style.setFillOpacity(1);
+
+                vectorOptions.setStyle(style);
+            }
+            vectorLayer = new Vector("Vector", vectorOptions);
+        }
+        {
+            VectorOptions team1LayerOptions = new VectorOptions();
+            {
+                Style style = new Style();
+                style.setStrokeColor("green");
+                style.setStrokeWidth(5);
+                style.setFillOpacity(1);
+
+                team1LayerOptions.setStyle(style);
+            }
+            team1Layer = new Vector("Team1", team1LayerOptions);
+        }
+        {
+            VectorOptions team2LayerOptions = new VectorOptions();
+            {
+                Style style = new Style();
+                style.setStrokeColor("yellow");
+                style.setStrokeWidth(5);
+                style.setFillOpacity(1);
+
+                team2LayerOptions.setStyle(style);
+            }
+            team2Layer = new Vector("Team2", team2LayerOptions);
+        }
+        MarkersOptions markersOptions = new MarkersOptions();
+        markerLayer = new Markers("Markers", markersOptions);
+
+        initMapLayers(map);
+
+        map.addLayer(vectorLayer);
+        map.addLayer(team1Layer);
+        map.addLayer(team2Layer);
+        map.addLayer(markerLayer);
+
+        map.addControl(new LayerSwitcher());
+        map.addControl(new ScaleLine());
+        map.setCenter(createLonLat(24.103382, 56.954818), 16);
+
+        map.addMapClickListener(new MapClickListener() {
+            @Override
+            public void onClick(MapClickEvent mapClickEvent) {
+                LonLat lonLat = mapClickEvent.getLonLat();
+                lonLat.transform(map.getProjection(), DEFAULT_PROJECTION.getProjectionCode()); //transform lonlat to more readable format
+                mapHandler.onAttackTargetClicked(lonLat.lat(), lonLat.lon());
+            }
+        });
+
+        contentPanel.add(mapWidget);
+
+        // Update map size
+        contentPanel.addResizeHandler(new ResizeHandler() {
+            @Override
+            public void onResize(ResizeEvent event) {
+                Scheduler.get().scheduleDeferred(new Command() {
+                    @Override
+                    public void execute() {
+                        map.updateSize();
+                    }
+                });
+            }
+        });
+
+        latestPositionRenderer = new MapPositionRenderer(this, MarkerIconFactory.IconType.iconLatest, latestPositionSelectHandler);
+        archivePositionRenderer = new MapPositionRenderer(this, MarkerIconFactory.IconType.iconArchive, archivePositionSelectHandler);
+    }
 
     public ContentPanel getView() {
         return contentPanel;
     }
-
-    private MapWidget mapWidget;
-    private Map map;
-    private Vector vectorLayer;
-    private Markers markerLayer;
 
     public Map getMap() {
         return map;
@@ -112,85 +209,42 @@ public class MapView {
         map.addLayer(new Bing(new BingOptions("Bing Aerial", bingKey, BingType.AERIAL)));
     }
 
-    public MapView(final MapHandler mapHandler) {
-        this.mapHandler = mapHandler;
-        contentPanel = new ContentPanel();
-        contentPanel.setHeadingText("Map");
-
-        MapOptions defaultMapOptions = new MapOptions();
-
-        mapWidget = new MapWidget("100%", "100%", defaultMapOptions);
-        map = mapWidget.getMap();
-
-        Style style = new Style();
-        style.setStrokeColor("blue");
-        style.setStrokeWidth(3);
-        style.setFillOpacity(1);
-
-        VectorOptions vectorOptions = new VectorOptions();
-        vectorOptions.setStyle(style);
-        vectorLayer = new Vector("Vector", vectorOptions);
-
-        MarkersOptions markersOptions = new MarkersOptions();
-        markerLayer = new Markers("Markers", markersOptions);
-
-        initMapLayers(map);
-
-        map.addLayer(vectorLayer);
-        map.addLayer(markerLayer);
-
-        map.addControl(new LayerSwitcher());
-        map.addControl(new ScaleLine());
-        map.setCenter(createLonLat(24.1306516666667, 56.961385), 16);
-
-
-        map.addMapClickListener(new MapClickListener() {
-            @Override
-            public void onClick(MapClickEvent mapClickEvent) {
-                LonLat lonLat = mapClickEvent.getLonLat();
-                lonLat.transform(map.getProjection(), DEFAULT_PROJECTION.getProjectionCode()); //transform lonlat to more readable format
-                mapHandler.onAttackTargetClicked(lonLat.lat(), lonLat.lon());
-            }
-        });
-
-        contentPanel.add(mapWidget);
-
-        // Update map size
-        contentPanel.addResizeHandler(new ResizeHandler() {
-            @Override
-            public void onResize(ResizeEvent event) {
-                Scheduler.get().scheduleDeferred(new Command() {
-                    @Override
-                    public void execute() {
-                        map.updateSize();
-                    }
-                });
-            }
-        });
-
-        latestPositionRenderer = new MapPositionRenderer(this, MarkerIconFactory.IconType.iconLatest, latestPositionSelectHandler);
-        archivePositionRenderer = new MapPositionRenderer(this, MarkerIconFactory.IconType.iconArchive, archivePositionSelectHandler);
-    }
-
-    private final MapPositionRenderer latestPositionRenderer;
-
-    private final MapPositionRenderer archivePositionRenderer;
-
     public void showLatestPositions(List<Position> positions) {
         latestPositionRenderer.showPositions(positions);
     }
 
     public void drawField(Point topLeft, Point topRight, Point bottomRight, Point bottomLeft) {
-        Point[] linePoints = new Point[]{
-                topLeft,
-                topRight,
-                bottomRight,
-                bottomLeft,
-                topLeft
+        /* Point[] linePoints = new Point[]{
+                topLeft,    // team1Start.begin
+                topRight,   // team2Start.begin
+                bottomRight,// team1Finish.begin
+                bottomLeft, // team2Finish.begin
+                topLeft     // team1Start.begin
         };
+        LineString lineString = new LineString(linePoints); */
 
-        LineString lineString = new LineString(linePoints);
-        getVectorLayer().addFeature(new VectorFeature(lineString));
+        MultiLineString team1 = new MultiLineString(new LineString[] {
+                new LineString(new Point[] {
+                        topLeft, topRight
+                }),
+                new LineString(new Point[] {
+                        bottomRight, bottomLeft
+                }),
+        });
+
+
+        MultiLineString team2 = new MultiLineString(new LineString[] {
+                new LineString(new Point[] {
+                        topRight, bottomRight
+                }),
+                new LineString(new Point[] {
+                        bottomLeft, topLeft
+                }),
+        });
+
+        // getVectorLayer().addFeature(new VectorFeature(lineString));
+        team1Layer.addFeature(new VectorFeature(team1));
+        team2Layer.addFeature(new VectorFeature(team2));
     }
 
     public void drawLink(SimplePoint[] points) {
@@ -203,13 +257,6 @@ public class MapView {
 
         LineString lineString = new LineString(linePoints);
         getVectorLayer().addFeature(new VectorFeature(lineString));
-    }
-
-    public void drawField2(LonLat topLeft, LonLat topRight, LonLat bottomLeft, LonLat bottomRight) {
-        getMarkerLayer().addMarker(new Marker((topLeft), MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, true)));
-        getMarkerLayer().addMarker(new Marker((topRight), MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, true)));
-        getMarkerLayer().addMarker(new Marker((bottomRight), MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, false)));
-        getMarkerLayer().addMarker(new Marker((bottomLeft), MarkerIconFactory.getIcon(MarkerIconFactory.IconType.iconArchive, false)));
     }
 
     public void showArchivePositions(List<Position> positions) {
@@ -225,22 +272,12 @@ public class MapView {
         archivePositionRenderer.selectPosition(position, true);
     }
 
-    private MapPositionRenderer.SelectHandler latestPositionSelectHandler = new MapPositionRenderer.SelectHandler() {
+    public interface MapHandler {
+        void onPositionSelected(Position position);
 
-        @Override
-        public void onSelected(Position position) {
-            mapHandler.onPositionSelected(position);
-        }
+        void onArchivePositionSelected(Position position);
 
-    };
-
-    private MapPositionRenderer.SelectHandler archivePositionSelectHandler = new MapPositionRenderer.SelectHandler() {
-
-        @Override
-        public void onSelected(Position position) {
-            mapHandler.onArchivePositionSelected(position);
-        }
-
-    };
+        void onAttackTargetClicked(double lat, double lon);
+    }
 
 }

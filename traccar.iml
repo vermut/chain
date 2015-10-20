@@ -35,7 +35,7 @@
     </facet>
     <facet type="gwt" name="GWT">
       <configuration>
-        <setting name="compilerMaxHeapSize" value="1024" />
+        <setting name="compilerMaxHeapSize" value="2048" />
         <setting name="gwtScriptOutputStyle" value="DETAILED" />
         <setting name="gwtSdkUrl" value="file://$USER_HOME$/lib/gwt-2.7.0" />
         <setting name="webFacet" value="Web" />
@@ -324,5 +324,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="com.googlecode.mgwt:mgwt:2.0.0" level="project" />
   </component>
 </module>

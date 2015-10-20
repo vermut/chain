@@ -15,52 +15,37 @@
  */
 package org.traccar.web.client.view;
 
-import org.traccar.web.client.ApplicationContext;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Widget;
-import com.sencha.gxt.widget.core.client.Window;
-import com.sencha.gxt.widget.core.client.button.TextButton;
-import com.sencha.gxt.widget.core.client.event.SelectEvent;
-import com.sencha.gxt.widget.core.client.form.PasswordField;
-import com.sencha.gxt.widget.core.client.form.TextField;
+import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
+import com.googlecode.mgwt.ui.client.widget.button.Button;
+import com.googlecode.mgwt.ui.client.widget.dialog.Dialog;
+import com.googlecode.mgwt.ui.client.widget.dialog.overlay.PopinDialogOverlay;
+import com.googlecode.mgwt.ui.client.widget.input.MPasswordTextBox;
+import com.googlecode.mgwt.ui.client.widget.input.MTextBox;
+import org.traccar.web.client.ApplicationContext;
 
 public class LoginDialog {
 
     private static LoginDialogUiBinder uiBinder = GWT.create(LoginDialogUiBinder.class);
-
-    interface LoginDialogUiBinder extends UiBinder<Widget, LoginDialog> {
-    }
-
-    public interface LoginHandler {
-        public void onLogin(String login, String password);
-        public void onDeviceLogin(String login, String password);
-        public void onRegister(String login, String password);
-    }
-
+    @UiField
+    PopinDialogOverlay window;
+    @UiField
+    MTextBox login;
+    @UiField
+    MPasswordTextBox password;
+    @UiField
+    Button registerButton;
     private LoginHandler loginHandler;
-
-    @UiField
-    Window window;
-
-    @UiField
-    TextField login;
-
-    @UiField
-    PasswordField password;
-
-    @UiField
-    TextButton registerButton;
 
     public LoginDialog(LoginHandler loginHandler) {
         this.loginHandler = loginHandler;
         uiBinder.createAndBindUi(this);
 
         if (ApplicationContext.getInstance().getApplicationSettings().getRegistrationEnabled()) {
-            registerButton.enable();
+            registerButton.setDisabled(false);
         }
     }
 
@@ -73,18 +58,29 @@ public class LoginDialog {
     }
 
     @UiHandler("loginButton")
-    public void onLoginClicked(SelectEvent event) {
-        loginHandler.onLogin(login.getText(), password.getText());
+    public void onLoginClicked(TapEvent event) {
+        loginHandler.onLogin(login.getValue(), password.getValue());
     }
 
     @UiHandler("deviceLoginButton")
-    public void onDeviceLoginClicked(SelectEvent event) {
-        loginHandler.onDeviceLogin(login.getText(), password.getText());
+    public void onDeviceLoginClicked(TapEvent event) {
+        loginHandler.onDeviceLogin(login.getValue(), password.getValue());
     }
 
     @UiHandler("registerButton")
-    public void onRegisterClicked(SelectEvent event) {
-        loginHandler.onRegister(login.getText(), password.getText());
+    public void onRegisterClicked(TapEvent event) {
+        loginHandler.onRegister(login.getValue(), password.getValue());
+    }
+
+    interface LoginDialogUiBinder extends UiBinder<Dialog, LoginDialog> {
+    }
+
+    public interface LoginHandler {
+        void onLogin(String login, String password);
+
+        void onDeviceLogin(String login, String password);
+
+        void onRegister(String login, String password);
     }
 
 }

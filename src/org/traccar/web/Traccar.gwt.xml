@@ -4,7 +4,7 @@
   "http://google-web-toolkit.googlecode.com/svn/tags/2.5.0/distro-source/core/src/gwt-module.dtd">
 
 <module rename-to='traccar'>
-
+  <inherits name='com.googlecode.mgwt.MGWT'/>
   <inherits name='com.google.gwt.user.User'/>
   <inherits name="com.google.gwt.logging.Logging"/>
   <inherits name="com.google.gwt.xml.XML"/>
