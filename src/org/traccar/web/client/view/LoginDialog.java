@@ -20,6 +20,8 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
+import com.googlecode.mgwt.ui.client.MGWT;
+import com.googlecode.mgwt.ui.client.MGWTSettings;
 import com.googlecode.mgwt.ui.client.widget.button.Button;
 import com.googlecode.mgwt.ui.client.widget.dialog.Dialog;
 import com.googlecode.mgwt.ui.client.widget.dialog.overlay.PopinDialogOverlay;
@@ -38,9 +40,23 @@ public class LoginDialog {
     MPasswordTextBox password;
     @UiField
     Button registerButton;
+
     private LoginHandler loginHandler;
 
     public LoginDialog(LoginHandler loginHandler) {
+        MGWTSettings.ViewPort viewPort = new MGWTSettings.ViewPort();
+        viewPort.setUserScaleAble(false).setMinimumScale(1.0).setMinimumScale(1.0).setMaximumScale(1.0);
+
+        MGWTSettings settings = new MGWTSettings();
+        settings.setViewPort(viewPort);
+        settings.setFullscreen(true);
+        settings.setPreventScrolling(true);
+        //settings.setIconUrl("logo.png");
+        //settings.setFixIOS71BodyBug(true);
+
+        if (MGWT.getFormFactor().isPhone())
+            MGWT.applySettings(settings);
+
         this.loginHandler = loginHandler;
         uiBinder.createAndBindUi(this);
 
