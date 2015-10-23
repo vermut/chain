@@ -524,6 +524,9 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
         if (device == null)
             return false;
 
+        if (!getSessionUser().getAdmin())
+            return false;
+
         EntityManager entityManager = getSessionEntityManager();
         synchronized (entityManager) {
             entityManager.getTransaction().begin();
