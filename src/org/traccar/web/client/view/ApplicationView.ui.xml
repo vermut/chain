@@ -37,7 +37,9 @@
       <container:west layoutData="{westData}">
         <container:BorderLayoutContainer>
           <container:north>
-            <g:Frame ui:field="chatFrame"/>
+              <g:SimplePanel>
+                  <g:Frame ui:field="chatFrame" addStyleNames="chatIframe"/>
+              </g:SimplePanel>
           </container:north>
           <container:center>
             <gxt:ContentPanel ui:field="devicePanel" />
@@ -50,9 +52,9 @@
       <container:center layoutData="{centerData}">
         <gxt:ContentPanel ui:field="mapPanel" />
       </container:center>
-      <container:south layoutData="{southData}">
-        <gxt:ContentPanel ui:field="archivePanel" />
-      </container:south>
+        <!--      <container:south layoutData="{southData}">
+                <gxt:ContentPanel ui:field="archivePanel" />
+              </container:south>-->
     </container:BorderLayoutContainer>
   </container:Viewport>
 
