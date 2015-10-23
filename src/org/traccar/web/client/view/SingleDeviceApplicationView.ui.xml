@@ -2,9 +2,9 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:mgwt="urn:import:com.googlecode.mgwt.ui.client.widget">
 
-    <g:FlowPanel ui:field="panel">
-        <mgwt:form.Form title="Current info">
-            <mgwt:form.FormEntry text="Status">
+    <g:FlowPanel>
+        <mgwt:form.Form>
+            <mgwt:form.FormEntry text="Status" ui:field="deathPanel">
                 <g:HTML ui:field="death"/>
             </mgwt:form.FormEntry>
 
@@ -16,8 +16,11 @@
                 <g:HTML ui:field="neighborsLabel"/>
             </mgwt:form.FormEntry>
 
-            <mgwt:form.FormEntry text="Links">
+            <mgwt:form.FormEntry text="Your link">
                 <g:HTML ui:field="yourLink"/>
+            </mgwt:form.FormEntry>
+
+            <mgwt:form.FormEntry text="Enemy link">
                 <g:HTML ui:field="otherLink"/>
             </mgwt:form.FormEntry>
 

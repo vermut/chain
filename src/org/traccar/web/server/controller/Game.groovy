@@ -160,14 +160,15 @@ class Game implements Runnable {
         def report = new DeviceReport()
         def team = getTeamId(device)
 
-        report.teamName = teamNameById(team)
+        report.teamName = teamNameById(team) + ' - ' + device.name
         report.teamConferenceUrl = chatUrl[team]
         report.score = gameInfo.score.toString()
 
         if (team == null)
             return report;
 
-        report.neighbors = field.getNeighbors(device.latestPosition, players[team])
+        report.neighbors = field.getNeighbors(device.latestPosition, players[team], team)
+        report.neighbors.remove(device.name + ':0')
 
         report.ownLinkStatus = getTeamlink(team) ? DeviceReport.HAVE_LINK : DeviceReport.NO_LINK
         if (getTeamlink(team).find {

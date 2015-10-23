@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTML;
+import com.googlecode.mgwt.ui.client.widget.form.FormEntry;
 import org.traccar.web.client.ApplicationContext;
 
 import java.util.Date;
@@ -34,11 +35,12 @@ public class SingleDeviceApplicationView extends Composite {
     @UiField
     public HTML score;
     @UiField
-    public FlowPanel panel;
-    @UiField
     public HTML death;
     @UiField
     public Frame chat;
+    @UiField
+    public
+    FormEntry deathPanel;
 
     Geolocation geolocation = Geolocation.getIfSupported();
 

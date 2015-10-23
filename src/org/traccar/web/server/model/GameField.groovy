@@ -13,6 +13,7 @@ import com.vividsolutions.jts.operation.distance.DistanceOp
 import org.jgrapht.alg.DijkstraShortestPath
 import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.SimpleGraph
+import org.traccar.web.server.controller.Game
 import org.traccar.web.shared.model.Position
 import org.traccar.web.shared.model.SimplePoint
 
@@ -35,9 +36,11 @@ class GameField {
     JtsGeometry teamOneFinish
     JtsGeometry teamTwoFinish
 
-    private static double TOUCH_DISTANCE_KM = 0.070
+    private static double TOUCH_DISTANCE_KM = 0.090
     private static double FEEL_DISTANCE_KM = TOUCH_DISTANCE_KM / 2
     private static double ATTACK_DISTANCE_KM = TOUCH_DISTANCE_KM / 4
+
+    private HashMap<Integer, Map<Integer, JtsGeometry>> borders = [:]
 
     public GameField(Coordinate topLeft, double yAxisOffsetDegrees, double sideSizeMeters) {
         def latSizeDeg = metersToDeg(sideSizeMeters)
@@ -65,6 +68,9 @@ class GameField {
             teamTwoStart = geo.makeShape gf.createLineString([getCoordinateN(1), getCoordinateN(2)] as Coordinate[])
             teamOneFinish = geo.makeShape gf.createLineString([getCoordinateN(2), getCoordinateN(3)] as Coordinate[])
             teamTwoFinish = geo.makeShape gf.createLineString([getCoordinateN(3), getCoordinateN(4)] as Coordinate[])
+
+            borders[Game.TEAM1] = [start: teamOneStart, finish: teamOneFinish]
+            borders[Game.TEAM2] = [start: teamTwoStart, finish: teamTwoFinish]
         }
     }
 
@@ -93,17 +99,17 @@ class GameField {
                     addEdge(start.center, player)
                 }
 
-                if (calcDistance(finish, player) < TOUCH_DISTANCE_KM) {
-                    print "hasFinish "
-                    addEdge(player, finish.center)
-                }
-
                 for (int j = i + 1; j < players.length; j++) {
                     def anotherPlayer = players[j]
                     if (calcDistance(anotherPlayer, player) < TOUCH_DISTANCE_KM) {
                         print "hasPlayer "
                         addEdge(player, anotherPlayer)
                     }
+                }
+
+                if (calcDistance(finish, player) < TOUCH_DISTANCE_KM) {
+                    print "hasFinish "
+                    addEdge(player, finish.center)
                 }
             }
         }
@@ -114,6 +120,7 @@ class GameField {
 
         def link = new Link()
         link.points = path.edgeList.collect { graph.getEdgeSource(it) as Point }
+        link.points.addAll path.edgeList.collect { graph.getEdgeTarget(it) as Point }
         link.start = start.center
         link.finish = finish.center
         link
@@ -163,10 +170,25 @@ class GameField {
         R * c
     }
 
-    def getNeighbors(Position position, List<Position> positions) {
+    def getNeighbors(Position position, List<Position> positions, teamId) {
+        if (outsiders([position]))
+            return ["Out of game field"]
+
         def player = geo.makePoint(position.latitude, position.longitude)
-        activePositions(positions).findAll { calcDistance(it, player) < TOUCH_DISTANCE_KM }.
-                collect { it.device.name }
+
+        def neighbors = activePositions(positions).findAll { calcDistance(it, player) < TOUCH_DISTANCE_KM }.
+                collect { it.device.name + ":" + ((int) calcDistance(it, player) * 1000) }
+
+        // Check edges
+        if (calcDistance(borders[teamId].start, player) < TOUCH_DISTANCE_KM) {
+            neighbors.add "Start:" + ((int) calcDistance(borders[teamId].start, player) * 1000)
+        }
+
+        if (calcDistance(borders[teamId].finish, player) < TOUCH_DISTANCE_KM) {
+            neighbors.add "Finish:" + ((int) calcDistance(borders[teamId].finish, player) * 1000)
+        }
+
+        return neighbors
     }
 
     def getVictims(double latitude, double longitude, List<Position> positions) {
@@ -185,6 +207,6 @@ class GameField {
     public class Link {
         Point start
         Point finish
-        List<Point> points
+        Set<Point> points
     }
 }

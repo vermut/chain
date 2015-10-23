@@ -45,9 +45,9 @@ public class SingleDeviceController {
                 if (result.active)
                 {
                     deviceView.death.setText("");
-                    deviceView.panel.setStylePrimaryName("active");
+                    deviceView.deathPanel.widgetContainer.removeStyleName("dead");
                 } else {
-                    deviceView.panel.setStylePrimaryName("dead");
+                    deviceView.deathPanel.widgetContainer.addStyleName("dead");
                     deviceView.death.setText("You are DEAD! Proceed of the limits to respawn.");
                 }
 
