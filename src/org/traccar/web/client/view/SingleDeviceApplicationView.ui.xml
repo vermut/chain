@@ -1,20 +1,36 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
-    <g:VerticalPanel ui:field="panel" width="100%">
-        <g:Label>Current info</g:Label>
-        <g:Label ui:field="death"/>
-        <g:Label ui:field="teamLabel"/>
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:mgwt="urn:import:com.googlecode.mgwt.ui.client.widget">
 
-        <g:Label text="You see around"/>
-        <g:Label ui:field="neighborsLabel"/>
-        <g:Label ui:field="yourLink"/>
+    <g:FlowPanel ui:field="panel">
+        <mgwt:form.Form title="Current info">
+            <mgwt:form.FormEntry text="Status">
+                <g:HTML ui:field="death"/>
+            </mgwt:form.FormEntry>
 
-        <g:Label ui:field="otherLink"/>
-        <g:Label text="score"/>
-        <g:Label ui:field="score"/>
+            <mgwt:form.FormEntry text="Team">
+                <g:HTML ui:field="teamLabel"/>
+            </mgwt:form.FormEntry>
 
-        <g:Label text="updateId"/>
-        <g:Label ui:field="updateId"/>
-        <g:Frame ui:field="chat" height="800px"/>
-    </g:VerticalPanel>
+            <mgwt:form.FormEntry text="You see around">
+                <g:HTML ui:field="neighborsLabel"/>
+            </mgwt:form.FormEntry>
+
+            <mgwt:form.FormEntry text="Links">
+                <g:HTML ui:field="yourLink"/>
+                <g:HTML ui:field="otherLink"/>
+            </mgwt:form.FormEntry>
+
+            <mgwt:form.FormEntry text="Score">
+                <g:HTML ui:field="score"/>
+            </mgwt:form.FormEntry>
+
+            <mgwt:form.FormEntry text="LastUpdated">
+                <g:HTML ui:field="updateId"/>
+            </mgwt:form.FormEntry>
+        </mgwt:form.Form>
+        <g:SimplePanel>
+            <g:Frame ui:field="chat" addStyleNames="chatIframe"/>
+        </g:SimplePanel>
+    </g:FlowPanel>
 </ui:UiBinder>

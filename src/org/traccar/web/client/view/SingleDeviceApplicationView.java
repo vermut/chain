@@ -9,9 +9,9 @@ import com.google.gwt.http.client.*;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Frame;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.HTML;
 import org.traccar.web.client.ApplicationContext;
 
 import java.util.Date;
@@ -22,28 +22,28 @@ import java.util.Date;
 public class SingleDeviceApplicationView extends Composite {
     private static SingleDeviceApplicationViewUiBinder ourUiBinder = GWT.create(SingleDeviceApplicationViewUiBinder.class);
     @UiField
-    public Label teamLabel;
+    public HTML teamLabel;
     @UiField
-    public Label neighborsLabel;
+    public HTML neighborsLabel;
     @UiField
-    public Label otherLink;
+    public HTML otherLink;
     @UiField
-    public Label yourLink;
+    public HTML yourLink;
     @UiField
-    public Label updateId;
+    public HTML updateId;
     @UiField
-    public Label score;
+    public HTML score;
     @UiField
-    public VerticalPanel panel;
+    public FlowPanel panel;
     @UiField
-    public Label death;
+    public HTML death;
     @UiField
     public Frame chat;
 
     Geolocation geolocation = Geolocation.getIfSupported();
 
     public SingleDeviceApplicationView() {
-        VerticalPanel rootElement = ourUiBinder.createAndBindUi(this);
+        FlowPanel rootElement = ourUiBinder.createAndBindUi(this);
         initWidget(rootElement);
         if (ApplicationContext.getInstance().getDevice() != null)
             initGeo(ApplicationContext.getInstance().getDevice().getUniqueId());
@@ -90,6 +90,6 @@ public class SingleDeviceApplicationView extends Composite {
         }, new Geolocation.PositionOptions().setHighAccuracyEnabled(true).setTimeout(60000).setMaximumAge(5000));
     }
 
-    interface SingleDeviceApplicationViewUiBinder extends UiBinder<VerticalPanel, SingleDeviceApplicationView> {
+    interface SingleDeviceApplicationViewUiBinder extends UiBinder<FlowPanel, SingleDeviceApplicationView> {
     }
 }

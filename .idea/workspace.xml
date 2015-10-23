@@ -8,8 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ac28e7d-5cdc-4e70-995c-5213f645448c" name="Default" comment="mobile friendly login, two colored teams">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/traccar/web/client/view/LoginDialog.java" afterPath="$PROJECT_DIR$/src/org/traccar/web/client/view/LoginDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/traccar/web/Traccar.gwt.xml" afterPath="$PROJECT_DIR$/src/org/traccar/web/Traccar.gwt.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/traccar/web/server/model/GameField.groovy" afterPath="$PROJECT_DIR$/src/org/traccar/web/server/model/GameField.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/traccar/web/client/view/SingleDeviceApplicationView.java" afterPath="$PROJECT_DIR$/src/org/traccar/web/client/view/SingleDeviceApplicationView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/traccar/web/client/view/SingleDeviceApplicationView.ui.xml" afterPath="$PROJECT_DIR$/src/org/traccar/web/client/view/SingleDeviceApplicationView.ui.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/traccar.html" afterPath="$PROJECT_DIR$/war/traccar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/traccar.iml" afterPath="$PROJECT_DIR$/traccar.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="traccar.iws" />
@@ -117,107 +121,169 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LoginDialog.ui.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/view/LoginDialog.ui.xml">
+      <file leaf-file-name="GameField.groovy" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/traccar/web/server/model/GameField.groovy">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="57" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
+              <caret line="165" column="14" selection-start-line="165" selection-start-column="14" selection-end-line="165" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/Application.java">
+      <file leaf-file-name="Game.groovy" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/traccar/web/server/controller/Game.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="83" column="6" selection-start-line="83" selection-start-column="6" selection-end-line="83" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.25465837">
+              <caret line="152" column="62" selection-start-line="152" selection-start-column="62" selection-end-line="152" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Traccar.gwt.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/traccar/web/Traccar.gwt.xml">
+      <file leaf-file-name="traccar.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/traccar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44959128">
+            <state vertical-scroll-proportion="-11.25">
               <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/controller/LoginController.java">
+      <file leaf-file-name="Panel.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/Panel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="118" column="13" selection-start-line="118" selection-start-column="13" selection-end-line="118" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Traccar.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/Traccar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="40" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
+              <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
               <folding>
-                <element signature="e#1413#1414#0" expanded="true" />
-                <element signature="e#1452#1453#0" expanded="true" />
-                <element signature="e#1501#1502#0" expanded="true" />
-                <element signature="e#1552#1553#0" expanded="true" />
+                <element signature="e#0#5927#0" expanded="false" />
+                <element signature="e#2823#2824#0" expanded="false" />
+                <element signature="e#2864#2865#0" expanded="false" />
+                <element signature="e#4199#4200#0" expanded="false" />
+                <element signature="e#4245#4246#0" expanded="false" />
+                <element signature="e#4878#4879#0" expanded="false" />
+                <element signature="e#4963#4964#0" expanded="false" />
+                <element signature="e#5014#5015#0" expanded="false" />
+                <element signature="e#5099#5100#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SingleDeviceApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/SingleDeviceApplication.java">
+      <file leaf-file-name="Widget.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/Widget.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SingleDeviceApplicationView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/view/SingleDeviceApplicationView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginDialog.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/view/LoginDialog.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+              <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2539#2540#0" expanded="true" />
-                <element signature="e#2568#2569#0" expanded="true" />
-                <element signature="e#2594#2595#0" expanded="true" />
-                <element signature="e#2623#2624#0" expanded="true" />
-                <element signature="e#2703#2704#0" expanded="true" />
-                <element signature="e#2778#2779#0" expanded="true" />
-                <element signature="e#3037#3038#0" expanded="true" />
-                <element signature="e#3115#3116#0" expanded="true" />
+                <element signature="e#0#15784#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#1769#1770#0" expanded="false" />
+                <element signature="e#1817#1818#0" expanded="false" />
+                <element signature="e#2311#2312#0" expanded="false" />
+                <element signature="e#2370#2371#0" expanded="false" />
+                <element signature="e#4593#4594#0" expanded="false" />
+                <element signature="e#4614#4615#0" expanded="false" />
+                <element signature="e#4927#4928#0" expanded="false" />
+                <element signature="e#4954#4955#0" expanded="false" />
+                <element signature="e#5079#5080#0" expanded="false" />
+                <element signature="e#5102#5103#0" expanded="false" />
+                <element signature="e#5406#5407#0" expanded="false" />
+                <element signature="e#5431#5432#0" expanded="false" />
+                <element signature="e#7398#7399#0" expanded="false" />
+                <element signature="e#7436#7437#0" expanded="false" />
+                <element signature="e#8705#8706#0" expanded="false" />
+                <element signature="e#8746#8747#0" expanded="false" />
+                <element signature="e#9027#9028#0" expanded="false" />
+                <element signature="e#9060#9061#0" expanded="false" />
+                <element signature="e#10227#10228#0" expanded="false" />
+                <element signature="e#10262#10263#0" expanded="false" />
+                <element signature="e#13980#13981#0" expanded="false" />
+                <element signature="e#14011#14012#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TapEvent.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/com/googlecode/mgwt/mgwt/2.0.0/mgwt-2.0.0-sources.jar!/com/googlecode/mgwt/dom/client/event/tap/TapEvent.java">
+      <file leaf-file-name="UIObject.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/UIObject.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-              <folding />
+              <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#33001#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#5832#5859#0" expanded="false" />
+                <element signature="e#5951#5978#0" expanded="false" />
+                <element signature="e#6352#6353#0" expanded="false" />
+                <element signature="e#6394#6395#0" expanded="false" />
+                <element signature="e#8337#8338#0" expanded="false" />
+                <element signature="e#8374#8375#0" expanded="false" />
+                <element signature="e#10425#10426#0" expanded="false" />
+                <element signature="e#10461#10462#0" expanded="false" />
+                <element signature="e#11367#11368#0" expanded="false" />
+                <element signature="e#11405#11406#0" expanded="false" />
+                <element signature="e#14460#14461#0" expanded="false" />
+                <element signature="e#14510#14511#0" expanded="false" />
+                <element signature="e#17481#17482#0" expanded="false" />
+                <element signature="e#17516#17517#0" expanded="false" />
+                <element signature="e#18327#18328#0" expanded="false" />
+                <element signature="e#18372#18373#0" expanded="false" />
+                <element signature="e#18586#18587#0" expanded="false" />
+                <element signature="e#18633#18634#0" expanded="false" />
+                <element signature="e#18844#18845#0" expanded="false" />
+                <element signature="e#18890#18891#0" expanded="false" />
+                <element signature="e#19697#19698#0" expanded="false" />
+                <element signature="e#19757#19758#0" expanded="false" />
+                <element signature="e#20004#20005#0" expanded="false" />
+                <element signature="e#20063#20064#0" expanded="false" />
+                <element signature="e#20373#20374#0" expanded="false" />
+                <element signature="e#20421#20422#0" expanded="false" />
+                <element signature="e#20685#20686#0" expanded="false" />
+                <element signature="e#20740#20741#0" expanded="false" />
+                <element signature="e#20954#20955#0" expanded="false" />
+                <element signature="e#21010#21011#0" expanded="false" />
+                <element signature="e#21054#21055#0" expanded="false" />
+                <element signature="e#21094#21095#0" expanded="false" />
+                <element signature="e#21460#21461#0" expanded="false" />
+                <element signature="e#21511#21512#0" expanded="false" />
+                <element signature="e#21892#21893#0" expanded="false" />
+                <element signature="e#21928#21929#0" expanded="false" />
+                <element signature="e#24530#24531#0" expanded="false" />
+                <element signature="e#24583#24584#0" expanded="false" />
+                <element signature="e#24926#24927#0" expanded="false" />
+                <element signature="e#24974#24975#0" expanded="false" />
+                <element signature="e#25236#25237#0" expanded="false" />
+                <element signature="e#25291#25292#0" expanded="false" />
+                <element signature="e#25746#25747#0" expanded="false" />
+                <element signature="e#25789#25790#0" expanded="false" />
+                <element signature="e#26696#26697#0" expanded="false" />
+                <element signature="e#26755#26756#0" expanded="false" />
+                <element signature="e#28378#28379#0" expanded="false" />
+                <element signature="e#28407#28408#0" expanded="false" />
+                <element signature="e#29331#29332#0" expanded="false" />
+                <element signature="e#29380#29381#0" expanded="false" />
+                <element signature="e#30347#30348#0" expanded="false" />
+                <element signature="e#30398#30399#0" expanded="false" />
+                <element signature="e#30675#30676#0" expanded="false" />
+                <element signature="e#30712#30713#0" expanded="false" />
+                <marker date="1413522396000" expanded="true" signature="8825:8873" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="9489:9671" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="9556:9606" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="9612:9667" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="13313:13898" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="13388:13409" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="13589:13854" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="13764:13848" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="32156:32792" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="32208:32231" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="32237:32788" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="32245:32408" placeholder="//..." />
+                <marker date="1413522396000" expanded="true" signature="32511:32663" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="32866:32994" placeholder="{...}" />
+                <marker date="1413522396000" expanded="true" signature="32909:32930" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -270,7 +336,6 @@
         <option value="$PROJECT_DIR$/../g_library.txt" />
         <option value="$PROJECT_DIR$/src/org/traccar/web/server/model/gs.json" />
         <option value="$PROJECT_DIR$/src/org/traccar/web/shared/model/User.java" />
-        <option value="$PROJECT_DIR$/war/traccar.html" />
         <option value="$PROJECT_DIR$/src/org/traccar/web/shared/model/Device.java" />
         <option value="$PROJECT_DIR$/src/org/traccar/web/client/Traccar.java" />
         <option value="$PROJECT_DIR$/src/org/traccar/web/client/SingleDeviceApplication.java" />
@@ -282,10 +347,7 @@
         <option value="$PROJECT_DIR$/src/org/traccar/web/shared/model/DeviceReport.java" />
         <option value="$PROJECT_DIR$/src/org/traccar/web/client/controller/SingleDeviceController.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/org/traccar/web/server/model/GameField.groovy" />
-        <option value="$PROJECT_DIR$/src/org/traccar/web/client/view/SingleDeviceApplicationView.ui.xml" />
         <option value="$PROJECT_DIR$/classes/artifacts/traccar_GWT/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/org/traccar/web/client/view/SingleDeviceApplicationView.java" />
         <option value="$PROJECT_DIR$/src/org/traccar/web/client/view/ApplicationView.java" />
         <option value="$PROJECT_DIR$/src/org/traccar/web/client/view/ApplicationView.ui.xml" />
         <option value="$PROJECT_DIR$/src/org/traccar/web/client/model/DataServiceAsync.java" />
@@ -300,6 +362,10 @@
         <option value="$PROJECT_DIR$/src/org/traccar/web/Traccar.gwt.xml" />
         <option value="$PROJECT_DIR$/src/org/traccar/web/client/view/LoginDialog.ui.xml" />
         <option value="$PROJECT_DIR$/src/org/traccar/web/client/view/LoginDialog.java" />
+        <option value="$PROJECT_DIR$/src/org/traccar/web/client/view/SingleDeviceApplicationView.java" />
+        <option value="$PROJECT_DIR$/src/org/traccar/web/client/view/SingleDeviceApplicationView.ui.xml" />
+        <option value="$PROJECT_DIR$/war/traccar.html" />
+        <option value="$PROJECT_DIR$/src/org/traccar/web/server/model/GameField.groovy" />
       </list>
     </option>
   </component>
@@ -327,10 +393,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="343" />
-    <option name="y" value="131" />
-    <option name="width" value="2093" />
-    <option name="height" value="1229" />
+    <option name="width" value="2560" />
+    <option name="height" value="1440" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -461,6 +525,108 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="traccar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-user.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="google" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="traccar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-user.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="google" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="traccar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-user.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="google" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="event" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -678,82 +844,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="widget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="traccar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com.googlecode.mgwt:mgwt:2.0.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mgwt-2.0.0.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mgwt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="widget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="input" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="traccar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com.googlecode.mgwt:mgwt:2.0.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mgwt-2.0.0.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mgwt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="widget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="button" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1019,11 +1109,77 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="war" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="traccar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="traccar-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="traccar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="traccar-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="traccar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="traccar-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1115,24 +1271,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="traccar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="traccar-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="artifacts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -1152,7 +1290,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
     <property name="extract.method.default.visibility" value="public" />
     <property name="Console.TableResult.DefaultCopyAction" value="SQL Insert Statements" />
-    <property name="FullScreen" value="false" />
+    <property name="FullScreen" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="true" />
@@ -1383,7 +1521,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="343" y="131" width="2093" height="1229" extended-state="0" />
+    <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329806" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1394,13 +1532,13 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32959533" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329806" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32804233" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32804233" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4382716" sideWeight="0.4979571" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32892415" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2728603" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1899012" sideWeight="0.5097002" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20965382" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17077045" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18966357" sideWeight="0.49029982" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15448768" sideWeight="0.49029982" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1899012" sideWeight="0.51177394" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16089712" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1455,7 +1593,8 @@
     <MESSAGE value="conference war" />
     <MESSAGE value="commandor chat panel" />
     <MESSAGE value="mobile friendly login, two colored teams" />
-    <option name="LAST_COMMIT_MESSAGE" value="mobile friendly login, two colored teams" />
+    <MESSAGE value="mobile friendly deviceview" />
+    <option name="LAST_COMMIT_MESSAGE" value="mobile friendly deviceview" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1475,101 +1614,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/SimpleLayoutPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/SimplePanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/logging/client/LoggingPopup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/DialogBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="131" column="13" selection-start-line="131" selection-start-column="13" selection-end-line="131" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/DecoratedPopupPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="76" column="13" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/PopupPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="7.0751367">
-          <caret line="996" column="13" selection-start-line="996" selection-start-column="13" selection-end-line="996" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1885246">
-          <caret line="58" column="21" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/googlecode/mgwt/mgwt/2.0.0/mgwt-2.0.0-sources.jar!/com/googlecode/mgwt/ui/client/widget/input/MTextBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16393442">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/uibinder/client/UiHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30737704">
-          <caret line="33" column="18" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/gwt/gwt-user/2.6.1/gwt-user-2.6.1.jar!/com/google/gwt/user/client/ui/Widget.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.037037">
-          <caret line="75" column="16" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/googlecode/mgwt/mgwt/2.0.0/mgwt-2.0.0.jar!/com/googlecode/mgwt/ui/client/widget/dialog/HasTitleText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/googlecode/mgwt/mgwt/2.0.0/mgwt-2.0.0-sources.jar!/com/googlecode/mgwt/ui/client/widget/dialog/ConfirmDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/googlecode/mgwt/mgwt/2.0.0/mgwt-2.0.0.jar!/com/googlecode/mgwt/ui/client/widget/dialog/AlertDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/googlecode/mgwt/mgwt/2.0.0/mgwt-2.0.0.jar!/com/googlecode/mgwt/ui/client/widget/dialog/panel/DialogPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1660,6 +1704,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.58318263">
           <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1814,7 +1859,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/controller/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="1.2633015">
           <caret line="118" column="13" selection-start-line="118" selection-start-column="13" selection-end-line="118" selection-end-column="13" />
           <folding />
         </state>
@@ -1822,36 +1867,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/Traccar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.5115962">
           <caret line="42" column="40" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
           <folding>
-            <element signature="e#1413#1414#0" expanded="true" />
-            <element signature="e#1452#1453#0" expanded="true" />
-            <element signature="e#1501#1502#0" expanded="true" />
-            <element signature="e#1552#1553#0" expanded="true" />
+            <element signature="e#1413#1414#0" expanded="false" />
+            <element signature="e#1452#1453#0" expanded="false" />
+            <element signature="e#1501#1502#0" expanded="false" />
+            <element signature="e#1552#1553#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/SingleDeviceApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.32742155">
           <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/view/SingleDeviceApplicationView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.98226464">
           <caret line="83" column="6" selection-start-line="83" selection-start-column="6" selection-end-line="83" selection-end-column="6" />
           <folding />
         </state>
@@ -1861,14 +1898,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/view/LoginDialog.ui.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="57" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
           <folding />
         </state>
       </provider>
@@ -1893,8 +1922,235 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/traccar/web/Traccar.gwt.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44959128">
+        <state vertical-scroll-proportion="0.40927693">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/view/LoginDialog.ui.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="12" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/googlecode/mgwt/mgwt/2.0.0/mgwt-2.0.0-sources.jar!/com/googlecode/mgwt/ui/client/widget/form/FormEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="19" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/FlowPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/AbsolutePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="58" column="13" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/SimplePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/Panel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#5927#0" expanded="false" />
+            <element signature="e#2823#2824#0" expanded="false" />
+            <element signature="e#2864#2865#0" expanded="false" />
+            <element signature="e#4199#4200#0" expanded="false" />
+            <element signature="e#4245#4246#0" expanded="false" />
+            <element signature="e#4878#4879#0" expanded="false" />
+            <element signature="e#4963#4964#0" expanded="false" />
+            <element signature="e#5014#5015#0" expanded="false" />
+            <element signature="e#5099#5100#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/Widget.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#15784#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1769#1770#0" expanded="false" />
+            <element signature="e#1817#1818#0" expanded="false" />
+            <element signature="e#2311#2312#0" expanded="false" />
+            <element signature="e#2370#2371#0" expanded="false" />
+            <element signature="e#4593#4594#0" expanded="false" />
+            <element signature="e#4614#4615#0" expanded="false" />
+            <element signature="e#4927#4928#0" expanded="false" />
+            <element signature="e#4954#4955#0" expanded="false" />
+            <element signature="e#5079#5080#0" expanded="false" />
+            <element signature="e#5102#5103#0" expanded="false" />
+            <element signature="e#5406#5407#0" expanded="false" />
+            <element signature="e#5431#5432#0" expanded="false" />
+            <element signature="e#7398#7399#0" expanded="false" />
+            <element signature="e#7436#7437#0" expanded="false" />
+            <element signature="e#8705#8706#0" expanded="false" />
+            <element signature="e#8746#8747#0" expanded="false" />
+            <element signature="e#9027#9028#0" expanded="false" />
+            <element signature="e#9060#9061#0" expanded="false" />
+            <element signature="e#10227#10228#0" expanded="false" />
+            <element signature="e#10262#10263#0" expanded="false" />
+            <element signature="e#13980#13981#0" expanded="false" />
+            <element signature="e#14011#14012#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/UIObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#33001#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#5832#5859#0" expanded="false" />
+            <element signature="e#5951#5978#0" expanded="false" />
+            <element signature="e#6352#6353#0" expanded="false" />
+            <element signature="e#6394#6395#0" expanded="false" />
+            <element signature="e#8337#8338#0" expanded="false" />
+            <element signature="e#8374#8375#0" expanded="false" />
+            <element signature="e#10425#10426#0" expanded="false" />
+            <element signature="e#10461#10462#0" expanded="false" />
+            <element signature="e#11367#11368#0" expanded="false" />
+            <element signature="e#11405#11406#0" expanded="false" />
+            <element signature="e#14460#14461#0" expanded="false" />
+            <element signature="e#14510#14511#0" expanded="false" />
+            <element signature="e#17481#17482#0" expanded="false" />
+            <element signature="e#17516#17517#0" expanded="false" />
+            <element signature="e#18327#18328#0" expanded="false" />
+            <element signature="e#18372#18373#0" expanded="false" />
+            <element signature="e#18586#18587#0" expanded="false" />
+            <element signature="e#18633#18634#0" expanded="false" />
+            <element signature="e#18844#18845#0" expanded="false" />
+            <element signature="e#18890#18891#0" expanded="false" />
+            <element signature="e#19697#19698#0" expanded="false" />
+            <element signature="e#19757#19758#0" expanded="false" />
+            <element signature="e#20004#20005#0" expanded="false" />
+            <element signature="e#20063#20064#0" expanded="false" />
+            <element signature="e#20373#20374#0" expanded="false" />
+            <element signature="e#20421#20422#0" expanded="false" />
+            <element signature="e#20685#20686#0" expanded="false" />
+            <element signature="e#20740#20741#0" expanded="false" />
+            <element signature="e#20954#20955#0" expanded="false" />
+            <element signature="e#21010#21011#0" expanded="false" />
+            <element signature="e#21054#21055#0" expanded="false" />
+            <element signature="e#21094#21095#0" expanded="false" />
+            <element signature="e#21460#21461#0" expanded="false" />
+            <element signature="e#21511#21512#0" expanded="false" />
+            <element signature="e#21892#21893#0" expanded="false" />
+            <element signature="e#21928#21929#0" expanded="false" />
+            <element signature="e#24530#24531#0" expanded="false" />
+            <element signature="e#24583#24584#0" expanded="false" />
+            <element signature="e#24926#24927#0" expanded="false" />
+            <element signature="e#24974#24975#0" expanded="false" />
+            <element signature="e#25236#25237#0" expanded="false" />
+            <element signature="e#25291#25292#0" expanded="false" />
+            <element signature="e#25746#25747#0" expanded="false" />
+            <element signature="e#25789#25790#0" expanded="false" />
+            <element signature="e#26696#26697#0" expanded="false" />
+            <element signature="e#26755#26756#0" expanded="false" />
+            <element signature="e#28378#28379#0" expanded="false" />
+            <element signature="e#28407#28408#0" expanded="false" />
+            <element signature="e#29331#29332#0" expanded="false" />
+            <element signature="e#29380#29381#0" expanded="false" />
+            <element signature="e#30347#30348#0" expanded="false" />
+            <element signature="e#30398#30399#0" expanded="false" />
+            <element signature="e#30675#30676#0" expanded="false" />
+            <element signature="e#30712#30713#0" expanded="false" />
+            <marker date="1413522396000" expanded="true" signature="8825:8873" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="9489:9671" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="9556:9606" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="9612:9667" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="13313:13898" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="13388:13409" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="13589:13854" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="13764:13848" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="32156:32792" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="32208:32231" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="32237:32788" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="32245:32408" placeholder="//..." />
+            <marker date="1413522396000" expanded="true" signature="32511:32663" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="32866:32994" placeholder="{...}" />
+            <marker date="1413522396000" expanded="true" signature="32909:32930" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/lib/gwt-2.7.0/gwt-user.jar!/com/google/gwt/user/client/ui/Frame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/controller/SingleDeviceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="42" column="20" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/traccar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.25">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/view/SingleDeviceApplicationView.ui.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="54" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/view/SingleDeviceApplicationView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/traccar/web/server/model/GameField.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="165" column="14" selection-start-line="165" selection-start-column="14" selection-end-line="165" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/traccar/web/server/controller/Game.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25465837">
+          <caret line="152" column="62" selection-start-line="152" selection-start-column="62" selection-end-line="152" selection-end-column="62" />
           <folding />
         </state>
       </provider>

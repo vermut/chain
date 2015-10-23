@@ -325,5 +325,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="com.googlecode.mgwt:mgwt:2.0.0" level="project" />
+    <orderEntry type="library" name="OpenStreetMap" level="application" />
+    <orderEntry type="library" name="OpenLayers" level="application" />
   </component>
 </module>
