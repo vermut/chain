@@ -514,6 +514,7 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
 
         report.setOwnLink(GAME.getTeamlink(team));
         report.setOtherTeamHasLink(GAME.isOtherTeamHasLink(team));
+        report.setAttackPoints(GAME.getAttackPoints());
 
         return report;
     }

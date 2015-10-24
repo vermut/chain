@@ -39,14 +39,13 @@ public class MapView {
     private static final Projection DEFAULT_PROJECTION = new Projection("EPSG:4326");
     private final MapPositionRenderer latestPositionRenderer;
     private final MapPositionRenderer archivePositionRenderer;
+    public Vector team1Layer;
+    public Vector team2Layer;
     private MapHandler mapHandler;
     private ContentPanel contentPanel;
     private MapWidget mapWidget;
     private Map map;
     private Vector vectorLayer;
-    private Vector team1Layer;
-    private Vector team2Layer;
-
     private Markers markerLayer;
     private MapPositionRenderer.SelectHandler latestPositionSelectHandler = new MapPositionRenderer.SelectHandler() {
 
@@ -257,6 +256,18 @@ public class MapView {
 
         LineString lineString = new LineString(linePoints);
         getVectorLayer().addFeature(new VectorFeature(lineString));
+    }
+
+    public void drawLines(SimplePoint[] points, Vector layer) {
+        Point[] linePoints = new Point[points.length];
+
+        for (int i = 0; i < points.length; i++) {
+            //noinspection SuspiciousNameCombination
+            linePoints[i] = createPoint(points[i].y, points[i].x);
+        }
+
+        LineString lineString = new LineString(linePoints);
+        layer.addFeature(new VectorFeature(lineString));
     }
 
     public void showArchivePositions(List<Position> positions) {

@@ -27,31 +27,28 @@ import java.util.*;
 
 public class MapController implements ContentController, MapView.MapHandler {
 
-    private static final int UPDATE_INTERVAL = 5000;
     public static final double ATTACK_CROSS = 0.0002;
-
-    public interface MapHandler {
-        public void onDeviceSelected(Device device);
-
-        public void onArchivePositionSelected(Position position);
-    }
-
+    private static final int UPDATE_INTERVAL = 5000;
     private MapHandler mapHandler;
-
     private MapView mapView;
-
+    private Timer updateTimer;
+    private GameInfo gameInfo;
+    private Map<Long, Position> latestPositionMap = new HashMap<Long, Position>();
+    private Map<Long, PositionUpdateHandler> positionUpdateMap = new HashMap<Long, PositionUpdateHandler>();
     public MapController(MapHandler mapHandler) {
         this.mapHandler = mapHandler;
         mapView = new MapView(this);
     }
 
+    public static native void console(String text)
+/*-{
+    console.log(text);
+}-*/;
+
     @Override
     public ContentPanel getView() {
         return mapView.getView();
     }
-
-    private Timer updateTimer;
-    private GameInfo gameInfo;
 
     @Override
     public void run() {
@@ -69,13 +66,6 @@ public class MapController implements ContentController, MapView.MapHandler {
             }
         };
     }
-
-    private Map<Long, Position> latestPositionMap = new HashMap<Long, Position>();
-
-    public static native void console(String text)
-/*-{
-    console.log(text);
-}-*/;
 
     public void update() {
         updateTimer.cancel();
@@ -101,6 +91,9 @@ public class MapController implements ContentController, MapView.MapHandler {
             @Override
             public void onSuccess(TeamReport result) {
                 mapView.getVectorLayer().removeAllFeatures();
+
+                mapView.team1Layer.removeAllFeatures();
+                mapView.team2Layer.removeAllFeatures();
                 //noinspection SuspiciousNameCombination
                 mapView.drawField(mapView.createPoint(gameInfo.getTopLeft().y, gameInfo.getTopLeft().x),
                         mapView.createPoint(gameInfo.getTopRight().y, gameInfo.getTopRight().x),
@@ -108,8 +101,15 @@ public class MapController implements ContentController, MapView.MapHandler {
                         mapView.createPoint(gameInfo.getBottomLeft().y, gameInfo.getBottomLeft().x)
                 );
 
-                if (result != null && result.getOwnLink() != null)
-                    mapView.drawLink(result.getOwnLink());
+
+                if (result != null) {
+                    drawAttackTarget(result.getAttackPoints()[0].x, result.getAttackPoints()[0].y, mapView.team1Layer);
+                    drawAttackTarget(result.getAttackPoints()[1].x, result.getAttackPoints()[1].y, mapView.team2Layer);
+
+                    if (result.getOwnLink() != null) {
+                        mapView.drawLink(result.getOwnLink());
+                    }
+                }
             }
         });
 
@@ -135,6 +135,15 @@ public class MapController implements ContentController, MapView.MapHandler {
         });
     }
 
+    public void drawAttackTarget(double lat, double lon, org.gwtopenmaps.openlayers.client.layer.Vector layer) {
+        mapView.drawLines(new SimplePoint[]{
+                new SimplePoint(lat - ATTACK_CROSS, lon), new SimplePoint(lat + ATTACK_CROSS, lon)
+        }, layer);
+        mapView.drawLines(new SimplePoint[]{
+                new SimplePoint(lat, lon - ATTACK_CROSS), new SimplePoint(lat, lon + ATTACK_CROSS)
+        }, layer);
+    }
+
     public void selectDevice(Device device) {
         mapView.selectDevice(device);
     }
@@ -153,13 +162,6 @@ public class MapController implements ContentController, MapView.MapHandler {
     public void selectArchivePosition(Position position) {
         mapView.selectArchivePosition(position);
     }
-
-    public interface PositionUpdateHandler {
-        public void onUpdate(Position position);
-    }
-
-    private Map<Long, PositionUpdateHandler> positionUpdateMap = new HashMap<Long, PositionUpdateHandler>();
-
 
     public void registerPositionUpdate(Device device, PositionUpdateHandler handler) {
         positionUpdateMap.put(device.getId(), handler);
@@ -195,6 +197,16 @@ public class MapController implements ContentController, MapView.MapHandler {
                 }
             }
         });
+    }
+
+    public interface MapHandler {
+        void onDeviceSelected(Device device);
+
+        void onArchivePositionSelected(Position position);
+    }
+
+    public interface PositionUpdateHandler {
+        void onUpdate(Position position);
     }
 
 }

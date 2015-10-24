@@ -28,8 +28,10 @@ class Game implements Runnable {
 
     HashMap<Integer, SimplePoint[]> teamlink = [:]
     HashMap<Integer, List<Position>> players = [:]
-    HashMap<Integer, Long> attackTimer = [:]
     HashMap<Integer, String> chatUrl = [:]
+
+    HashMap<Integer, Long> attackTimer = [:]
+    HashMap<Integer, SimplePoint> attackPoints = [:]
 
     EntityManager em
 
@@ -45,7 +47,7 @@ class Game implements Runnable {
                 bottomLeft: new SimplePoint(field.teamTwoStart.geom.coordinate.x, field.teamTwoStart.geom.coordinate.y),
                 bottomRight: new SimplePoint(field.teamOneFinish.geom.coordinate.x, field.teamOneFinish.geom.coordinate.y),
                 topRight: new SimplePoint(field.teamTwoFinish.geom.coordinate.x, field.teamTwoFinish.geom.coordinate.y),
-                score: [0, 0]
+                score: [0, 0],
         )
 
         DataServiceImpl.GAME = this
@@ -203,7 +205,12 @@ class Game implements Runnable {
         }
 
         attackTimer[team] = System.currentTimeMillis()
+        attackPoints[team] = new SimplePoint(lat, lon)
         true
+    }
+
+    public SimplePoint[] getAttackPoints() {
+        [attackPoints[TEAM1], attackPoints[TEAM2]]
     }
 
     String getChatUrl(Integer team) {

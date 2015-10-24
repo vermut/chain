@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class TeamReport implements Serializable, Cloneable {
     SimplePoint[] ownLink;
     Boolean otherTeamHasLink;
+    SimplePoint[] attackPoints;
 
     public SimplePoint[] getOwnLink() {
         return ownLink;
@@ -23,5 +24,13 @@ public class TeamReport implements Serializable, Cloneable {
 
     public void setOtherTeamHasLink(Boolean otherTeamHasLink) {
         this.otherTeamHasLink = otherTeamHasLink;
+    }
+
+    public SimplePoint[] getAttackPoints() {
+        return attackPoints;
+    }
+
+    public void setAttackPoints(SimplePoint[] attackPoints) {
+        this.attackPoints = attackPoints;
     }
 }
