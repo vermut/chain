@@ -26,41 +26,18 @@ import javax.naming.NamingException;
 import javax.persistence.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class DataServiceImpl extends RemoteServiceServlet implements DataService {
 
     private static final long serialVersionUID = 1;
 
-    private static final String PERSISTENCE_DATASTORE = "java:/DefaultDS";
-    private static final String PERSISTENCE_UNIT_DEBUG = "debug";
-    private static final String PERSISTENCE_UNIT_RELEASE = "release";
     private static final String ATTRIBUTE_USER = "traccar.user";
     private static final String ATTRIBUTE_DEVICE = "traccar.device";
     private static final String ATTRIBUTE_ENTITYMANAGER = "traccar.entitymanager";
 
     public static EntityManagerFactory entityManagerFactory;
     public static Game GAME;
-    private EntityManager servletEntityManager;
-    private ApplicationSettings applicationSettings;
-
-    public static EntityManagerFactory initEMF() {
-        String persistenceUnit;
-        try {
-            Context context = new InitialContext();
-            context.lookup(PERSISTENCE_DATASTORE);
-            persistenceUnit = PERSISTENCE_UNIT_RELEASE;
-        } catch (NamingException e) {
-            persistenceUnit = PERSISTENCE_UNIT_DEBUG;
-        }
-
-        if (entityManagerFactory == null)
-            entityManagerFactory = Persistence.createEntityManagerFactory(persistenceUnit);
-
-        return entityManagerFactory;
-    }
 
     @Override
     public void init() throws ServletException {
@@ -80,6 +57,40 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
             createUser(entityManager, user);
         }
     }
+
+    public static EntityManagerFactory initEMF() {
+        if (entityManagerFactory == null)
+        {
+            String databaseUrl = System.getenv("CLEARDB_DATABASE_URL");
+            StringTokenizer st = new StringTokenizer(databaseUrl, ":@/");
+            String dbVendor = st.nextToken(); //if DATABASE_URL is set
+            String userName = st.nextToken();
+            String password = st.nextToken();
+            String host = st.nextToken();
+            String databaseName = st.nextToken();
+            String jdbcUrl = String.format("jdbc:mysql://%s/%s?reconnect=true", host, databaseName);
+            Map<String, String> properties = new HashMap<String, String>();
+
+/*
+            properties.put("javax.persistence.jdbc.url", jdbcUrl );
+            properties.put("javax.persistence.jdbc.user", userName );
+            properties.put("javax.persistence.jdbc.password", password );
+            properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
+*/
+
+            properties.put("hibernate.connection.url", jdbcUrl );
+            properties.put("hibernate.connection.username", userName );
+            properties.put("hibernate.connection.password", password );
+            properties.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
+            properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+
+            entityManagerFactory = Persistence.createEntityManagerFactory("default", properties);
+        }
+
+        return entityManagerFactory;
+    }
+
+    private EntityManager servletEntityManager;
 
     private EntityManager getServletEntityManager() {
         if (servletEntityManager == null) {
