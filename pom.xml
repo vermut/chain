@@ -53,6 +53,16 @@
             <artifactId>jts</artifactId>
             <version>1.13</version>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.mgwt</groupId>
+            <artifactId>mgwt</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jgrapht</groupId>
+            <artifactId>jgrapht-core</artifactId>
+            <version>0.9.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -99,6 +109,11 @@
             <artifactId>groovy-all</artifactId>
             <classifier>indy</classifier>
             <version>2.4.15</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.http-builder-ng</groupId>
+            <artifactId>http-builder-ng-core</artifactId>
+            <version>1.0.3</version>
         </dependency>
     </dependencies>
 

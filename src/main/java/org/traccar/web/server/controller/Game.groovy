@@ -1,7 +1,6 @@
 package org.traccar.web.server.controller
 
 import com.vividsolutions.jts.geom.Coordinate
-import groovyx.net.http.HTTPBuilder
 import org.traccar.web.server.model.DataServiceImpl
 import org.traccar.web.server.model.GameField
 import org.traccar.web.shared.model.*
@@ -51,11 +50,6 @@ class Game implements Runnable {
         )
 
         DataServiceImpl.GAME = this
-
-        // Create voice rooms
-        def http = new HTTPBuilder('http://voicechatapi.com/api/v1/conference/')
-        chatUrl[TEAM1] = http.post(body: null).conference_url
-        chatUrl[TEAM2] = http.post(body: null).conference_url
     }
 
     void startGame() {
@@ -129,11 +123,11 @@ class Game implements Runnable {
 
     def getTeamId(Device device) {
         if (players[TEAM1].find { it.device.id == device.id })
-            return TEAM1;
+            return TEAM1
         if (players[TEAM2].find { it.device.id == device.id })
-            return TEAM2;
+            return TEAM2
 
-        return null;
+        return null
     }
 
     static def teamNameById(team) {
@@ -144,7 +138,7 @@ class Game implements Runnable {
         }
     }
 
-    static def Integer teamIdByName(team) {
+    static Integer teamIdByName(team) {
         switch (team) {
             case TEAM1_STR: TEAM1; break
             case TEAM2_STR: TEAM2; break
@@ -167,7 +161,7 @@ class Game implements Runnable {
         report.score = gameInfo.score.toString()
 
         if (team == null)
-            return report;
+            return report
 
         report.neighbors = field.getNeighbors(device.latestPosition, players[team], team)
         report.neighbors.remove(device.name + ':0')
@@ -191,10 +185,10 @@ class Game implements Runnable {
 
     Boolean attack(double lat, double lon, Integer team) {
         if (team == null)
-            return false;
+            return false
 
         if (System.currentTimeMillis() - ATTACK_INTERVAL < attackTimer[team])
-            return false;
+            return false
 
         field.getVictims(lat, lon, players[TEAM1] + players[TEAM2]).each {
             em.transaction.begin()
@@ -209,11 +203,11 @@ class Game implements Runnable {
         true
     }
 
-    public SimplePoint[] getAttackPoints() {
+    SimplePoint[] getAttackPoints() {
         [attackPoints[TEAM1], attackPoints[TEAM2]]
     }
 
     String getChatUrl(Integer team) {
-        return chatUrl[team];
+        return chatUrl[team]
     }
 }

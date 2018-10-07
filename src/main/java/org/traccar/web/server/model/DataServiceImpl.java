@@ -33,7 +33,8 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
     private static final String ATTRIBUTE_DEVICE = "traccar.device";
     private static final String ATTRIBUTE_ENTITYMANAGER = "traccar.entitymanager";
 
-    public static EntityManagerFactory entityManagerFactory;
+    private static EntityManagerFactory entityManagerFactory;
+    private ApplicationSettings applicationSettings;
     public static Game GAME;
 
     @Override
