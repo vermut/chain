@@ -73,9 +73,9 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
         return entityManagerFactory;
     }
 
-    private EntityManager servletEntityManager;
+    private static EntityManager servletEntityManager;
 
-    private EntityManager getServletEntityManager() {
+    public static EntityManager getServletEntityManager() {
         if (servletEntityManager == null) {
             servletEntityManager = entityManagerFactory.createEntityManager();
         }
@@ -565,10 +565,5 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
     @Override
     public Boolean attack(double lat, double lon) {
         return GAME.attack(lat, lon, Game.teamIdByName(getSessionUser().getLogin()));
-    }
-
-    @Override
-    public String getChatUrl() {
-        return GAME.getChatUrl(Game.teamIdByName(getSessionUser().getLogin()));
     }
 }

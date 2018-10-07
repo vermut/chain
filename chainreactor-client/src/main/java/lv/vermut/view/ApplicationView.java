@@ -26,8 +26,6 @@ import com.sencha.gxt.widget.core.client.ContentPanel;
 public class ApplicationView extends Composite {
 
     private static ApplicationViewUiBinder uiBinder = GWT.create(ApplicationViewUiBinder.class);
-    @UiField
-    public Frame chatFrame;
     @UiField(provided = true)
     ContentPanel devicePanel;
 

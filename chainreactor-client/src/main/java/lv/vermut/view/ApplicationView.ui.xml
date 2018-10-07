@@ -36,11 +36,6 @@
     <container:BorderLayoutContainer>
       <container:west layoutData="{westData}">
         <container:BorderLayoutContainer>
-          <container:north>
-            <g:SimplePanel>
-              <g:Frame ui:field="chatFrame" addStyleNames="chatIframe"/>
-            </g:SimplePanel>
-          </container:north>
           <container:center>
             <gxt:ContentPanel ui:field="devicePanel"/>
           </container:center>

@@ -133,14 +133,6 @@ public class Application {
         stateController.run();
         mapController.run();
         archiveController.run();
-
-
-        Application.getDataService().getChatUrl(new BaseAsyncCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                view.chatFrame.setUrl(result);
-            }
-        });
     }
 
 }

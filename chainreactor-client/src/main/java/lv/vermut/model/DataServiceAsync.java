@@ -63,6 +63,4 @@ public interface DataServiceAsync {
     void getDeviceReport(AsyncCallback<DeviceReport> callback);
 
     void attack(double lat, double lon, AsyncCallback<Boolean> callback);
-
-    void getChatUrl(AsyncCallback<String> async);
 }
