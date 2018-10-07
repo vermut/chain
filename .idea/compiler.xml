@@ -9,6 +9,9 @@
         <module name="traccar" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="traccar" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="DEPRECATION" value="false" />
