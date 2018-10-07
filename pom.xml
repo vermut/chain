@@ -71,7 +71,7 @@
             <sourceLevel>${java.version}</sourceLevel>
             <!--<failOnError>true</failOnError>  need this for strange sencha bug-->
             <draftCompile>true</draftCompile>
-            <skipCompilation>true</skipCompilation>
+            <!--<skipCompilation>true</skipCompilation>-->
           </configuration>
         </plugin>
         <plugin>
