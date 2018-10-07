@@ -16,7 +16,6 @@
 package lv.vermut.model;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import lv.vermut.model.*;
 
 import java.util.Date;
 import java.util.List;

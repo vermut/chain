@@ -1,16 +1,10 @@
 package lv.vermut.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 @Entity
-@Table(name="user_settings")
+@Table(name = "user_settings")
 public class UserSettings implements Serializable {
 
     private static final long serialVersionUID = 1;

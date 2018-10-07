@@ -43,11 +43,11 @@ public class GameProcessListener implements ServletContextListener
     // HttpSessionListener implementation
     // -------------------------------------------------------
     public void sessionCreated(HttpSessionEvent se) {
-      /* Session is created. */
+        /* Session is created. */
     }
 
     public void sessionDestroyed(HttpSessionEvent se) {
-      /* Session is destroyed. */
+        /* Session is destroyed. */
     }
 
     // -------------------------------------------------------

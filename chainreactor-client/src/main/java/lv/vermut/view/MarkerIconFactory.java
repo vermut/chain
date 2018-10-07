@@ -33,7 +33,9 @@ class MarkerIconFactory {
     public enum IconType {
         iconLatest,
         iconArchive
-    };
+    }
+
+    ;
 
     public static String getIconUrl(IconType type, boolean selected) {
         if (type == IconType.iconLatest) {

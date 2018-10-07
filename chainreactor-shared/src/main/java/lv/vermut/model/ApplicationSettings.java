@@ -1,14 +1,13 @@
 package lv.vermut.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
-@Table(name="application_settings")
+@Table(name = "application_settings")
 public class ApplicationSettings implements Serializable {
 
     private static final long serialVersionUID = 1;

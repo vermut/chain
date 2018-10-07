@@ -10,12 +10,12 @@ import com.vividsolutions.jts.geom.Geometry
 import com.vividsolutions.jts.geom.Polygon
 import com.vividsolutions.jts.geom.util.AffineTransformation
 import com.vividsolutions.jts.operation.distance.DistanceOp
-import org.jgrapht.alg.DijkstraShortestPath
-import org.jgrapht.graph.DefaultEdge
-import org.jgrapht.graph.SimpleGraph
 import lv.vermut.controller.Game
 import lv.vermut.model.Position
 import lv.vermut.model.SimplePoint
+import org.jgrapht.alg.DijkstraShortestPath
+import org.jgrapht.graph.DefaultEdge
+import org.jgrapht.graph.SimpleGraph
 
 /**
  * Created by admin on 03/04/15.

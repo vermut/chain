@@ -3,8 +3,8 @@ package lv.vermut.controller;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import lv.vermut.Application;
-import lv.vermut.view.SingleDeviceApplicationView;
 import lv.vermut.model.DeviceReport;
+import lv.vermut.view.SingleDeviceApplicationView;
 
 /**
  * Created by admin on 19/04/15.
@@ -14,6 +14,7 @@ public class SingleDeviceController {
     private final SingleDeviceApplicationView deviceView;
     private Timer updateTimer;
     private Long updateId = 0L;
+
     public SingleDeviceController(SingleDeviceApplicationView deviceView) {
         this.deviceView = deviceView;
     }
@@ -42,8 +43,7 @@ public class SingleDeviceController {
                 if (!deviceView.chat.getUrl().equalsIgnoreCase(result.teamConferenceUrl))
                     deviceView.chat.setUrl(result.teamConferenceUrl);
 
-                if (result.active)
-                {
+                if (result.active) {
                     deviceView.death.setText("");
                     deviceView.deathPanel.widgetContainer.removeStyleName("dead");
                 } else {

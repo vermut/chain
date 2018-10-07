@@ -1,11 +1,5 @@
 package lv.vermut.view;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import lv.vermut.model.StateItem;
-import lv.vermut.model.StateItemProperties;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -15,6 +9,11 @@ import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
+import lv.vermut.model.StateItem;
+import lv.vermut.model.StateItemProperties;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class StateView {
 

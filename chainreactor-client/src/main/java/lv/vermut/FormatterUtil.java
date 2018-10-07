@@ -30,12 +30,12 @@ public class FormatterUtil {
 
     public NumberFormat getSpeedFormat() {
         switch (ApplicationContext.getInstance().getUserSettings().getSpeedUnit()) {
-        case kilometersPerHour:
-            return new SpeedNumberFormat("km/h", 1.852);
-        case milesPerHour:
-            return new SpeedNumberFormat("mph", 1.150779);
-        default:
-            return new SpeedNumberFormat("kn", 1);
+            case kilometersPerHour:
+                return new SpeedNumberFormat("km/h", 1.852);
+            case milesPerHour:
+                return new SpeedNumberFormat("mph", 1.150779);
+            default:
+                return new SpeedNumberFormat("kn", 1);
         }
     }
 

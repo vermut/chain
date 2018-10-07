@@ -1,8 +1,6 @@
 package lv.vermut.controller
 
 import com.vividsolutions.jts.geom.Coordinate
-import lv.vermut.model.DataServiceImpl
-import lv.vermut.model.GameField
 import lv.vermut.model.*
 
 import javax.persistence.EntityManager

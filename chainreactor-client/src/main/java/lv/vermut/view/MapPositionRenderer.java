@@ -15,10 +15,10 @@
  */
 package lv.vermut.view;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.user.client.ui.RootPanel;
+import lv.vermut.model.Device;
+import lv.vermut.model.Position;
 import org.gwtopenmaps.openlayers.client.Icon;
 import org.gwtopenmaps.openlayers.client.Marker;
 import org.gwtopenmaps.openlayers.client.event.EventHandler;
@@ -28,11 +28,10 @@ import org.gwtopenmaps.openlayers.client.geometry.LineString;
 import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.layer.Markers;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
-import lv.vermut.model.Device;
-import lv.vermut.model.Position;
 
-import com.google.gwt.dom.client.Style;
-import com.google.gwt.user.client.ui.RootPanel;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class MapPositionRenderer {

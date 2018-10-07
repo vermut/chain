@@ -13,8 +13,9 @@
     </facet>
     <facet type="gwt" name="GWT">
       <configuration>
-        <setting name="compilerParameters" value="-failOnError -sourceLevel 1.7" />
-        <setting name="gwtSdkUrl" value="file://C:/tools/gwt-2.7.0" />
+        <setting name="compilerParameters" value="-draftCompile -failOnError -logLevel INFO -sourceLevel 1.8" />
+        <setting name="compilerMaxHeapSize" value="4096" />
+        <setting name="gwtSdkUrl" value="file://C:/tools/gwt-2.8.2" />
         <setting name="webFacet" value="Web" />
       </configuration>
     </facet>

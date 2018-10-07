@@ -21,14 +21,9 @@ import com.sencha.gxt.data.shared.event.StoreAddEvent;
 import com.sencha.gxt.data.shared.event.StoreHandlers;
 import com.sencha.gxt.data.shared.event.StoreRemoveEvent;
 import lv.vermut.controller.*;
-import lv.vermut.model.BaseAsyncCallback;
-import lv.vermut.model.BaseStoreHandlers;
-import lv.vermut.model.DataService;
-import lv.vermut.model.DataServiceAsync;
+import lv.vermut.model.*;
 import lv.vermut.view.ApplicationView;
 import lv.vermut.view.SingleDeviceApplicationView;
-import lv.vermut.model.Device;
-import lv.vermut.model.Position;
 
 import java.util.logging.Logger;
 

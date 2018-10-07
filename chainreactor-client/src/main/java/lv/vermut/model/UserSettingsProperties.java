@@ -15,13 +15,11 @@
  */
 package lv.vermut.model;
 
-import lv.vermut.model.UserSettings;
-import lv.vermut.model.UserSettings.SpeedUnit;
-
 import com.sencha.gxt.core.client.ValueProvider;
 import com.sencha.gxt.data.shared.LabelProvider;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
+import lv.vermut.model.UserSettings.SpeedUnit;
 
 public interface UserSettingsProperties extends PropertyAccess<UserSettings> {
 
@@ -34,14 +32,14 @@ public interface UserSettingsProperties extends PropertyAccess<UserSettings> {
         @Override
         public String getLabel(SpeedUnit item) {
             switch (item) {
-            case kilometersPerHour:
-                return "km/h";
-            case knots:
-                return "knots";
-            case milesPerHour:
-                return "mph";
-            default:
-                return null;
+                case kilometersPerHour:
+                    return "km/h";
+                case knots:
+                    return "knots";
+                case milesPerHour:
+                    return "mph";
+                default:
+                    return null;
             }
         }
 

@@ -15,15 +15,14 @@
  */
 package lv.vermut.controller;
 
+import com.google.gwt.core.client.GWT;
+import com.sencha.gxt.data.shared.ListStore;
+import com.sencha.gxt.widget.core.client.ContentPanel;
+import lv.vermut.model.Position;
 import lv.vermut.model.StateItem;
 import lv.vermut.model.StateItemProperties;
 import lv.vermut.model.StateReader;
 import lv.vermut.view.StateView;
-import lv.vermut.model.Position;
-
-import com.google.gwt.core.client.GWT;
-import com.sencha.gxt.data.shared.ListStore;
-import com.sencha.gxt.widget.core.client.ContentPanel;
 
 public class StateController implements ContentController {
 

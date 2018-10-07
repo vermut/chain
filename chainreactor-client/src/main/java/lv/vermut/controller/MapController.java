@@ -19,8 +19,8 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import lv.vermut.Application;
-import lv.vermut.view.MapView;
 import lv.vermut.model.*;
+import lv.vermut.view.MapView;
 
 import java.util.*;
 
@@ -34,6 +34,7 @@ public class MapController implements ContentController, MapView.MapHandler {
     private GameInfo gameInfo;
     private Map<Long, Position> latestPositionMap = new HashMap<>();
     private Map<Long, PositionUpdateHandler> positionUpdateMap = new HashMap<>();
+
     public MapController(MapHandler mapHandler) {
         this.mapHandler = mapHandler;
         mapView = new MapView(this);

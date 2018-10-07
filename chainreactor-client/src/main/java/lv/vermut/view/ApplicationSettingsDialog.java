@@ -15,8 +15,6 @@
  */
 package lv.vermut.view;
 
-import lv.vermut.model.ApplicationSettings;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
@@ -27,6 +25,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.form.CheckBox;
+import lv.vermut.model.ApplicationSettings;
 
 public class ApplicationSettingsDialog implements Editor<ApplicationSettings> {
 

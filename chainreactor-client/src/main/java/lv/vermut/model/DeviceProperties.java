@@ -15,8 +15,6 @@
  */
 package lv.vermut.model;
 
-import lv.vermut.model.Device;
-
 import com.google.gwt.editor.client.Editor.Path;
 import com.sencha.gxt.core.client.ValueProvider;
 import com.sencha.gxt.data.shared.LabelProvider;

@@ -15,9 +15,6 @@
  */
 package lv.vermut.view;
 
-import lv.vermut.ApplicationContext;
-import lv.vermut.model.User;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
@@ -30,6 +27,8 @@ import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.form.CheckBox;
 import com.sencha.gxt.widget.core.client.form.PasswordField;
 import com.sencha.gxt.widget.core.client.form.TextField;
+import lv.vermut.ApplicationContext;
+import lv.vermut.model.User;
 
 public class UserDialog implements Editor<User> {
 

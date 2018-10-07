@@ -15,12 +15,6 @@
  */
 package lv.vermut.view;
 
-import java.util.Arrays;
-
-import lv.vermut.model.EnumKeyProvider;
-import lv.vermut.model.UserSettingsProperties;
-import lv.vermut.model.UserSettings;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
@@ -33,6 +27,11 @@ import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
+import lv.vermut.model.EnumKeyProvider;
+import lv.vermut.model.UserSettings;
+import lv.vermut.model.UserSettingsProperties;
+
+import java.util.Arrays;
 
 public class UserSettingsDialog implements Editor<UserSettings> {
 

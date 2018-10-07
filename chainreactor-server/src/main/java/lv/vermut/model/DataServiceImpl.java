@@ -55,8 +55,7 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
     }
 
     public static EntityManagerFactory initEMF() {
-        if (entityManagerFactory == null)
-        {
+        if (entityManagerFactory == null) {
             String databaseUrl = System.getenv("CLEARDB_DATABASE_URL");
             StringTokenizer st = new StringTokenizer(databaseUrl, ":@/");
             String dbVendor = st.nextToken(); //if DATABASE_URL is set
@@ -74,9 +73,9 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
             properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
 */
 
-            properties.put("hibernate.connection.url", jdbcUrl );
-            properties.put("hibernate.connection.username", userName );
-            properties.put("hibernate.connection.password", password );
+            properties.put("hibernate.connection.url", jdbcUrl);
+            properties.put("hibernate.connection.username", userName);
+            properties.put("hibernate.connection.password", password);
             properties.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
             properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 

@@ -15,13 +15,11 @@
  */
 package lv.vermut.model;
 
-import java.util.Date;
-
-import lv.vermut.model.Position;
-
 import com.sencha.gxt.core.client.ValueProvider;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
+
+import java.util.Date;
 
 public interface PositionProperties extends PropertyAccess<Position> {
 

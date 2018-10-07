@@ -17,7 +17,6 @@ package lv.vermut.model;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import lv.vermut.model.*;
 
 import java.util.Date;
 import java.util.List;
@@ -58,6 +57,7 @@ public interface DataService extends RemoteService {
     ApplicationSettings updateApplicationSettings(ApplicationSettings applicationSettings);
 
     GameInfo getGameInfo();
+
     TeamReport getTeamReport();
 
     Boolean moveDevice(Device device, double offsetX, double offsetY);

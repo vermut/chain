@@ -15,15 +15,6 @@
  */
 package lv.vermut.controller;
 
-import java.util.List;
-
-import lv.vermut.Application;
-import lv.vermut.model.BaseAsyncCallback;
-import lv.vermut.model.DeviceProperties;
-import lv.vermut.view.DeviceDialog;
-import lv.vermut.view.DeviceView;
-import lv.vermut.model.Device;
-
 import com.google.gwt.core.client.GWT;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.ContentPanel;
@@ -31,6 +22,14 @@ import com.sencha.gxt.widget.core.client.Dialog.PredefinedButton;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.event.DialogHideEvent;
+import lv.vermut.Application;
+import lv.vermut.model.BaseAsyncCallback;
+import lv.vermut.model.Device;
+import lv.vermut.model.DeviceProperties;
+import lv.vermut.view.DeviceDialog;
+import lv.vermut.view.DeviceView;
+
+import java.util.List;
 
 public class DeviceController implements ContentController, DeviceView.DeviceHandler {
 
@@ -85,10 +84,11 @@ public class DeviceController implements ContentController, DeviceView.DeviceHan
                     public void onSuccess(Device result) {
                         deviceStore.add(result);
                     }
+
                     @Override
                     public void onFailure(Throwable caught) {
                         new AlertMessageBox("Error", "Device with this Unique ID already exists").show();
-                    }                    
+                    }
                 });
             }
         }).show();
@@ -104,10 +104,11 @@ public class DeviceController implements ContentController, DeviceView.DeviceHan
                     public void onSuccess(Device result) {
                         deviceStore.update(result);
                     }
+
                     @Override
                     public void onFailure(Throwable caught) {
                         new AlertMessageBox("Error", "Device with this Unique ID already exists").show();
-                    }                     
+                    }
                 });
             }
         }).show();
@@ -117,18 +118,18 @@ public class DeviceController implements ContentController, DeviceView.DeviceHan
     public void onRemove(final Device device) {
         final ConfirmMessageBox dialog = new ConfirmMessageBox("Confirm", "Are you sure you want remove device?");
         dialog.addDialogHideHandler(new DialogHideEvent.DialogHideHandler() {
-			@Override
-			public void onDialogHide(DialogHideEvent event) {
-				if (event.getHideButton() == PredefinedButton.YES) {
+            @Override
+            public void onDialogHide(DialogHideEvent event) {
+                if (event.getHideButton() == PredefinedButton.YES) {
                     Application.getDataService().removeDevice(device, new BaseAsyncCallback<Device>() {
                         @Override
                         public void onSuccess(Device result) {
                             deviceStore.remove(device);
                         }
                     });
-				}
-			}
-		});
+                }
+            }
+        });
         dialog.show();
     }
 

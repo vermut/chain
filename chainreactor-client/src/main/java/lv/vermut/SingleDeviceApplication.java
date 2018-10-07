@@ -17,7 +17,7 @@ package lv.vermut;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
-import lv.vermut.controller.*;
+import lv.vermut.controller.SingleDeviceController;
 import lv.vermut.model.DataService;
 import lv.vermut.model.DataServiceAsync;
 import lv.vermut.view.SingleDeviceApplicationView;

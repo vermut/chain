@@ -2,38 +2,38 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:mgwt="urn:import:com.googlecode.mgwt.ui.client.widget">
 
-    <g:FlowPanel>
-        <mgwt:form.Form>
-            <mgwt:form.FormEntry text="Status" ui:field="deathPanel">
-                <g:HTML ui:field="death"/>
-            </mgwt:form.FormEntry>
+  <g:FlowPanel>
+    <mgwt:form.Form>
+      <mgwt:form.FormEntry text="Status" ui:field="deathPanel">
+        <g:HTML ui:field="death"/>
+      </mgwt:form.FormEntry>
 
-            <mgwt:form.FormEntry text="Team">
-                <g:HTML ui:field="teamLabel"/>
-            </mgwt:form.FormEntry>
+      <mgwt:form.FormEntry text="Team">
+        <g:HTML ui:field="teamLabel"/>
+      </mgwt:form.FormEntry>
 
-            <mgwt:form.FormEntry text="You see around">
-                <g:HTML ui:field="neighborsLabel"/>
-            </mgwt:form.FormEntry>
+      <mgwt:form.FormEntry text="You see around">
+        <g:HTML ui:field="neighborsLabel"/>
+      </mgwt:form.FormEntry>
 
-            <mgwt:form.FormEntry text="Your link">
-                <g:HTML ui:field="yourLink"/>
-            </mgwt:form.FormEntry>
+      <mgwt:form.FormEntry text="Your link">
+        <g:HTML ui:field="yourLink"/>
+      </mgwt:form.FormEntry>
 
-            <mgwt:form.FormEntry text="Enemy link">
-                <g:HTML ui:field="otherLink"/>
-            </mgwt:form.FormEntry>
+      <mgwt:form.FormEntry text="Enemy link">
+        <g:HTML ui:field="otherLink"/>
+      </mgwt:form.FormEntry>
 
-            <mgwt:form.FormEntry text="Score">
-                <g:HTML ui:field="score"/>
-            </mgwt:form.FormEntry>
+      <mgwt:form.FormEntry text="Score">
+        <g:HTML ui:field="score"/>
+      </mgwt:form.FormEntry>
 
-            <mgwt:form.FormEntry text="LastUpdated">
-                <g:HTML ui:field="updateId"/>
-            </mgwt:form.FormEntry>
-        </mgwt:form.Form>
-        <g:SimplePanel>
-            <g:Frame ui:field="chat" addStyleNames="chatIframe"/>
-        </g:SimplePanel>
-    </g:FlowPanel>
+      <mgwt:form.FormEntry text="LastUpdated">
+        <g:HTML ui:field="updateId"/>
+      </mgwt:form.FormEntry>
+    </mgwt:form.Form>
+    <g:SimplePanel>
+      <g:Frame ui:field="chat" addStyleNames="chatIframe"/>
+    </g:SimplePanel>
+  </g:FlowPanel>
 </ui:UiBinder>

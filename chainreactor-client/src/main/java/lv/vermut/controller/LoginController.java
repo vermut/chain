@@ -19,9 +19,9 @@ import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import lv.vermut.Application;
 import lv.vermut.ApplicationContext;
 import lv.vermut.model.BaseAsyncCallback;
-import lv.vermut.view.LoginDialog;
 import lv.vermut.model.Device;
 import lv.vermut.model.User;
+import lv.vermut.view.LoginDialog;
 
 public class LoginController implements LoginDialog.LoginHandler {
 
@@ -37,6 +37,7 @@ public class LoginController implements LoginDialog.LoginHandler {
                 ApplicationContext.getInstance().setUser(result);
                 loginHandler.onLogin();
             }
+
             @Override
             public void onFailure(Throwable caught) {
                 dialog = new LoginDialog(LoginController.this);
@@ -107,6 +108,7 @@ public class LoginController implements LoginDialog.LoginHandler {
                         loginHandler.onLogin();
                     }
                 }
+
                 @Override
                 public void onFailure(Throwable caught) {
                     new AlertMessageBox("Error", "Username is already taken").show();

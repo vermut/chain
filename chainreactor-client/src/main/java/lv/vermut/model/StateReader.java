@@ -1,7 +1,6 @@
 package lv.vermut.model;
 
 import lv.vermut.ApplicationContext;
-import lv.vermut.model.Position;
 
 import java.util.Date;
 import java.util.LinkedList;

@@ -15,12 +15,6 @@
  */
 package lv.vermut.view;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import lv.vermut.model.UserProperties;
-import lv.vermut.model.User;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -35,6 +29,11 @@ import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
 import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent;
+import lv.vermut.model.User;
+import lv.vermut.model.UserProperties;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class UsersDialog implements SelectionChangedEvent.SelectionChangedHandler<User> {
 
@@ -45,6 +44,7 @@ public class UsersDialog implements SelectionChangedEvent.SelectionChangedHandle
 
     public interface UserHandler {
         void onAdd();
+
         void onRemove(User user);
     }
 
@@ -97,6 +97,7 @@ public class UsersDialog implements SelectionChangedEvent.SelectionChangedHandle
     public void onSelectionChanged(SelectionChangedEvent<User> event) {
         removeButton.setEnabled(!event.getSelection().isEmpty());
     }
+
     @UiHandler("addButton")
     public void onAddClicked(SelectEvent event) {
         userHandler.onAdd();

@@ -15,17 +15,6 @@
  */
 package lv.vermut.view;
 
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-
-import lv.vermut.ApplicationContext;
-import lv.vermut.model.BaseStoreHandlers;
-import lv.vermut.model.DeviceProperties;
-import lv.vermut.model.PositionProperties;
-import lv.vermut.model.Device;
-import lv.vermut.model.Position;
-
 import com.google.gwt.cell.client.DateCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -45,6 +34,12 @@ import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
 import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent;
+import lv.vermut.ApplicationContext;
+import lv.vermut.model.*;
+
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ArchiveView implements SelectionChangedEvent.SelectionChangedHandler<Position> {
 
@@ -55,7 +50,9 @@ public class ArchiveView implements SelectionChangedEvent.SelectionChangedHandle
 
     public interface ArchiveHandler {
         void onSelected(Position position);
+
         void onLoad(Device device, Date from, Date to);
+
         void onClear();
     }
 

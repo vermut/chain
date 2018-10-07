@@ -17,8 +17,8 @@ package lv.vermut;
 
 import com.google.gwt.core.client.EntryPoint;
 import lv.vermut.controller.LoginController;
-import lv.vermut.model.BaseAsyncCallback;
 import lv.vermut.model.ApplicationSettings;
+import lv.vermut.model.BaseAsyncCallback;
 
 public class Traccar implements EntryPoint, LoginController.LoginHandler {
 

@@ -15,27 +15,18 @@
  */
 package lv.vermut.controller;
 
-import java.util.List;
-
-import lv.vermut.Application;
-import lv.vermut.ApplicationContext;
-import lv.vermut.model.BaseAsyncCallback;
-import lv.vermut.model.UserProperties;
-import lv.vermut.view.ApplicationSettingsDialog;
-import lv.vermut.view.DeviceView;
-import lv.vermut.view.UserDialog;
-import lv.vermut.view.UserSettingsDialog;
-import lv.vermut.view.UsersDialog;
-import lv.vermut.model.ApplicationSettings;
-import lv.vermut.model.User;
-import lv.vermut.model.UserSettings;
-
 import com.google.gwt.core.client.GWT;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.Dialog.PredefinedButton;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.event.DialogHideEvent;
+import lv.vermut.Application;
+import lv.vermut.ApplicationContext;
+import lv.vermut.model.*;
+import lv.vermut.view.*;
+
+import java.util.List;
 
 public class SettingsController implements DeviceView.SettingsHandler {
 
@@ -98,6 +89,7 @@ public class SettingsController implements DeviceView.SettingsHandler {
                                             public void onSuccess(User result) {
                                                 userStore.add(result);
                                             }
+
                                             @Override
                                             public void onFailure(Throwable caught) {
                                                 new AlertMessageBox("Error", "Username is already taken").show();
@@ -111,18 +103,18 @@ public class SettingsController implements DeviceView.SettingsHandler {
                     public void onRemove(final User user) {
                         final ConfirmMessageBox dialog = new ConfirmMessageBox("Confirm", "Are you sure you want remove user?");
                         dialog.addDialogHideHandler(new DialogHideEvent.DialogHideHandler() {
-							@Override
-							public void onDialogHide(DialogHideEvent event) {
-								if (event.getHideButton() == PredefinedButton.YES) {
+                            @Override
+                            public void onDialogHide(DialogHideEvent event) {
+                                if (event.getHideButton() == PredefinedButton.YES) {
                                     Application.getDataService().removeUser(user, new BaseAsyncCallback<User>() {
                                         @Override
                                         public void onSuccess(User result) {
                                             userStore.remove(user);
                                         }
                                     });
-								}
-							}
-						});
+                                }
+                            }
+                        });
                         dialog.show();
                     }
 

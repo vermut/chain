@@ -15,15 +15,6 @@
  */
 package lv.vermut.view;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import lv.vermut.Application;
-import lv.vermut.ApplicationContext;
-import lv.vermut.model.BaseAsyncCallback;
-import lv.vermut.model.DeviceProperties;
-import lv.vermut.model.Device;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -42,6 +33,14 @@ import com.sencha.gxt.widget.core.client.grid.Grid;
 import com.sencha.gxt.widget.core.client.menu.Item;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
 import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent;
+import lv.vermut.Application;
+import lv.vermut.ApplicationContext;
+import lv.vermut.model.BaseAsyncCallback;
+import lv.vermut.model.Device;
+import lv.vermut.model.DeviceProperties;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class DeviceView implements SelectionChangedEvent.SelectionChangedHandler<Device> {
 
@@ -53,9 +52,13 @@ public class DeviceView implements SelectionChangedEvent.SelectionChangedHandler
 
     public interface DeviceHandler {
         void onSelected(Device device);
+
         void onAdd();
+
         void onEdit(Device device);
+
         void onRemove(Device device);
+
         void onMove(Device device, double offsetX, double offsetY);
     }
 
@@ -92,10 +95,14 @@ public class DeviceView implements SelectionChangedEvent.SelectionChangedHandler
     @UiField
     MenuItem settingsGlobal;
 
-    @UiField TextButton leftButton;
-    @UiField TextButton rightButton;
-    @UiField TextButton upButton;
-    @UiField TextButton downButton;
+    @UiField
+    TextButton leftButton;
+    @UiField
+    TextButton rightButton;
+    @UiField
+    TextButton upButton;
+    @UiField
+    TextButton downButton;
 
     public DeviceView(DeviceHandler deviceHandler, SettingsHandler settingsHandler, ListStore<Device> deviceStore) {
         this.deviceHandler = deviceHandler;
@@ -157,16 +164,23 @@ public class DeviceView implements SelectionChangedEvent.SelectionChangedHandler
         });
     }
 
-    @UiHandler("upButton")  public void onUpClicked(SelectEvent event) {
+    @UiHandler("upButton")
+    public void onUpClicked(SelectEvent event) {
         deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), MANUAL_MOVE_STEP, 0.0);
     }
-    @UiHandler("downButton")  public void onDownClicked(SelectEvent event) {
+
+    @UiHandler("downButton")
+    public void onDownClicked(SelectEvent event) {
         deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), -MANUAL_MOVE_STEP, 0.0);
     }
-    @UiHandler("leftButton")  public void onLeftClicked(SelectEvent event) {
+
+    @UiHandler("leftButton")
+    public void onLeftClicked(SelectEvent event) {
         deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), 0.0, -MANUAL_MOVE_STEP);
     }
-    @UiHandler("rightButton")  public void onRightClicked(SelectEvent event) {
+
+    @UiHandler("rightButton")
+    public void onRightClicked(SelectEvent event) {
         deviceHandler.onMove(grid.getSelectionModel().getSelectedItem(), 0.0, MANUAL_MOVE_STEP);
     }
 
@@ -177,8 +191,11 @@ public class DeviceView implements SelectionChangedEvent.SelectionChangedHandler
 
     public interface SettingsHandler {
         void onAccountSelected();
+
         void onPreferencesSelected();
+
         void onUsersSelected();
+
         void onApplicationSelected();
     }
 

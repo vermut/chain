@@ -20,6 +20,9 @@ import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Command;
 import com.sencha.gxt.widget.core.client.ContentPanel;
+import lv.vermut.model.Device;
+import lv.vermut.model.Position;
+import lv.vermut.model.SimplePoint;
 import org.gwtopenmaps.openlayers.client.*;
 import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
 import org.gwtopenmaps.openlayers.client.control.ScaleLine;
@@ -29,9 +32,6 @@ import org.gwtopenmaps.openlayers.client.geometry.LineString;
 import org.gwtopenmaps.openlayers.client.geometry.MultiLineString;
 import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.layer.*;
-import lv.vermut.model.Device;
-import lv.vermut.model.Position;
-import lv.vermut.model.SimplePoint;
 
 import java.util.List;
 
@@ -222,21 +222,21 @@ public class MapView {
         };
         LineString lineString = new LineString(linePoints); */
 
-        MultiLineString team1 = new MultiLineString(new LineString[] {
-                new LineString(new Point[] {
+        MultiLineString team1 = new MultiLineString(new LineString[]{
+                new LineString(new Point[]{
                         topLeft, topRight
                 }),
-                new LineString(new Point[] {
+                new LineString(new Point[]{
                         bottomRight, bottomLeft
                 }),
         });
 
 
-        MultiLineString team2 = new MultiLineString(new LineString[] {
-                new LineString(new Point[] {
+        MultiLineString team2 = new MultiLineString(new LineString[]{
+                new LineString(new Point[]{
                         topRight, bottomRight
                 }),
-                new LineString(new Point[] {
+                new LineString(new Point[]{
                         bottomLeft, topLeft
                 }),
         });

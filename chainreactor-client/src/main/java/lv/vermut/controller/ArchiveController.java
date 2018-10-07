@@ -15,20 +15,19 @@
  */
 package lv.vermut.controller;
 
-import java.util.Date;
-import java.util.List;
-
-import lv.vermut.Application;
-import lv.vermut.model.BaseAsyncCallback;
-import lv.vermut.model.PositionProperties;
-import lv.vermut.view.ArchiveView;
-import lv.vermut.model.Device;
-import lv.vermut.model.Position;
-
 import com.google.gwt.core.client.GWT;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
+import lv.vermut.Application;
+import lv.vermut.model.BaseAsyncCallback;
+import lv.vermut.model.Device;
+import lv.vermut.model.Position;
+import lv.vermut.model.PositionProperties;
+import lv.vermut.view.ArchiveView;
+
+import java.util.Date;
+import java.util.List;
 
 public class ArchiveController implements ContentController, ArchiveView.ArchiveHandler {
 
