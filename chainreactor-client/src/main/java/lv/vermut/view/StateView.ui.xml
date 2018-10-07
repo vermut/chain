@@ -12,7 +12,7 @@
     <ui:attributes stripeRows="true" autoFill="true"/>
   </ui:with>
 
-  <gxt:ContentPanel ui:field="contentPanel" headingText="State">
+  <gxt:ContentPanel ui:field="contentPanel" heading="State">
     <grid:Grid ui:field="grid" store="{stateStore}" cm="{columnModel}" view="{view}"/>
   </gxt:ContentPanel>
 

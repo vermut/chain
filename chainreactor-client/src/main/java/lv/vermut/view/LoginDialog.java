@@ -19,49 +19,46 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
-import com.googlecode.mgwt.ui.client.MGWT;
-import com.googlecode.mgwt.ui.client.MGWTSettings;
-import com.googlecode.mgwt.ui.client.widget.button.Button;
-import com.googlecode.mgwt.ui.client.widget.dialog.Dialog;
-import com.googlecode.mgwt.ui.client.widget.dialog.overlay.PopinDialogOverlay;
-import com.googlecode.mgwt.ui.client.widget.input.MPasswordTextBox;
-import com.googlecode.mgwt.ui.client.widget.input.MTextBox;
+import com.google.gwt.user.client.ui.Widget;
+import com.sencha.gxt.widget.core.client.Window;
+import com.sencha.gxt.widget.core.client.button.TextButton;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.form.PasswordField;
+import com.sencha.gxt.widget.core.client.form.TextField;
 import lv.vermut.ApplicationContext;
 
 public class LoginDialog {
 
     private static LoginDialogUiBinder uiBinder = GWT.create(LoginDialogUiBinder.class);
-    @UiField
-    PopinDialogOverlay window;
-    @UiField
-    MTextBox login;
-    @UiField
-    MPasswordTextBox password;
-    @UiField
-    Button registerButton;
+
+    interface LoginDialogUiBinder extends UiBinder<Widget, LoginDialog> {
+    }
+
+    public interface LoginHandler {
+        public void onLogin(String login, String password);
+        public void onRegister(String login, String password);
+    }
 
     private LoginHandler loginHandler;
 
+    @UiField
+    Window window;
+
+    @UiField
+    TextField login;
+
+    @UiField
+    PasswordField password;
+
+    @UiField
+    TextButton registerButton;
+
     public LoginDialog(LoginHandler loginHandler) {
-        MGWTSettings.ViewPort viewPort = new MGWTSettings.ViewPort();
-        viewPort.setUserScaleAble(false).setMinimumScale(1.0).setMinimumScale(1.0).setMaximumScale(1.0);
-
-        MGWTSettings settings = new MGWTSettings();
-        settings.setViewPort(viewPort);
-        settings.setFullscreen(true);
-        settings.setPreventScrolling(true);
-        //settings.setIconUrl("logo.png");
-        //settings.setFixIOS71BodyBug(true);
-
-        if (MGWT.getFormFactor().isPhone())
-            MGWT.applySettings(settings);
-
         this.loginHandler = loginHandler;
         uiBinder.createAndBindUi(this);
 
         if (ApplicationContext.getInstance().getApplicationSettings().getRegistrationEnabled()) {
-            registerButton.setDisabled(false);
+            registerButton.enable();
         }
     }
 
@@ -74,29 +71,13 @@ public class LoginDialog {
     }
 
     @UiHandler("loginButton")
-    public void onLoginClicked(TapEvent event) {
-        loginHandler.onLogin(login.getValue(), password.getValue());
-    }
-
-    @UiHandler("deviceLoginButton")
-    public void onDeviceLoginClicked(TapEvent event) {
-        loginHandler.onDeviceLogin(login.getValue(), password.getValue());
+    public void onLoginClicked(SelectEvent event) {
+        loginHandler.onLogin(login.getText(), password.getText());
     }
 
     @UiHandler("registerButton")
-    public void onRegisterClicked(TapEvent event) {
-        loginHandler.onRegister(login.getValue(), password.getValue());
-    }
-
-    interface LoginDialogUiBinder extends UiBinder<Dialog, LoginDialog> {
-    }
-
-    public interface LoginHandler {
-        void onLogin(String login, String password);
-
-        void onDeviceLogin(String login, String password);
-
-        void onRegister(String login, String password);
+    public void onRegisterClicked(SelectEvent event) {
+        loginHandler.onRegister(login.getText(), password.getText());
     }
 
 }

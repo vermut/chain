@@ -24,7 +24,7 @@
     <ui:attributes stripeRows="true" autoFill="true"/>
   </ui:with>
 
-  <gxt:ContentPanel ui:field="contentPanel" headingText="Archive">
+  <gxt:ContentPanel ui:field="contentPanel" heading="Archive">
     <container:VerticalLayoutContainer>
 
       <container:child layoutData="{toolBarRowData}">

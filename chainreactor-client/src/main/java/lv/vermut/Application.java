@@ -23,7 +23,6 @@ import com.sencha.gxt.data.shared.event.StoreRemoveEvent;
 import lv.vermut.controller.*;
 import lv.vermut.model.*;
 import lv.vermut.view.ApplicationView;
-import lv.vermut.view.SingleDeviceApplicationView;
 
 import java.util.logging.Logger;
 
@@ -36,9 +35,7 @@ public class Application {
     private final StateController stateController;
     private final MapController mapController;
     private final ArchiveController archiveController;
-    private final SingleDeviceController singleDeviceController;
     private ApplicationView view;
-    private SingleDeviceApplicationView singleDeviceApplicationView;
     private MapController.PositionUpdateHandler positionUpdateHandler = new MapController.PositionUpdateHandler() {
 
         @Override
@@ -119,8 +116,6 @@ public class Application {
         view = new ApplicationView(
                 deviceController.getView(), stateController.getView(), mapController.getView(), archiveController.getView());
 
-        singleDeviceApplicationView = new SingleDeviceApplicationView();
-        singleDeviceController = new SingleDeviceController(singleDeviceApplicationView);
     }
 
     public static DataServiceAsync getDataService() {

@@ -11,7 +11,7 @@
     <ui:attributes width="1" height="-1"/>
   </ui:with>
 
-  <gxt:Window ui:field="window" pixelSize="300, 110" modal="true" headingText="Preferences" focusWidget="{saveButton}">
+  <gxt:Window ui:field="window" pixelSize="300, 110" modal="true" heading="Preferences" focusWidget="{saveButton}">
     <container:VerticalLayoutContainer>
       <container:child layoutData="{verticalLayoutData}">
         <form:FieldLabel text="Speed Units">

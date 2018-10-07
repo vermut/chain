@@ -2,23 +2,42 @@
 <ui:UiBinder
         xmlns:ui="urn:ui:com.google.gwt.uibinder"
         xmlns:g="urn:import:com.google.gwt.user.client.ui"
-        xmlns:mgwt="urn:import:com.googlecode.mgwt.ui.client.widget">
+        xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client"
+        xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+        xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form"
+        xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button">
 
-  <mgwt:dialog.overlay.PopinDialogOverlay ui:field="window">
-    <mgwt:panel.scroll.ScrollPanel>
-      <g:FlowPanel>
-        <mgwt:form.Form>
-          <mgwt:form.FormEntry text="User">
-            <mgwt:input.MTextBox ui:field="login"/>
-          </mgwt:form.FormEntry>
-          <mgwt:form.FormEntry text="Password">
-            <mgwt:input.MPasswordTextBox ui:field="password"/>
-          </mgwt:form.FormEntry>
-        </mgwt:form.Form>
-        <mgwt:button.Button text="Commandor" ui:field="loginButton"/>
-        <mgwt:button.Button text="Field Agent" ui:field="deviceLoginButton"/>
-        <mgwt:button.Button text="Register" ui:field="registerButton" disabled="true"/>
-      </g:FlowPanel>
-    </mgwt:panel.scroll.ScrollPanel>
-  </mgwt:dialog.overlay.PopinDialogOverlay>
+  <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData">
+    <ui:attributes width="1" height="-1" />
+  </ui:with>
+
+  <gxt:Window ui:field="window" pixelSize="300, 130" modal="true" closable="false" heading="Authentication" focusWidget="{loginButton}">
+    <container:VerticalLayoutContainer>
+      <container:child layoutData="{verticalLayoutData}">
+        <form:FieldLabel text="User">
+          <form:widget>
+            <form:TextField ui:field="login" />
+          </form:widget>
+        </form:FieldLabel>
+      </container:child>
+      <container:child layoutData="{verticalLayoutData}">
+        <form:FieldLabel text="Password">
+          <form:widget>
+            <form:PasswordField ui:field="password" />
+          </form:widget>
+        </form:FieldLabel>
+      </container:child>
+    </container:VerticalLayoutContainer>
+
+    <gxt:button>
+      <button:TextButton ui:field="loginButton" text="Login" />
+    </gxt:button>
+    <gxt:button>
+      <button:TextButton ui:field="deviceLoginButton" text="Device Login" />
+    </gxt:button>
+    <gxt:button>
+      <button:TextButton ui:field="registerButton" text="Register" enabled="false" />
+    </gxt:button>
+  </gxt:Window>
+
 </ui:UiBinder>

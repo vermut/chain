@@ -76,27 +76,6 @@ public class LoginController implements LoginDialog.LoginHandler {
     }
 
     @Override
-    public void onDeviceLogin(String login, String password) {
-        if (validate(login, password)) {
-            Application.getDataService().deviceLogin(login, password, new BaseAsyncCallback<Device>() {
-                @Override
-                public void onSuccess(Device result) {
-                    ApplicationContext.getInstance().setDevice(result);
-                    if (loginHandler != null) {
-                        dialog.hide();
-                        loginHandler.onDeviceLogin();
-                    }
-                }
-
-                @Override
-                public void onFailure(Throwable caught) {
-                    new AlertMessageBox("Error", "User name or password is invalid").show();
-                }
-            });
-        }
-    }
-
-    @Override
     public void onRegister(String login, String password) {
         if (validate(login, password)) {
             Application.getDataService().register(login, password, new BaseAsyncCallback<User>() {
@@ -119,8 +98,6 @@ public class LoginController implements LoginDialog.LoginHandler {
 
     public interface LoginHandler {
         void onLogin();
-
-        void onDeviceLogin();
     }
 
 }

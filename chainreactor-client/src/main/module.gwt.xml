@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
   <inherits name='com.google.gwt.user.User'/>
-  <inherits name="com.googlecode.mgwt.MGWT"/>
   <inherits name="com.google.gwt.logging.Logging"/>
   <inherits name="com.google.gwt.xml.XML"/>
   <inherits name='com.sencha.gxt.ui.GXT'/>

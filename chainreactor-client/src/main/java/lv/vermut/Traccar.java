@@ -38,9 +38,4 @@ public class Traccar implements EntryPoint, LoginController.LoginHandler {
         new Application().run();
     }
 
-    @Override
-    public void onDeviceLogin() {
-        new SingleDeviceApplication().run();
-    }
-
 }

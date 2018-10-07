@@ -69,7 +69,7 @@
           <extensions>true</extensions>
           <configuration>
             <sourceLevel>${java.version}</sourceLevel>
-            <!--<failOnError>true</failOnError>  need this for strange sencha bug-->
+            <failOnError>true</failOnError>
             <draftCompile>true</draftCompile>
             <!--<skipCompilation>true</skipCompilation>-->
           </configuration>
