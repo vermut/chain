@@ -63,21 +63,19 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
             String password = st.nextToken();
             String host = st.nextToken();
             String databaseName = st.nextToken();
-            String jdbcUrl = String.format("jdbc:mysql://%s/%s?reconnect=true", host, databaseName);
+            String jdbcUrl = String.format("jdbc:mysql://%s/%s", host, databaseName);
             Map<String, String> properties = new HashMap<String, String>();
 
-/*
             properties.put("javax.persistence.jdbc.url", jdbcUrl );
             properties.put("javax.persistence.jdbc.user", userName );
             properties.put("javax.persistence.jdbc.password", password );
-            properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
-*/
+            properties.put("javax.persistence.jdbc.driver", "com.mysql.cj.jdbc.Driver");
+            properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 
-            properties.put("hibernate.connection.url", jdbcUrl);
+/*            properties.put("hibernate.connection.url", jdbcUrl);
             properties.put("hibernate.connection.username", userName);
             properties.put("hibernate.connection.password", password);
-            properties.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
-            properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+            properties.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");*/
 
             entityManagerFactory = Persistence.createEntityManagerFactory("default", properties);
         }
