@@ -7,10 +7,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ac28e7d-5cdc-4e70-995c-5213f645448c" name="Default" comment="post-rebase fixes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/traccar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/traccar.iml" afterDir="false" />
+    <list default="true" id="2ac28e7d-5cdc-4e70-995c-5213f645448c" name="Default" comment="runner">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.ids" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/xercesImpl-2.4.0.jar" beforeDir="false" />
     </list>
     <ignored path="traccar.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -147,7 +148,7 @@
         <counts>
           <entry key="groovy" value="21" />
           <entry key="java" value="2" />
-          <entry key="txt" value="30" />
+          <entry key="txt" value="36" />
           <entry key="xml" value="13" />
         </counts>
       </usages-collector>
@@ -155,7 +156,7 @@
         <counts>
           <entry key="Groovy" value="21" />
           <entry key="JAVA" value="2" />
-          <entry key="PLAIN_TEXT" value="30" />
+          <entry key="PLAIN_TEXT" value="36" />
           <entry key="XML" value="13" />
         </counts>
       </usages-collector>
@@ -172,8 +173,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+            <state relative-caret-position="483">
+              <caret line="165" column="64" selection-start-line="165" selection-start-column="64" selection-end-line="165" selection-end-column="64" />
               <folding>
                 <element signature="n#plugin#0;n#plugins#0;n#build#0;n#project#0;n#!!top" />
                 <element signature="n#plugin#1;n#plugins#0;n#build#0;n#project#0;n#!!top" />
@@ -388,12 +389,18 @@
             <path>
               <item name="traccar" type="b2602c69:ProjectViewProjectNode" />
               <item name="chain" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="traccar" type="b2602c69:ProjectViewProjectNode" />
               <item name="chain" type="462c0819:PsiDirectoryNode" />
               <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="traccar" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chain" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="dependency" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="traccar" type="b2602c69:ProjectViewProjectNode" />
@@ -452,7 +459,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538875389828" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538875515902" />
     <property name="dynamic.classpath" value="false" />
     <property name="extract.method.default.visibility" value="public" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
@@ -578,7 +585,7 @@
       <workItem from="1538861913813" duration="1201000" />
       <workItem from="1538863122619" duration="660000" />
       <workItem from="1538864730449" duration="8403000" />
-      <workItem from="1538873178049" duration="2155000" />
+      <workItem from="1538873178049" duration="2396000" />
     </task>
     <task id="LOCAL-00001" summary="post-rebase fixes">
       <created>1538874496035</created>
@@ -587,12 +594,12 @@
       <option name="project" value="LOCAL" />
       <updated>1538874496035</updated>
     </task>
-    <task id="LOCAL-00002" summary="heroku milestone alpha 1">
-      <created>1538872945256</created>
+    <task id="LOCAL-00002" summary="runner">
+      <created>1538875442419</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1538872945256</updated>
+      <updated>1538875442419</updated>
     </task>
     <task id="LOCAL-00003" summary="+gitignore">
       <created>1538873277020</created>
@@ -601,11 +608,11 @@
       <option name="project" value="LOCAL" />
       <updated>1538873277020</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1777000" />
+    <option name="totallyTimeSpent" value="2018000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -631,13 +638,13 @@
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49960256" visible="true" weight="0.46843335" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960256" weight="0.46843335" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920508" weight="0.3289166" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3289166" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3289166" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007949" side_tool="true" weight="0.3289166" />
       <window_info anchor="bottom" id="Application Servers" order="10" weight="0.32967034" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.32967034" />
@@ -716,7 +723,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="mysql db" />
     <MESSAGE value="libs imported from maven" />
     <MESSAGE value="haversine" />
     <MESSAGE value="teamreports" />
@@ -741,7 +747,8 @@
     <MESSAGE value="Skip unused layout" />
     <MESSAGE value="move only admin" />
     <MESSAGE value="post-rebase fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="post-rebase fixes" />
+    <MESSAGE value="runner" />
+    <option name="LAST_COMMIT_MESSAGE" value="runner" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -775,7 +782,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/SingleDeviceApplication.java" />
     <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/Application.java" />
     <entry file="file://$PROJECT_DIR$/src/org/traccar/web/client/view/LoginDialog.java" />
     <entry file="file://$PROJECT_DIR$/src/org/traccar/web/Traccar.gwt.xml" />
@@ -861,10 +867,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Procfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="57" selection-start-column="57" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+        <state relative-caret-position="483">
+          <caret line="165" column="64" selection-start-line="165" selection-start-column="64" selection-end-line="165" selection-end-column="64" />
           <folding>
             <element signature="n#plugin#0;n#plugins#0;n#build#0;n#project#0;n#!!top" />
             <element signature="n#plugin#1;n#plugins#0;n#build#0;n#project#0;n#!!top" />
@@ -932,7 +945,6 @@
             <option name="proportions">
               <list>
                 <option value="0.28416914" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
