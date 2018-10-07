@@ -1,5 +1,8 @@
 package lv.vermut.controller
 
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
+import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 import groovy.xml.MarkupBuilder
 import lv.vermut.model.DataServiceImpl
@@ -17,6 +20,7 @@ class MobileClient extends HttpServlet {
     def application
     JsonSlurper jsonSlurper
     final EntityManager entityManager = DataServiceImpl.getServletEntityManager();
+    Algorithm algorithm = Algorithm.HMAC256("chainsecret");
 
     void init(ServletConfig config) {
         super.init(config)
@@ -36,6 +40,14 @@ class MobileClient extends HttpServlet {
             use(ServletCategory) {
                 def body = jsonSlurper.parse(request.reader)
                 session.traccar_device = deviceLogin(body.username, body.password)
+                String token = JWT.create()
+                        .withIssuer("ChainReactor")
+                        .sign(algorithm);
+                response.writer.print(new JsonBuilder([
+                        id   : session.traccar_device.id,
+                        token: token
+                ]))
+
             }
         }
         catch (IllegalStateException ignored) {
