@@ -9,10 +9,10 @@
   <packaging>pom</packaging>
 
   <properties>
-    <gwt.version>2.7.0</gwt.version>
+    <gwt.version>2.8.2</gwt.version>
     <webapp-runner.version>8.5.34.1</webapp-runner.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.7</java.version>
+    <java.version>1.8</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
   </properties>
