@@ -1,0 +1,24 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder
+        xmlns:ui="urn:ui:com.google.gwt.uibinder"
+        xmlns:g="urn:import:com.google.gwt.user.client.ui"
+        xmlns:mgwt="urn:import:com.googlecode.mgwt.ui.client.widget">
+
+  <mgwt:dialog.overlay.PopinDialogOverlay ui:field="window">
+    <mgwt:panel.scroll.ScrollPanel>
+      <g:FlowPanel>
+        <mgwt:form.Form>
+          <mgwt:form.FormEntry text="User">
+            <mgwt:input.MTextBox ui:field="login"/>
+          </mgwt:form.FormEntry>
+          <mgwt:form.FormEntry text="Password">
+            <mgwt:input.MPasswordTextBox ui:field="password"/>
+          </mgwt:form.FormEntry>
+        </mgwt:form.Form>
+        <mgwt:button.Button text="Commandor" ui:field="loginButton"/>
+        <mgwt:button.Button text="Field Agent" ui:field="deviceLoginButton"/>
+        <mgwt:button.Button text="Register" ui:field="registerButton" disabled="true"/>
+      </g:FlowPanel>
+    </mgwt:panel.scroll.ScrollPanel>
+  </mgwt:dialog.overlay.PopinDialogOverlay>
+</ui:UiBinder>
