@@ -56,26 +56,16 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
 
     public static EntityManagerFactory initEMF() {
         if (entityManagerFactory == null) {
-            String databaseUrl = System.getenv("CLEARDB_DATABASE_URL");
-            StringTokenizer st = new StringTokenizer(databaseUrl, ":@/");
-            String dbVendor = st.nextToken(); //if DATABASE_URL is set
-            String userName = st.nextToken();
-            String password = st.nextToken();
-            String host = st.nextToken();
-            String databaseName = st.nextToken();
-            String jdbcUrl = String.format("jdbc:mysql://%s/%s", host, databaseName);
-            Map<String, String> properties = new HashMap<String, String>();
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            if (dbUrl == null)
+                throw new RuntimeException("JDBC_DATABASE_URL is not set. Heroku?..");
 
-            properties.put("javax.persistence.jdbc.url", jdbcUrl );
-            properties.put("javax.persistence.jdbc.user", userName );
-            properties.put("javax.persistence.jdbc.password", password );
-            properties.put("javax.persistence.jdbc.driver", "com.mysql.cj.jdbc.Driver");
-            properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-
-/*            properties.put("hibernate.connection.url", jdbcUrl);
-            properties.put("hibernate.connection.username", userName);
-            properties.put("hibernate.connection.password", password);
-            properties.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");*/
+            Map<String, String> properties = new HashMap<>();
+            properties.put("javax.persistence.jdbc.url", dbUrl);
+            properties.put("javax.persistence.jdbc.user", System.getenv("JDBC_DATABASE_USERNAME"));
+            properties.put("javax.persistence.jdbc.password", System.getenv("JDBC_DATABASE_PASSWORD"));
+            properties.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
+            properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect");
 
             entityManagerFactory = Persistence.createEntityManagerFactory("default", properties);
         }

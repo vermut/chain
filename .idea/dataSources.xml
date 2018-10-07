@@ -15,5 +15,14 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="dfkg9e42p1337v@ec2-54-217-235-137.eu-west-1.compute.amazonaws.com" uuid="282f09ae-8609-48bf-ad08-060a37e971d7">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-54-217-235-137.eu-west-1.compute.amazonaws.com/dfkg9e42p1337v</jdbc-url>
+      <driver-properties>
+        <property name="sslmode" value="require" />
+      </driver-properties>
+    </data-source>
   </component>
 </project>
