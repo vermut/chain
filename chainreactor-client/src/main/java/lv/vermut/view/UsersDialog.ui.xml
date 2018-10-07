@@ -24,7 +24,7 @@
     <ui:attributes stripeRows="true" autoFill="true"/>
   </ui:with>
 
-  <gxt:Window ui:field="window" pixelSize="640, 480" modal="true" heading="Users">
+  <gxt:Window ui:field="window" pixelSize="640, 480" modal="true" headingText="Users">
     <container:VerticalLayoutContainer>
       <container:child layoutData="{layoutData}">
         <gxt:ContentPanel ui:field="contentPanel" headerVisible="false">

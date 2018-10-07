@@ -10,10 +10,11 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
-    <gwt.version>2.8.2</gwt.version>
+    <java.version>1.7</java.version>
+    <gwt.version>2.7.0</gwt.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
+    <webapp-runner.version>9.0.11.0</webapp-runner.version>
   </properties>
 
   <dependencyManagement>
@@ -64,11 +65,11 @@
         <plugin>
           <groupId>net.ltgt.gwt.maven</groupId>
           <artifactId>gwt-maven-plugin</artifactId>
-          <version>1.0-rc-9</version>
+          <version>1.0-rc-10</version>
           <extensions>true</extensions>
           <configuration>
             <sourceLevel>${java.version}</sourceLevel>
-            <failOnError>true</failOnError>
+            <!--<failOnError>true</failOnError>-->
             <draftCompile>true</draftCompile>
             <logLevel>INFO</logLevel>
           </configuration>

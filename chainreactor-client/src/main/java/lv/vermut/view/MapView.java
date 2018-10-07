@@ -67,7 +67,7 @@ public class MapView {
     public MapView(final MapHandler mapHandler) {
         this.mapHandler = mapHandler;
         contentPanel = new ContentPanel();
-        contentPanel.setHeading("Map");
+        contentPanel.setHeadingText("Map");
 
         MapOptions defaultMapOptions = new MapOptions();
 

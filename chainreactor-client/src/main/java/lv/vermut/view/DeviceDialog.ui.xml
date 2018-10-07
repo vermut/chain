@@ -11,7 +11,7 @@
     <ui:attributes width="1" height="-1"/>
   </ui:with>
 
-  <gxt:Window ui:field="window" pixelSize="300, 130" modal="true" heading="Device" focusWidget="{saveButton}">
+  <gxt:Window ui:field="window" pixelSize="300, 130" modal="true" headingText="Device" focusWidget="{saveButton}">
     <container:VerticalLayoutContainer>
       <container:child layoutData="{verticalLayoutData}">
         <form:FieldLabel text="Name">
