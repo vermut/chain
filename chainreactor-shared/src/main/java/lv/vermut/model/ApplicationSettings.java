@@ -1,9 +1,6 @@
 package lv.vermut.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -13,7 +10,7 @@ public class ApplicationSettings implements Serializable {
     private static final long serialVersionUID = 1;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public ApplicationSettings() {

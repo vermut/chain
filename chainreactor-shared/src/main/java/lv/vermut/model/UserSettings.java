@@ -10,7 +10,7 @@ public class UserSettings implements Serializable {
     private static final long serialVersionUID = 1;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public UserSettings() {

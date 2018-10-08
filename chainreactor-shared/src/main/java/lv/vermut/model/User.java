@@ -40,7 +40,7 @@ public class User implements Serializable, Cloneable {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public long getId() {

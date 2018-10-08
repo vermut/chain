@@ -46,7 +46,7 @@ public class Position implements Serializable, Cloneable {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public long getId() {

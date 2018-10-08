@@ -71,7 +71,6 @@
           <configuration>
             <sourceLevel>${java.version}</sourceLevel>
             <failOnError>true</failOnError>
-            <draftCompile>true</draftCompile>
             <skipCompilation>${gwt.skipCompilation}</skipCompilation>
           </configuration>
         </plugin>
