@@ -6,7 +6,6 @@ import groovy.json.JsonBuilder
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.servlet.ServletCategory
-import groovy.xml.MarkupBuilder
 import lv.vermut.model.Device
 
 import javax.persistence.TypedQuery
@@ -42,11 +41,6 @@ class MobileClient extends HttpServlet {
             use(ServletCategory) {
                 def body = jsonSlurper.parse(request.reader)
                 session.traccar_device = deviceLogin(body.username, body.password)
-                if (session.counter) {  // We can use . notation to access session attribute.
-                    session.counter++  // We can use . notation to set value for session attribute.
-                } else {
-                    session.counter = 1
-                }
 
                 String token = JWT.create()
                         .withIssuer("ChainReactor")
@@ -68,6 +62,12 @@ class MobileClient extends HttpServlet {
         def session = request.session
         try {
             use(ServletCategory) {
+                if (session.counter) {  // We can use . notation to access session attribute.
+                    session.counter++  // We can use . notation to set value for session attribute.
+                } else {
+                    session.counter = 1
+                }
+
                 Device device = session.traccar_device
                 if (!request.getHeader("Authorization") || !device)
                     throw new IllegalStateException();
@@ -75,6 +75,7 @@ class MobileClient extends HttpServlet {
                 synchronized (GAME.em) {
                     GAME.em.refresh(device);
                     def report = GAME.deviceReport(device)
+                    report.score = session.counter      // TODO remove
                     response.writer.print JsonOutput.toJson(report)
                 }
             }
@@ -85,31 +86,6 @@ class MobileClient extends HttpServlet {
         }
     }
 
-    void modoGet(HttpServletRequest request, HttpServletResponse response) {
-        def html = new MarkupBuilder(response.writer)
-        def session = request.session
-
-        use(ServletCategory) {
-            if (session.counter) {  // We can use . notation to access session attribute.
-                session.counter++  // We can use . notation to set value for session attribute.
-            } else {
-                session.counter = 1
-            }
-            request.pageTitle = 'Groovy Rocks!'
-
-
-            html.html {
-                head {
-                    title request.pageTitle
-                }
-                body {
-                    h1 request.pageTitle
-                    h2 "$application?.version written by $application.author"
-                    p "You have requested this page $session.counter times."
-                }
-            }
-        }
-    }
 
     Device deviceLogin(String login, String password) {
         synchronized (GAME.em) {

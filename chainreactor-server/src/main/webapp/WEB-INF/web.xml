@@ -31,7 +31,7 @@
     <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
     <init-param>
       <param-name>cors.allowed.origins</param-name>
-      <param-value>http://localhost:8100</param-value>
+      <param-value>http://localhost:8100, http://localhost:8080, http://192.168.118.63:8100, http://192.168.118.5:8100, http://192.168.118.5:8100</param-value>
     </init-param>
     <init-param>
       <param-name>cors.allowed.methods</param-name>
