@@ -26,8 +26,6 @@ public interface DataServiceAsync {
 
     void login(String login, String password, AsyncCallback<User> callback);
 
-    void deviceLogin(String login, String password, AsyncCallback<Device> callback);
-
     void logout(AsyncCallback<Boolean> callback);
 
     void register(String login, String password, AsyncCallback<User> callback);
@@ -59,8 +57,6 @@ public interface DataServiceAsync {
     void moveDevice(Device device, double offsetX, double offsetY, AsyncCallback<Boolean> callback);
 
     void getTeamReport(AsyncCallback<TeamReport> callback);
-
-    void getDeviceReport(AsyncCallback<DeviceReport> callback);
 
     void attack(double lat, double lon, AsyncCallback<Boolean> callback);
 }

@@ -47,6 +47,7 @@ class Game implements Runnable {
         )
 
         DataServiceImpl.GAME = this
+        MobileClient.GAME = this
     }
 
     void startGame() {

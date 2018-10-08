@@ -152,27 +152,6 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
     }
 
     @Override
-    public Device deviceLogin(String login, String password) {
-        EntityManager entityManager = getSessionEntityManager();
-        synchronized (entityManager) {
-            TypedQuery<Device> query = entityManager.createQuery(
-                    "SELECT x FROM Device x WHERE x.name = :name", Device.class);
-            query.setParameter("name", login);
-            List<Device> results = query.getResultList();
-
-            if (!results.isEmpty()) {
-                Device device = results.get(0);
-                if (!device.getUniqueId().equals(password))
-                    throw new IllegalStateException();
-
-                setSessionDevice(device);
-                return device;
-            }
-            throw new IllegalStateException();
-        }
-    }
-
-    @Override
     public boolean logout() {
         setSessionUser(null);
         return true;
@@ -549,16 +528,6 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
                 entityManager.getTransaction().rollback();
                 throw e;
             }
-        }
-    }
-
-    @Override
-    public DeviceReport getDeviceReport() {
-        EntityManager entityManager = getSessionEntityManager();
-        synchronized (entityManager) {
-            Device device = getSessionDevice();
-            entityManager.refresh(device);
-            return GAME.deviceReport(device);
         }
     }
 
