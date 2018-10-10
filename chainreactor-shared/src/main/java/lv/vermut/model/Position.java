@@ -15,14 +15,14 @@
  */
 package lv.vermut.model;
 
-import org.hibernate.annotations.Index;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "positions")
+@Table(name = "positions", indexes = {
+        @Index(name = "positionsIndex", columnList = "device_id, time")
+})
 public class Position implements Serializable, Cloneable {
 
     private static final long serialVersionUID = 1;
@@ -54,14 +54,12 @@ public class Position implements Serializable, Cloneable {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @Index(name = "positionsIndex")
     private Device device;
 
     public Device getDevice() {
         return device;
     }
 
-    @Index(name = "positionsIndex")
     private Date time;
 
     public Date getTime() {
