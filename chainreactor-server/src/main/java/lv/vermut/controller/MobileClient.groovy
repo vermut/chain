@@ -75,16 +75,8 @@ class MobileClient extends HttpServlet {
                     GAME.em.getTransaction().begin()
                     try {
                         device.setActive(true)
-                        TypedQuery<Position> query = GAME.em.createQuery(
-                                "SELECT x FROM Position x WHERE x.id IN (" +
-                                        "SELECT y.latestPosition FROM Device y WHERE y = :device)", Position.class)
-                        query.setParameter("device", device)
-
-                        Position position = query.getResultList() ? new Position(query.getSingleResult()) : new Position()
-                        position.setId(null)
-                        position.setLatitude(body.latitude)
-                        position.setLongitude(body.longitude)
-                        position.setTime(new Date(body.timestamp))
+                        Position position = new Position(device, new Date(body.timestamp),
+                                body.latitude, body.longitude)
                         GAME.em.persist(position)
 
                         device.setLatestPosition(position)
@@ -119,9 +111,10 @@ class MobileClient extends HttpServlet {
                     throw new IllegalStateException()
 
                 synchronized (GAME.em) {
+                    def report
                     try {
                         GAME.em.refresh(device)
-                        def report = GAME.deviceReport(device)
+                        report = GAME.deviceReport(device)
                     } catch (e) {
                         log("Troubles getting report", e)
                         throw new IllegalStateException()
@@ -145,16 +138,15 @@ class MobileClient extends HttpServlet {
         synchronized (GAME.em) {
             TypedQuery<Device> query = GAME.em.createQuery("SELECT x FROM Device x WHERE x.name = :name", Device.class)
             query.setParameter("name", login)
-            List<Device> results = query.getResultList()
 
-            if (!results.isEmpty()) {
-                Device device = results.get(0)
-                if (!device.getUniqueId().equals(password))
-                    throw new IllegalStateException()
+            if (!query.resultList)
+                throw new IllegalStateException()
 
-                return device
-            }
-            throw new IllegalStateException()
+            Device device = query.singleResult
+            if (device.getUniqueId() != password)
+                throw new IllegalStateException()
+
+            return device
         }
     }
 }

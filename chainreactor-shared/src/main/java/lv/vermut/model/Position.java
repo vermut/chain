@@ -30,6 +30,13 @@ public class Position implements Serializable, Cloneable {
     public Position() {
     }
 
+    public Position(Device device, Date time, Double latitude, Double longitude) {
+        this.device = device;
+        this.time = time;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public Position(Position position) {
         id = position.id;
         device = position.device;
@@ -55,6 +62,10 @@ public class Position implements Serializable, Cloneable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Device device;
+
+    public void setDevice(Device device) {
+        this.device = device;
+    }
 
     public Device getDevice() {
         return device;
