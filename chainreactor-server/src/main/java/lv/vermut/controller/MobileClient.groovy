@@ -75,7 +75,7 @@ class MobileClient extends HttpServlet {
                     GAME.em.getTransaction().begin()
                     try {
                         device.setActive(true)
-                        Position position = new Position(device, new Date(body.timestamp),
+                        Position position = new Position(device, new Date((long) body.timestamp),
                                 body.latitude, body.longitude)
                         GAME.em.persist(position)
 

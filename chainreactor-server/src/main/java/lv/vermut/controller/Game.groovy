@@ -25,6 +25,7 @@ class Game implements Runnable {
 
     HashMap<Integer, SimplePoint[]> teamlink = [:]
     HashMap<Integer, List<Position>> players = [:]
+    HashMap<Integer, String> chatUrl = [:]
 
     HashMap<Integer, Long> attackTimer = [:]
     HashMap<Integer, SimplePoint> attackPoints = [:]
@@ -155,6 +156,7 @@ class Game implements Runnable {
         def team = getTeamId(device)
 
         report.teamName = teamNameById(team) + ' - ' + device.name
+        report.teamConferenceUrl = chatUrl[team]
         report.score = gameInfo.score.toString()
 
         if (team == null)
