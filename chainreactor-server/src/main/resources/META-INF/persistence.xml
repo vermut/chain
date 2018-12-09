@@ -16,8 +16,12 @@
       <!-- Configuring Connection Pool -->
       <property name="hibernate.c3p0.min_size" value="1"/>
       <property name="hibernate.c3p0.max_size" value="10"/>
-      <property name="hibernate.c3p0.timeout" value="0"/>
+      <property name="hibernate.c3p0.timeout" value="5"/>
+      <!--<property name="hibernate.c3p0.max_statements" value="2"/>-->
       <property name="hibernate.c3p0.idle_test_period" value="1"/>
+      <property name="hibernate.c3p0.testConnectionOnCheckout" value="true"/>
+      <!--<property name="hibernate.c3p0.testConnectionOnCheckin" value="true"/>-->
+      <!--<property name="hibernate.c3p0.preferredTestQuery" value="SELECT 1"/>-->
     </properties>
   </persistence-unit>
 </persistence>

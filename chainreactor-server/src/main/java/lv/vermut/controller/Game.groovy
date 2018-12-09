@@ -4,6 +4,8 @@ import com.vividsolutions.jts.geom.Coordinate
 import lv.vermut.model.*
 
 import javax.persistence.EntityManager
+import javax.persistence.PersistenceException
+import java.sql.SQLException
 
 /**
  * Created by admin on 03/04/15.
@@ -20,8 +22,8 @@ class Game implements Runnable {
 
     public static long ATTACK_INTERVAL = 60 * 1000l
 
-    public static TEAM1_STR = 'team1'
-    public static TEAM2_STR = 'team2'
+    public static TEAM1_STR = "team1"
+    public static TEAM2_STR = "team2"
 
     HashMap<Integer, SimplePoint[]> teamlink = [:]
     HashMap<Integer, List<Position>> players = [:]
@@ -61,19 +63,31 @@ class Game implements Runnable {
     void run() {
         if (!started) return
 
-        fetchDbData()
-        processRevivals()
-        checkForConnection()
-        updateScore()
+        try {
+            fetchDbData()
+            processRevivals()
+            checkForConnection()
+            updateScore()
+        } catch (ConcurrentModificationException | PersistenceException | SQLException ignored) {
+            println "BG DB sync bark"
+        } catch (Exception e) {
+            println e
+            println e.stackTrace
+        }
     }
 
     def processRevivals() {
         field.outsiders(players[TEAM1] + players[TEAM2]).each {
-            em.transaction.begin()
-            em.refresh(it.device)
-            it.device.active = true
-            em.persist(it.device)
-            em.transaction.commit()
+            try {
+                em.transaction.begin()
+                em.refresh(it.device)
+                it.device.active = true
+                em.persist(it.device)
+                em.transaction.commit()
+            } catch (e) {
+                em.transaction.rollback()
+                throw e
+            }
         }
     }
 
@@ -114,10 +128,15 @@ class Game implements Runnable {
     }
 
     void fetchDbData() {
-        players[TEAM1] =
-                em.createQuery("SELECT x FROM User u join u.devices d join d.latestPosition x WHERE u.login = '$TEAM1_STR'", Position.class).resultList
-        players[TEAM2] =
-                em.createQuery("SELECT x FROM User u join u.devices d join d.latestPosition x WHERE u.login = '$TEAM2_STR'", Position.class).resultList
+        try {
+            players[TEAM1] =
+                    em.createQuery("SELECT x FROM User u join u.devices d join d.latestPosition x WHERE u.login = '$TEAM1_STR'", Position.class).resultList
+            players[TEAM2] =
+                    em.createQuery("SELECT x FROM User u join u.devices d join d.latestPosition x WHERE u.login = '$TEAM2_STR'", Position.class).resultList
+        } catch (NullPointerException ignored) {
+            throw new PersistenceException("DB Error")
+        }
+
     }
 
     def getTeamId(Device device) {

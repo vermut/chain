@@ -124,6 +124,12 @@
                   <version>${webapp-runner.version}</version>
                   <destFileName>webapp-runner.jar</destFileName>
                 </artifactItem>
+                <artifactItem>
+                  <groupId>com.github.tomcat-slf4j-logback</groupId>
+                  <artifactId>tomcat85-slf4j-logback</artifactId>
+                  <version>8.5.34</version>
+                  <destFileName>tomcat-slf4j-logback.jar</destFileName>
+                </artifactItem>
               </artifactItems>
             </configuration>
           </execution>
