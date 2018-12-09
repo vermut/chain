@@ -53,7 +53,7 @@ public class Position implements Serializable, Cloneable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     public long getId() {
