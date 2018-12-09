@@ -1,3 +1,6 @@
+newrelic/
+
+
 ### Maven template
 target/
 pom.xml.tag
