@@ -51,7 +51,8 @@ class MobileClient extends HttpServlet {
                         .sign(algorithm)
                 response.writer.print(new JsonBuilder([
                         id   : session.traccar_device_id,
-                        token: token
+                        token: token,
+                        JSESSIONID: session.id
                 ]))
 
             }
